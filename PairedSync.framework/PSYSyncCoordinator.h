@@ -55,6 +55,7 @@
 - (void)reportProgress:(double)arg1;
 - (void)syncDidFailWithError:(id)arg1;
 - (void)syncDidComplete;
+- (void)syncDidCompleteSending;
 - (id)progressHandler;
 - (oneway void)beginSyncWithOptions:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (_Bool)listener:(id)arg1 shouldAcceptNewConnection:(id)arg2;

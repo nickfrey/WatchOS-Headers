@@ -8,5 +8,6 @@
 
 @protocol PSYActivityProgress <NSObject>
 - (oneway void)activityDidUpdateProgress:(float)arg1;
+- (oneway void)activityDidCompleteSending;
 @end
 

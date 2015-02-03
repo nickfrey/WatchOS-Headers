@@ -13,6 +13,7 @@
 @interface PUConnection : NSObject <PUUnlockClient>
 {
     CDUnknownBlockType _getRemoteDevicePasscodeStateHandler;
+    CDUnknownBlockType _remoteDeviceRemoveLockoutHandler;
     id <PUConnectionDelegate> _delegate;
     NSXPCConnection *_connection;
 }
@@ -20,6 +21,7 @@
 @property(readonly, nonatomic) NSXPCConnection *connection; // @synthesize connection=_connection;
 @property(nonatomic) __weak id <PUConnectionDelegate> delegate; // @synthesize delegate=_delegate;
 - (void).cxx_destruct;
+- (void)remoteDeviceDidRemoveLockout:(_Bool)arg1 error:(id)arg2;
 - (void)didGetRemoteDeviceHasPasscode:(_Bool)arg1 isLocked:(_Bool)arg2 isUnlockOnly:(_Bool)arg3 error:(id)arg4;
 - (void)remoteDeviceDidUnlock;
 - (void)remoteDeviceDidCompletePasscodeAction:(_Bool)arg1 error:(id)arg2;
@@ -28,10 +30,9 @@
 - (void)didUnpairForUnlock:(_Bool)arg1 error:(id)arg2;
 - (void)didPairForUnlock:(_Bool)arg1 error:(id)arg2;
 - (void)getRemoteDeviceState:(CDUnknownBlockType)arg1;
-- (void)getRemoteDevicePasscodeState:(CDUnknownBlockType)arg1;
+- (void)requestRemoteDeviceRemoveLockout:(CDUnknownBlockType)arg1;
 - (void)requestRemoteDeviceUnlockNotification;
-- (void)requestRemoteDevicePasscodeAction:(long long)arg1;
-- (void)setUnlockEnabled:(_Bool)arg1;
+- (void)requestRemoteDevicePasscodeAction:(long long)arg1 type:(long long)arg2;
 - (void)disableOnlyRemoteUnlock;
 - (void)enableOnlyRemoteUnlockWithPasscode:(id)arg1;
 - (void)unpairForUnlock;

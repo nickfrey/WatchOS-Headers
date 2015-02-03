@@ -8,7 +8,7 @@
 
 #import "NSSecureCoding.h"
 
-@class NSArray, NSString;
+@class NSArray, NSNumber, NSString;
 
 @interface PSYActivityInfo : NSObject <NSSecureCoding>
 {
@@ -16,12 +16,14 @@
     NSString *_machServiceName;
     NSArray *_dependencies;
     NSString *_priority;
+    NSNumber *_timeoutSeconds;
     NSString *_backboardPrelaunchBundleIdentifier;
 }
 
 + (_Bool)supportsSecureCoding;
 + (id)activityWithPlist:(id)arg1;
 @property(copy, nonatomic) NSString *backboardPrelaunchBundleIdentifier; // @synthesize backboardPrelaunchBundleIdentifier=_backboardPrelaunchBundleIdentifier;
+@property(copy, nonatomic) NSNumber *timeoutSeconds; // @synthesize timeoutSeconds=_timeoutSeconds;
 @property(copy, nonatomic) NSString *priority; // @synthesize priority=_priority;
 @property(copy, nonatomic) NSArray *dependencies; // @synthesize dependencies=_dependencies;
 @property(copy, nonatomic) NSString *machServiceName; // @synthesize machServiceName=_machServiceName;

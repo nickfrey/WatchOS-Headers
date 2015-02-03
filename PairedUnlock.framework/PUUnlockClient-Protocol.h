@@ -10,6 +10,7 @@
 
 @protocol PUUnlockClient <NSObject>
 - (void)didGetRemoteDeviceHasPasscode:(_Bool)arg1 isLocked:(_Bool)arg2 isUnlockOnly:(_Bool)arg3 error:(NSError *)arg4;
+- (void)remoteDeviceDidRemoveLockout:(_Bool)arg1 error:(NSError *)arg2;
 - (void)remoteDeviceDidUnlock;
 - (void)remoteDeviceDidCompletePasscodeAction:(_Bool)arg1 error:(NSError *)arg2;
 - (void)didDisableOnlyRemoteUnlock:(_Bool)arg1 error:(NSError *)arg2;

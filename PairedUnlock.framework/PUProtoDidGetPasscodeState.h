@@ -13,9 +13,6 @@
     _Bool _hasPasscode;
     _Bool _isLocked;
     _Bool _isUnlockOnly;
-    struct {
-        unsigned int isUnlockOnly:1;
-    } _has;
 }
 
 @property(nonatomic) _Bool isUnlockOnly; // @synthesize isUnlockOnly=_isUnlockOnly;
@@ -30,7 +27,6 @@
 - (_Bool)readFrom:(id)arg1;
 - (id)dictionaryRepresentation;
 - (id)description;
-@property(nonatomic) _Bool hasIsUnlockOnly;
 
 @end
 

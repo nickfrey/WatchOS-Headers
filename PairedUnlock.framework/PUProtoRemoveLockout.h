@@ -8,17 +8,10 @@
 
 #import "NSCopying.h"
 
-@interface PUProtoStartPasscodeAction : PBCodable <NSCopying>
+@interface PUProtoRemoveLockout : PBCodable <NSCopying>
 {
-    unsigned int _actionID;
-    unsigned int _passcodeType;
-    struct {
-        unsigned int passcodeType:1;
-    } _has;
 }
 
-@property(nonatomic) unsigned int passcodeType; // @synthesize passcodeType=_passcodeType;
-@property(nonatomic) unsigned int actionID; // @synthesize actionID=_actionID;
 - (void)mergeFrom:(id)arg1;
 - (unsigned long long)hash;
 - (_Bool)isEqual:(id)arg1;
@@ -28,7 +21,6 @@
 - (_Bool)readFrom:(id)arg1;
 - (id)dictionaryRepresentation;
 - (id)description;
-@property(nonatomic) _Bool hasPasscodeType;
 
 @end
 
