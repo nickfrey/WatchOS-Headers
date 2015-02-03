@@ -14,7 +14,6 @@
 - (struct CGRect)imageRectForContentRect:(struct CGRect)arg1;
 - (struct CGRect)titleRectForContentRect:(struct CGRect)arg1;
 - (void)_updateBackgroundImage;
-- (void)_updateButtonTintColor;
 @property(nonatomic) _Bool useSmallFont;
 - (struct CGSize)sizeThatFits:(struct CGSize)arg1;
 - (id)initWithFrame:(struct CGRect)arg1;

@@ -10,10 +10,12 @@
 {
     unsigned int _numberOfVisibleGlobalContexts;
     _Bool _ignoreVisibleAssertionsForGlobalContextVisibleFrame;
+    unsigned long long _globalContextLayoutBehavior;
     struct CGRect _globalContextVisibleFrame;
 }
 
 + (id)sharedInstance;
+@property(nonatomic) unsigned long long globalContextLayoutBehavior; // @synthesize globalContextLayoutBehavior=_globalContextLayoutBehavior;
 @property(nonatomic) _Bool ignoreVisibleAssertionsForGlobalContextVisibleFrame; // @synthesize ignoreVisibleAssertionsForGlobalContextVisibleFrame=_ignoreVisibleAssertionsForGlobalContextVisibleFrame;
 @property(nonatomic) struct CGRect globalContextVisibleFrame; // @synthesize globalContextVisibleFrame=_globalContextVisibleFrame;
 - (void)releaseGlobalContextVisibleAssertion;

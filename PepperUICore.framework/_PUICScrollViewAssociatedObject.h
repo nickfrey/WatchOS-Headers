@@ -6,16 +6,16 @@
 
 #import "NSObject.h"
 
-@class PUICAdditiveValueAnimator, PUICCrownInputSequencer;
+@class PUICCrownInputSequencer;
 
 @interface _PUICScrollViewAssociatedObject : NSObject
 {
+    CDStruct_ab02ea00 _delegateRespondsTo;
     long long _crownInputScrollDirection;
     PUICCrownInputSequencer *_crownInputSequencer;
-    PUICAdditiveValueAnimator *_contentOffsetAnimator;
 }
 
-@property(retain, nonatomic) PUICAdditiveValueAnimator *contentOffsetAnimator; // @synthesize contentOffsetAnimator=_contentOffsetAnimator;
+@property(nonatomic) CDStruct_ab02ea00 delegateRespondsTo; // @synthesize delegateRespondsTo=_delegateRespondsTo;
 @property(retain, nonatomic) PUICCrownInputSequencer *crownInputSequencer; // @synthesize crownInputSequencer=_crownInputSequencer;
 @property(nonatomic) long long crownInputScrollDirection; // @synthesize crownInputScrollDirection=_crownInputScrollDirection;
 - (void).cxx_destruct;

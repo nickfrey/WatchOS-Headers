@@ -6,16 +6,19 @@
 
 #import "NSObject.h"
 
-@class PUICCrownInputSequencer, PUICCrownInputSequencerDetent;
+@class PUICCrownInputSequencer;
 
 @protocol PUICCrownInputSequencerDelegate <NSObject>
 
 @optional
-- (_Bool)crownInputSequencer:(PUICCrownInputSequencer *)arg1 shouldPlayHapticForDetent:(PUICCrownInputSequencerDetent *)arg2;
+- (void)crownInputSequencerAverageCrownVelocityDidChange:(PUICCrownInputSequencer *)arg1;
+- (void)crownInputSequencerDidEndDecelerating:(PUICCrownInputSequencer *)arg1;
+- (void)crownInputSequencerWillBeginDecelerating:(PUICCrownInputSequencer *)arg1;
+- (void)crownInputSequencerDidBecomeIdle:(PUICCrownInputSequencer *)arg1 willDecelerate:(_Bool)arg2;
+- (void)crownInputSequencerWillBecomeIdle:(PUICCrownInputSequencer *)arg1 withCrownVelocity:(double)arg2 targetOffset:(inout double *)arg3;
 - (_Bool)crownInputSequencer:(PUICCrownInputSequencer *)arg1 shouldRubberBandAtBoundary:(long long)arg2;
 - (void)crownInputSequencerOffsetDidChange:(PUICCrownInputSequencer *)arg1;
 - (void)crownInputSequencerIdleDidChange:(PUICCrownInputSequencer *)arg1;
-- (void)crownInputSequencerActiveDetentDidChange:(PUICCrownInputSequencer *)arg1;
 - (void)crownInputSequencer:(PUICCrownInputSequencer *)arg1 offsetDidReachBoundary:(long long)arg2;
 @end
 

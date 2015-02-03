@@ -7,6 +7,7 @@
 #import "UIDevice.h"
 
 @interface UIDevice (PUICAdditionsSim)
+@property(nonatomic) _Bool runningInInterfaceBuilder; // @dynamic runningInInterfaceBuilder;
 @property(nonatomic) long long overrideDeviceVariant; // @dynamic overrideDeviceVariant;
 @property(readonly, nonatomic) _Bool overrideDeviceVariantHasBeenSet; // @dynamic overrideDeviceVariantHasBeenSet;
 @end

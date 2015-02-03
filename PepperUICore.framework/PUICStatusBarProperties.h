@@ -9,26 +9,28 @@
 #import "NSCopying.h"
 #import "PUICApplicationStatusBarProperties.h"
 
-@class NSString, UIColor, UIFont, UIView;
+@class NSString, UIColor, UIFont, UIImage, UIView;
 
 @interface PUICStatusBarProperties : NSObject <PUICApplicationStatusBarProperties, NSCopying>
 {
+    _Bool _titleInteractive;
     _Bool _showNavigationUI;
     _Bool _navUIBackButtonDisabled;
-    _Bool _activityIndicatorVisible;
     NSString *_title;
     UIColor *_titleColor;
     UIFont *_titleFont;
     double _titleBaseLine;
     UIView *_titleAccessoryView;
     UIColor *_backgroundColor;
+    UIImage *_navigationImage;
 }
 
-@property(nonatomic) _Bool activityIndicatorVisible; // @synthesize activityIndicatorVisible=_activityIndicatorVisible;
+@property(retain, nonatomic) UIImage *navigationImage; // @synthesize navigationImage=_navigationImage;
 @property(nonatomic) _Bool navUIBackButtonDisabled; // @synthesize navUIBackButtonDisabled=_navUIBackButtonDisabled;
 @property(nonatomic) _Bool showNavigationUI; // @synthesize showNavigationUI=_showNavigationUI;
 @property(retain, nonatomic) UIColor *backgroundColor; // @synthesize backgroundColor=_backgroundColor;
 @property(retain, nonatomic) UIView *titleAccessoryView; // @synthesize titleAccessoryView=_titleAccessoryView;
+@property(nonatomic, getter=isTitleInteractive) _Bool titleInteractive; // @synthesize titleInteractive=_titleInteractive;
 @property(nonatomic) double titleBaseLine; // @synthesize titleBaseLine=_titleBaseLine;
 @property(retain, nonatomic) UIFont *titleFont; // @synthesize titleFont=_titleFont;
 @property(retain, nonatomic) UIColor *titleColor; // @synthesize titleColor=_titleColor;

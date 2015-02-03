@@ -22,8 +22,6 @@
 - (void).cxx_destruct;
 - (void)_updateBackgroundImage;
 - (void)_updateButtonTintColor;
-- (void)setSelected:(_Bool)arg1;
-- (void)setHighlighted:(_Bool)arg1;
 - (void)setEnabled:(_Bool)arg1;
 - (void)tintColorDidChange;
 @property(readonly, nonatomic, getter=isImageButton) _Bool imageButton;

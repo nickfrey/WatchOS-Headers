@@ -9,7 +9,7 @@
 #import "PUICWheelHandlerDelegate.h"
 #import "PUICZoomModelDelegate.h"
 
-@class NSString, PUICWheelHandler, PUICZoomModel, UIColor, UIViewController, UIWindow;
+@class NSString, PUICActionWindowListener, PUICWheelHandler, PUICZoomModel, UIColor, UIViewController, UIWindow;
 
 @interface PUICApplication : UIApplication <PUICWheelHandlerDelegate, PUICZoomModelDelegate>
 {
@@ -20,6 +20,7 @@
     long long _orientation;
     PUICWheelHandler *_wheelHandler;
     PUICZoomModel *_zoomModel;
+    PUICActionWindowListener *_windowListener;
 }
 
 + (_Bool)supportsOrb;
@@ -27,6 +28,8 @@
 + (Class)_statusBarClass;
 + (id)sharedPUICApplication;
 + (id)_puicUserDefaults;
++ (double)topWindowLevel;
+@property(retain, nonatomic) PUICActionWindowListener *windowListener; // @synthesize windowListener=_windowListener;
 @property(retain, nonatomic) PUICZoomModel *zoomModel; // @synthesize zoomModel=_zoomModel;
 @property(retain, nonatomic) PUICWheelHandler *wheelHandler; // @synthesize wheelHandler=_wheelHandler;
 @property(nonatomic) long long orientation; // @synthesize orientation=_orientation;
@@ -42,8 +45,16 @@
 @property(readonly, nonatomic) UIColor *primaryApplicationColor;
 - (void)dealloc;
 - (_Bool)_shouldDelayTouchesForControlCenter;
+- (_Bool)_statusBarShouldAnimationTitleContextChanges;
+- (void)_setStatusBarShouldAnimateTitleContentChanges:(_Bool)arg1;
+- (unsigned long long)_statusBarGlobalContextLayoutBehavior;
+- (void)_setStatusBarGlobalContextLayoutBehavior:(unsigned long long)arg1;
+- (void)statusBarReleaseDisableTitleTruncationTimerAssertion;
+- (void)statusBarTakeDisableTitleTruncationTimerAssertion;
 - (void)statusBarReleaseDisableAppContextAnimationsAssertion;
 - (void)statusBarTakeDisableAppContextAnimationsAssertion;
+- (id)statusBarCurrentApplicationContextDelegate;
+- (void)setStatusBarAppContextDelegate:(id)arg1;
 - (id)statusBarCurrentApplicationContextDataSource;
 - (void)setStatusBarAppContextDataSource:(id)arg1 animated:(_Bool)arg2;
 - (id)statusBarKeyController:(_Bool)arg1;
@@ -51,6 +62,11 @@
 - (void)setStatusBarKeyController:(id)arg1 animated:(_Bool)arg2;
 - (id)_takeStatusBarGlobalContextAssertion;
 - (id)_takeStatusBarAppContextAssertion;
+- (_Bool)_areStatusBarIndicatorsHidden;
+- (void)_setStatusBarIndicatorsHidden:(_Bool)arg1 duration:(double)arg2 animation:(unsigned long long)arg3 completion:(CDUnknownBlockType)arg4;
+- (void)_setStatusBarIndicatorsHidden:(_Bool)arg1 animation:(unsigned long long)arg2 completion:(CDUnknownBlockType)arg3;
+- (void)_setStatusBarIndicatorsHidden:(_Bool)arg1 animated:(_Bool)arg2 completion:(CDUnknownBlockType)arg3;
+- (_Bool)_isStatusBarTimeHidden;
 - (void)_setStatusBarTimeHidden:(_Bool)arg1 duration:(double)arg2 animation:(unsigned long long)arg3 completion:(CDUnknownBlockType)arg4;
 - (void)_setStatusBarTimeHidden:(_Bool)arg1 animation:(unsigned long long)arg2 completion:(CDUnknownBlockType)arg3;
 - (void)_setStatusBarTimeHidden:(_Bool)arg1 animated:(_Bool)arg2 completion:(CDUnknownBlockType)arg3;
@@ -60,8 +76,8 @@
 - (void)_updateCurrentStatusBarViewControllerAppearance;
 - (struct CGAffineTransform)_rotationTransformForOrientation:(long long)arg1;
 - (void)_orientationChanged:(id)arg1;
-- (void)_keyWindowChange:(id)arg1;
 - (void)_overrideMainScreenDefaultTraitCollection;
+- (void)_setupUnblankingSynchronization;
 - (void)_applicationDidBecomeActiveNotification:(id)arg1;
 - (id)init;
 - (void)setupZoomModel;

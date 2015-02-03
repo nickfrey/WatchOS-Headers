@@ -8,37 +8,66 @@
 
 #import "UIScrollViewDelegate.h"
 
-@class NSString, UITapGestureRecognizer, UIView;
+@class NSString, UIColor, UIImageView, UITapGestureRecognizer, UIView;
 
 @interface PUICPageView : UIScrollView <UIScrollViewDelegate>
 {
     UITapGestureRecognizer *_tapGesture;
     struct CGPoint _zeroOffset;
+    UIImageView *_outlineView;
+    UIView *_outlineBackingView;
+    _Bool _swipingToDelete;
     _Bool _allowsSelect;
+    _Bool _allowsDelete;
+    long long _layoutRule;
+    UIColor *_outlineColor;
+    double _outlineStrokeWidth;
+    double _outlineCornerRadius;
+    double _outlineAlpha;
+    double _contentAlpha;
+    UIColor *_outlineBackingColor;
     id <PUICPageDelegate> _pageDelegate;
     UIView *_contentView;
-    long long _layoutRule;
     unsigned long long _deleteEdge;
     struct CGSize _pageSize;
     struct CGSize _contentViewSize;
+    struct UIEdgeInsets _outlineInsets;
 }
 
 @property(nonatomic) unsigned long long deleteEdge; // @synthesize deleteEdge=_deleteEdge;
+@property(nonatomic) _Bool allowsDelete; // @synthesize allowsDelete=_allowsDelete;
 @property(nonatomic) _Bool allowsSelect; // @synthesize allowsSelect=_allowsSelect;
-@property(nonatomic) long long layoutRule; // @synthesize layoutRule=_layoutRule;
 @property(nonatomic) struct CGSize contentViewSize; // @synthesize contentViewSize=_contentViewSize;
 @property(nonatomic) struct CGSize pageSize; // @synthesize pageSize=_pageSize;
 @property(retain, nonatomic) UIView *contentView; // @synthesize contentView=_contentView;
 @property(nonatomic) __weak id <PUICPageDelegate> pageDelegate; // @synthesize pageDelegate=_pageDelegate;
+@property(retain, nonatomic) UIColor *outlineBackingColor; // @synthesize outlineBackingColor=_outlineBackingColor;
+@property(nonatomic) double contentAlpha; // @synthesize contentAlpha=_contentAlpha;
+@property(nonatomic) double outlineAlpha; // @synthesize outlineAlpha=_outlineAlpha;
+@property(nonatomic) struct UIEdgeInsets outlineInsets; // @synthesize outlineInsets=_outlineInsets;
+@property(nonatomic) double outlineCornerRadius; // @synthesize outlineCornerRadius=_outlineCornerRadius;
+@property(nonatomic) double outlineStrokeWidth; // @synthesize outlineStrokeWidth=_outlineStrokeWidth;
+@property(retain, nonatomic) UIColor *outlineColor; // @synthesize outlineColor=_outlineColor;
+@property(nonatomic) long long layoutRule; // @synthesize layoutRule=_layoutRule;
 - (void).cxx_destruct;
+- (void)_tearDownOutlineBackingView;
+- (void)_setUpOutlineBackingView;
 - (void)_handleTap:(id)arg1;
-- (void)_checkIfDeleted;
+- (void)_handleScrollingStopped;
+- (double)_deleteFractionForOffset:(struct CGPoint)arg1;
+- (void)_updateBouncing;
+- (void)_updateContentSize;
+- (void)scrollViewDidEndScrollingAnimation:(id)arg1;
 - (void)scrollViewDidEndDecelerating:(id)arg1;
 - (void)scrollViewDidEndDragging:(id)arg1 willDecelerate:(_Bool)arg2;
-- (void)_updateContentSize;
+- (void)scrollViewWillEndDragging:(id)arg1 withVelocity:(struct CGPoint)arg2 targetContentOffset:(inout struct CGPoint *)arg3;
+- (void)scrollViewDidScroll:(id)arg1;
+- (id)hitTest:(struct CGPoint)arg1 withEvent:(id)arg2;
 - (struct CGSize)sizeThatFits:(struct CGSize)arg1;
 - (void)layoutSubviews;
 - (void)prepareForReuse;
+- (void)applyConfiguration;
+- (void)cancelDelete:(_Bool)arg1;
 - (id)initWithFrame:(struct CGRect)arg1;
 
 // Remaining properties

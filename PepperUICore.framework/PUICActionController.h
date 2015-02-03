@@ -15,6 +15,7 @@
 {
     ORBTapGestureRecognizer *_orbGestureRecognizer;
     float _progress;
+    _Bool _isVisible;
     PUICActionGroup *_actionGroup;
     id <PUICActionControllerDelegate> _delegate;
     UIWindow *_actionWindow;
@@ -25,12 +26,23 @@
 + (id)_actionControllerOrbTapGestureRecognizer;
 + (void)_popActionControllerOrbGestureEnabled;
 + (void)_pushActionControllerOrbGestureEnabled:(_Bool)arg1 inWindow:(id)arg2;
++ (void)_initializeActionViewController;
++ (void)_initializeSnapshotWindow;
 + (void)_initializeActionWindow;
 + (void)_setOrbGestureWindow:(id)arg1;
 + (void)_setActionControllerOrbGestureEnabled:(_Bool)arg1 inWindow:(id)arg2;
 + (void)ORBTapGestureRecognizerDidLatch:(id)arg1;
++ (void)_beginPresentingActionController;
 + (void)_orbGestureRecognized:(id)arg1;
++ (id)presentationControllerForPresentedViewController:(id)arg1 presentingViewController:(id)arg2 sourceViewController:(id)arg3;
++ (double)transitionDuration:(id)arg1;
++ (void)animateTransition:(id)arg1;
++ (id)animationControllerForDismissedController:(id)arg1;
++ (id)animationControllerForPresentedController:(id)arg1 presentingController:(id)arg2 sourceController:(id)arg3;
++ (id)interactionControllerForDismissal:(id)arg1;
++ (id)interactionControllerForPresentation:(id)arg1;
 + (_Bool)gestureRecognizer:(id)arg1 shouldReceiveTouch:(id)arg2;
++ (id)_currentActionController;
 @property(retain, nonatomic) UIWindow *actionWindow; // @synthesize actionWindow=_actionWindow;
 @property(nonatomic) __weak id <PUICActionControllerDelegate> delegate; // @synthesize delegate=_delegate;
 @property(retain, nonatomic) PUICActionGroup *actionGroup; // @synthesize actionGroup=_actionGroup;
@@ -44,7 +56,8 @@
 - (void)presentWithORBTapGestureRecognizer:(id)arg1;
 - (void)ORBTapGestureRecognizerDidLatch:(id)arg1;
 - (void)_orbGestureDismiss:(id)arg1;
-- (void)_hideActionsAnimated:(_Bool)arg1 completionHandler:(CDUnknownBlockType)arg2;
+- (void)_cleanupAnimated:(_Bool)arg1 completionHandler:(CDUnknownBlockType)arg2;
+- (void)_dismissAnimated:(_Bool)arg1 completionHandler:(CDUnknownBlockType)arg2;
 - (void)_dismissed:(CDUnknownBlockType)arg1;
 - (void)_showActionsAnimated:(_Bool)arg1;
 - (void)_deactivated;

@@ -11,7 +11,7 @@
 #import "PUICApplicationStatusBarProperties.h"
 #import "PUICStatusBarAppContextViewDataSource.h"
 
-@class NSString, PUICAppContextDataSourceObservedImpl, PUICStatusBarProperties, UIColor, UIFont, UIView;
+@class NSString, PUICAppContextDataSourceObservedImpl, PUICStatusBarProperties, UIColor, UIFont, UIImage, UIView;
 
 @interface PUICApplicationStatusBarItem : NSObject <PUICApplicationStatusBarProperties, PUICStatusBarAppContextViewDataSource, NSCoding, NSCopying>
 {
@@ -27,8 +27,9 @@
 - (_Bool)isObservingStatusBarAppContextDataSource:(id)arg1;
 - (void)removeStatusBarAppContextDataSourceObserver:(id)arg1;
 - (void)addStatusBarAppContextDataSourceObserver:(id)arg1;
-- (void)_activityIndicatorChanged:(id)arg1;
-- (_Bool)statusBarAppContextActivityIndicatorVisible;
+- (id)_navigationImage:(_Bool)arg1;
+- (id)statusBarAppContextNavigationImage;
+@property(retain, nonatomic) UIImage *navigationImage;
 - (_Bool)_navUIBackButtonDisabled:(_Bool)arg1;
 - (_Bool)statusBarAppContextNavUIBackButtonDisabled;
 @property(nonatomic) _Bool navUIBackButtonDisabled;
@@ -41,6 +42,9 @@
 - (id)_titleAccessoryView:(_Bool)arg1;
 - (id)statusBarAppContextTitleAccessoryView;
 @property(retain, nonatomic) UIView *titleAccessoryView;
+- (_Bool)_isTitleInteractive:(_Bool)arg1;
+- (_Bool)statusBarAppContextIsTitleInteractive;
+@property(nonatomic, getter=isTitleInteractive) _Bool titleInteractive;
 - (double)_titleBaseLine:(_Bool)arg1;
 - (double)statusBarAppContextTitleBaseLine;
 @property(nonatomic) double titleBaseLine;
@@ -59,7 +63,6 @@
 @property(readonly, copy) NSString *description;
 - (void)encodeWithCoder:(id)arg1;
 - (id)initWithCoder:(id)arg1;
-- (void)dealloc;
 - (id)init;
 
 // Remaining properties

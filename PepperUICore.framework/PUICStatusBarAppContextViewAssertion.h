@@ -10,10 +10,14 @@
 
 @interface PUICStatusBarAppContextViewAssertion : NSObject
 {
+    _Bool _animated;
+    double _animationDuration;
     PUICStatusBar *_statusBar;
 }
 
 @property(nonatomic) __weak PUICStatusBar *statusBar; // @synthesize statusBar=_statusBar;
+@property(nonatomic) double animationDuration; // @synthesize animationDuration=_animationDuration;
+@property(nonatomic) _Bool animated; // @synthesize animated=_animated;
 - (void).cxx_destruct;
 - (void)dealloc;
 - (id)initWithStatusBar:(id)arg1;

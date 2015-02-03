@@ -6,27 +6,54 @@
 
 #import "UIView.h"
 
-@class UIImageView;
+@class NSMutableArray;
 
 @interface PUICStatusView : UIView
 {
-    unsigned long long _statusViewState;
-    UIImageView *_doNotDisturb;
-    UIImageView *_airplaneMode;
-    UIImageView *_unreadNotifications;
+    id <PUICStatusViewState> _currentVisibleState;
+    id <PUICStatusViewState> _exitingState;
+    _Bool _inTransition;
+    CDUnknownBlockType _showIndex;
+    CDUnknownBlockType _postTransitionAction;
+    CDUnknownBlockType _postTransitionCompletion;
+    _Bool _cancelAnimations;
+    id <PUICStatusViewDataSource> _dataSource;
+    unsigned long long _horizontalAlignment;
+    unsigned long long _verticalAlignment;
+    NSMutableArray *_states;
 }
 
-@property(retain, nonatomic) UIImageView *unreadNotifications; // @synthesize unreadNotifications=_unreadNotifications;
-@property(retain, nonatomic) UIImageView *airplaneMode; // @synthesize airplaneMode=_airplaneMode;
-@property(retain, nonatomic) UIImageView *doNotDisturb; // @synthesize doNotDisturb=_doNotDisturb;
-@property(nonatomic) unsigned long long statusViewState; // @synthesize statusViewState=_statusViewState;
++ (double)defaultStateTransitionOutDuration;
++ (double)defaultStateTransitionInDuration;
+@property(retain, nonatomic) NSMutableArray *states; // @synthesize states=_states;
+@property(nonatomic) unsigned long long verticalAlignment; // @synthesize verticalAlignment=_verticalAlignment;
+@property(nonatomic) unsigned long long horizontalAlignment; // @synthesize horizontalAlignment=_horizontalAlignment;
+@property(nonatomic) __weak id <PUICStatusViewDataSource> dataSource; // @synthesize dataSource=_dataSource;
 - (void).cxx_destruct;
-- (void)_transitionInToState:(unsigned long long)arg1 completion:(CDUnknownBlockType)arg2;
-- (void)_transitionOutFromState:(unsigned long long)arg1 completion:(CDUnknownBlockType)arg2;
-- (CDStruct_c3b9c2ee)_animationParametersForState:(unsigned long long)arg1;
-- (void)_transitionFromState:(unsigned long long)arg1 toState:(unsigned long long)arg2;
-- (id)_viewForStatusViewState:(unsigned long long)arg1;
-- (void)setStatusViewState:(unsigned long long)arg1 animated:(_Bool)arg2;
+- (void)_transitionInToState:(id)arg1 oldState:(id)arg2 nextState:(id)arg3 completion:(CDUnknownBlockType)arg4;
+- (void)_transitionOutFromState:(id)arg1 newState:(id)arg2 completion:(CDUnknownBlockType)arg3;
+- (void)_transitionFromState:(id)arg1 toState:(id)arg2 nextState:(id)arg3 completion:(CDUnknownBlockType)arg4;
+- (id)_viewForStatusViewState:(id)arg1;
+- (void)_setVisibleStatusViewState:(id)arg1 animated:(_Bool)arg2 nextState:(id)arg3 completion:(CDUnknownBlockType)arg4;
+- (void)_showFinalStateAnimated:(_Bool)arg1 completion:(CDUnknownBlockType)arg2;
+- (void)_showStateNamed:(id)arg1 animated:(_Bool)arg2 completion:(CDUnknownBlockType)arg3;
+- (void)_showState:(unsigned long long)arg1 animated:(_Bool)arg2 completion:(CDUnknownBlockType)arg3;
+- (void)showFinalStateAnimated:(_Bool)arg1 completion:(CDUnknownBlockType)arg2;
+- (void)showStateNamed:(id)arg1 animated:(_Bool)arg2 completion:(CDUnknownBlockType)arg3;
+- (void)showState:(unsigned long long)arg1 animated:(_Bool)arg2 completion:(CDUnknownBlockType)arg3;
+- (void)_handlePostTransitionAction;
+- (void)_addPostTransitionAction:(CDUnknownBlockType)arg1 withActionCompletion:(CDUnknownBlockType)arg2;
+- (id)visibleState;
+- (_Bool)isAnimating;
+- (_Bool)isAnyStateActive;
+- (_Bool)isStateActiveByIndex:(unsigned long long)arg1;
+- (_Bool)isStateActive:(id)arg1;
+- (id)stateByIndex:(unsigned long long)arg1;
+- (id)stateForName:(id)arg1;
+- (unsigned long long)numberOfStates;
+- (void)reloadData;
+- (void)layoutSubviews;
+- (void)_alignView:(id)arg1;
 
 @end
 

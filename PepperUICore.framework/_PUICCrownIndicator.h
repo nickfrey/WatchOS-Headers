@@ -10,21 +10,32 @@
 
 @interface _PUICCrownIndicator : NSObject
 {
+    id displayer;
     PUICCrownIndicatorWindow *_crownWindow;
     PUICCrownView *_crownView;
 }
 
++ (double)trackMinY;
++ (double)trackMinX;
++ (double)trackCornerRadius;
++ (double)trackHeight;
++ (id)trackBackgroundColor;
++ (double)hideAnimationDuration;
++ (id)_sharedIndicator;
++ (id)acquireCrownIndicatorFor:(id)arg1;
++ (id)sharedIndicatorForDisplayer:(id)arg1;
 + (struct CGRect)windowFrame;
 @property(retain, nonatomic) PUICCrownView *crownView; // @synthesize crownView=_crownView;
 @property(retain, nonatomic) PUICCrownIndicatorWindow *crownWindow; // @synthesize crownWindow=_crownWindow;
+@property(nonatomic) __weak id displayer; // @synthesize displayer;
 - (void).cxx_destruct;
 - (void)setVisible:(_Bool)arg1 animated:(_Bool)arg2;
 @property(nonatomic, getter=isVisible) _Bool visible;
+- (void)_resetWindowLevel;
 @property(nonatomic) _Bool usingCrown;
 @property(nonatomic) double visibleLength;
 @property(nonatomic) double offset;
 @property(nonatomic) double length;
-- (void)dealloc;
 - (id)init;
 
 @end

@@ -8,38 +8,48 @@
 
 #import "PUICPageDelegate.h"
 
-@class NSMutableDictionary, NSMutableSet, NSString, PUICPageScrollView;
+@class NSMutableDictionary, NSMutableSet, NSString, PUICPageScrollView, UIView;
 
 @interface PUICPageScrollViewController : UIViewController <PUICPageDelegate>
 {
-    long long _scrollDirection;
+    long long _scrollOrientation;
     struct {
         unsigned int handlesSelect:1;
         unsigned int handlesDelete:1;
         unsigned int handlesReorder:1;
-        unsigned int suppliesContentSize:1;
-        unsigned int suppliesPageLayout:1;
+        unsigned int configuresPage:1;
+        unsigned int suppliesContentViewSize:1;
         unsigned int handlesWillAppear:1;
         unsigned int handlesDidAppear:1;
         unsigned int handlesWillDisappear:1;
+        unsigned int handlesDidDisappear:1;
         unsigned int handlesScroll:1;
         unsigned int handlesScrollStart:1;
         unsigned int handlesScrollStop:1;
-        unsigned int handlesDidDisappear:1;
+        unsigned int handlesSwipeToDeleteBegan:1;
+        unsigned int handlesSwipeToDeleteUpdated:1;
+        unsigned int handlesSwipeToDeleteEnded:1;
+        unsigned int handlesWillAnimateDeletion:1;
+        unsigned int handlesIsAnimatingDeletion:1;
+        unsigned int handlesDidAnimateDeletion:1;
     } _delegateFlags;
     struct {
         unsigned int handlesPagePurge:1;
     } _dataSourceFlags;
     NSMutableDictionary *_pageViewControllers;
     NSMutableSet *_recycledPages;
+    _Bool _swipeToDeleteInProgress;
+    unsigned long long _swipeToDeleteIndex;
     _Bool _scrollEnabled;
     id <PUICPageScrollViewControllerDataSource> _dataSource;
     id <PUICPageScrollViewControllerDelegate> _delegate;
     PUICPageScrollView *_scrollView;
     double _interpageSpacing;
     unsigned long long _pageDeleteEdge;
+    UIView *_deleteConfirmationView;
 }
 
+@property(retain, nonatomic) UIView *deleteConfirmationView; // @synthesize deleteConfirmationView=_deleteConfirmationView;
 @property(nonatomic) _Bool scrollEnabled; // @synthesize scrollEnabled=_scrollEnabled;
 @property(nonatomic) unsigned long long pageDeleteEdge; // @synthesize pageDeleteEdge=_pageDeleteEdge;
 @property(nonatomic) double interpageSpacing; // @synthesize interpageSpacing=_interpageSpacing;
@@ -47,6 +57,10 @@
 @property(nonatomic) __weak id <PUICPageScrollViewControllerDelegate> delegate; // @synthesize delegate=_delegate;
 @property(nonatomic) __weak id <PUICPageScrollViewControllerDataSource> dataSource; // @synthesize dataSource=_dataSource;
 - (void).cxx_destruct;
+- (void)_tearDownPageDeletion;
+- (void)_handleDidAnimatePageDeletion;
+- (void)_handleIsAnimatingPageDeletion;
+- (void)_handleWillAnimatePageDeletion:(unsigned long long)arg1 destinationIndex:(unsigned long long)arg2;
 - (void)_handlePageDeletion:(unsigned long long)arg1;
 - (void)_handleScrollingDidStop;
 - (void)_handleScrollingDidStart;
@@ -64,15 +78,17 @@
 - (void)_migratePageViewControllersWithStartIndex:(unsigned long long)arg1 offset:(long long)arg2;
 - (id)_viewControllerForPageAtIndex:(unsigned long long)arg1;
 - (void)_ensureViewControllerForPageAtIndex:(unsigned long long)arg1;
-- (_Bool)_shouldEnableScrolling;
-- (long long)_layoutRuleForPageAtIndex:(unsigned long long)arg1;
 - (struct CGSize)_contentViewSizeForPageAtIndex:(unsigned long long)arg1;
-- (unsigned long long)_deleteEdgeForPageAtIndex:(unsigned long long)arg1;
+- (_Bool)_shouldEnableScrolling;
+- (void)_applyDefaultConfigurationToPage:(id)arg1;
+- (_Bool)_canDeletePageAtIndex:(unsigned long long)arg1;
 - (_Bool)_canSelectPageAtIndex:(unsigned long long)arg1;
 - (struct CGRect)_frameForCenteredPage;
 - (void)updatePageBehaviors;
 - (void)updateScrollingEnabled;
-- (void)pageWasDeleted:(id)arg1;
+- (void)page:(id)arg1 didEndSwipeToDelete:(_Bool)arg2;
+- (void)page:(id)arg1 didUpdateSwipeToDelete:(double)arg2;
+- (void)pageDidBeginSwipeToDelete:(id)arg1;
 - (void)pageWasSelected:(id)arg1;
 - (void)viewDidDisappear:(_Bool)arg1;
 - (void)viewWillDisappear:(_Bool)arg1;
@@ -80,6 +96,8 @@
 - (void)viewWillAppear:(_Bool)arg1;
 - (_Bool)shouldAutomaticallyForwardAppearanceMethods;
 - (void)enumeratePageViewControllersWithBlock:(CDUnknownBlockType)arg1;
+- (void)cancelPageDeletion;
+- (void)confirmPageDeletion;
 - (id)pageViewControllerAtIndex:(unsigned long long)arg1;
 @property(readonly, nonatomic) unsigned long long currentPageIndex;
 @property(nonatomic) unsigned long long prefetchBuffer;
@@ -91,6 +109,7 @@
 - (void)activate;
 - (void)viewDidLayoutSubviews;
 - (void)loadView;
+- (id)initWithScrollOrientation:(long long)arg1;
 - (id)initWithScrollDirection:(long long)arg1;
 
 // Remaining properties

@@ -9,7 +9,9 @@
 @class PUICPageView;
 
 @protocol PUICPageDelegate <NSObject>
-- (void)pageWasDeleted:(PUICPageView *)arg1;
+- (void)page:(PUICPageView *)arg1 didEndSwipeToDelete:(_Bool)arg2;
+- (void)page:(PUICPageView *)arg1 didUpdateSwipeToDelete:(double)arg2;
+- (void)pageDidBeginSwipeToDelete:(PUICPageView *)arg1;
 - (void)pageWasSelected:(PUICPageView *)arg1;
 @end
 

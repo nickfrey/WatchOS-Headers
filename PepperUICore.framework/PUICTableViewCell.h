@@ -11,18 +11,19 @@
 @interface PUICTableViewCell : UITableViewCell
 {
     PUICTableViewCellBackgroundView *_backgroundPillView;
-    _Bool _isInsetByTap;
     _Bool _isInteractive;
     _Bool _clippedBeforeSwiping;
     _Bool _hasSetBackgroundColor;
     double _swipeDistancePulled;
     _Bool _usesCustomBackground;
     _Bool _usesDynamicType;
+    _Bool _usesCustomHighlightAlpha;
     _Bool _radioSectionCell;
     UIView *_contentWrapperView;
     PUICTableViewCellActionBar *_actionBar;
 }
 
++ (double)deselectCellAnimationDuration;
 + (double)defaultContentHeight;
 + (double)defaultCellHeight;
 + (id)cellIdentifier;
@@ -47,15 +48,16 @@
 - (void)_updateCellContentColor:(id)arg1 opaque:(_Bool)arg2;
 - (void)setBackgroundView:(id)arg1;
 - (void)setHighlighted:(_Bool)arg1 animated:(_Bool)arg2;
-- (void)setSelected:(_Bool)arg1 animated:(_Bool)arg2;
 - (void)setSelectionStyle:(long long)arg1;
-- (void)_setHiliteMode:(_Bool)arg1 animated:(_Bool)arg2;
+- (void)setSelected:(_Bool)arg1 animated:(_Bool)arg2;
+- (void)_updateHighlightAndSelectionAppearance:(_Bool)arg1;
 - (struct CGSize)systemLayoutSizeFittingSize:(struct CGSize)arg1 withHorizontalFittingPriority:(float)arg2 verticalFittingPriority:(float)arg3;
 - (struct CGSize)sizeThatFits:(struct CGSize)arg1;
 - (void)setSeparatorStyle:(long long)arg1;
 - (void)setSectionLocation:(int)arg1 animated:(_Bool)arg2;
 - (void)prepareForReuse;
 - (void)_systemTextSizeChanged;
+@property(nonatomic) _Bool usesCustomHighlightAlpha;
 @property(nonatomic) _Bool usesDynamicType;
 - (void)_didCreateContentView;
 - (void)_replaceContentView;

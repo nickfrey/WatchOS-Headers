@@ -19,7 +19,10 @@
 @property(nonatomic) unsigned long long roundedCorners; // @synthesize roundedCorners=_roundedCorners;
 - (void).cxx_destruct;
 - (id)_contentMaskLayer;
+- (void)setOpaqueWithUpdate:(_Bool)arg1;
 - (void)setPillOpaque:(_Bool)arg1;
+- (void)viewWillMoveToSuperview:(id)arg1;
+- (void)_updateColor;
 - (void)_updateImage;
 - (id)initWithFrame:(struct CGRect)arg1;
 

@@ -8,6 +8,7 @@
 
 @interface UIResponder (PUICActionController)
 - (_Bool)canProvideActionController;
+- (id)actionControllerViewForScaling;
 - (id)actionController;
 @end
 

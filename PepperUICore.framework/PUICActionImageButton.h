@@ -6,14 +6,26 @@
 
 #import <PepperUICore/PUICActionButton.h>
 
+@class UIView;
+
 @interface PUICActionImageButton : PUICActionButton
 {
     _Bool _isAnimatingDown;
+    _Bool _needsLongTitleLayout;
+    _Bool _blendEnabled;
+    UIView *_blendView;
 }
 
+@property(nonatomic) _Bool needsLongTitleLayout; // @synthesize needsLongTitleLayout=_needsLongTitleLayout;
+- (void).cxx_destruct;
 - (struct CGRect)imageRectForContentRect:(struct CGRect)arg1;
 - (struct CGRect)titleRectForContentRect:(struct CGRect)arg1;
 - (struct CGRect)backgroundRectForBounds:(struct CGRect)arg1;
+- (id)_createBackgroundImageWithColor:(id)arg1;
+- (id)_destructiveBackgroundImage;
+- (id)_activeBackgroundImage;
+- (id)_backgroundImage;
+- (id)_blendImage;
 - (void)_updateBackgroundImage;
 - (_Bool)isImageButton;
 - (void)tintColorDidChange;
@@ -23,6 +35,8 @@
 - (void)setHighlighted:(_Bool)arg1;
 - (id)hitTest:(struct CGPoint)arg1 withEvent:(id)arg2;
 - (void)touchesBegan:(id)arg1 withEvent:(id)arg2;
+- (void)disableBlend;
+- (void)setBlendEnabled:(_Bool)arg1 animated:(_Bool)arg2;
 - (id)initWithFrame:(struct CGRect)arg1;
 
 @end

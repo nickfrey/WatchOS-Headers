@@ -6,13 +6,15 @@
 
 #import "NSObject.h"
 
-@class NSString, UIColor, UIFont, UIView;
+@class NSString, UIColor, UIFont, UIImage, UIView;
 
 @protocol PUICApplicationStatusBarProperties <NSObject>
+@property(retain, nonatomic) UIImage *navigationImage;
 @property(nonatomic) _Bool navUIBackButtonDisabled;
 @property(nonatomic) _Bool showNavigationUI;
 @property(retain, nonatomic) UIColor *backgroundColor;
 @property(retain, nonatomic) UIView *titleAccessoryView;
+@property(nonatomic, getter=isTitleInteractive) _Bool titleInteractive;
 @property(nonatomic) double titleBaseLine;
 @property(retain, nonatomic) UIFont *titleFont;
 @property(retain, nonatomic) UIColor *titleColor;

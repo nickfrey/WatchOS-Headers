@@ -8,14 +8,13 @@
 
 #import "PUICCrownInputSequencerDelegate.h"
 
-@class CAShapeLayer, NSString, NSTimer, PUICCrownInputSequencer, UIImage, _PUICSliderButtonSnapshot;
+@class CAShapeLayer, NSString, PUICCrownInputSequencer, PUICEventThrottler, UIImage, _PUICSliderAccessoryState;
 
 @interface PUICSlider : UISlider <PUICCrownInputSequencerDelegate>
 {
     long long _style;
     long long _touchTarget;
     PUICCrownInputSequencer *_crownInputSequencer;
-    NSTimer *_longPressTimer;
     struct CGRect _currentTrackLayoutBounds;
     float _stepValue;
     float _disabledValue;
@@ -23,8 +22,9 @@
     CAShapeLayer *_crownGlowLayer;
     UIImage *_thumbImage;
     UIImage *_emptyThumbImage;
-    _PUICSliderButtonSnapshot *_maxSnapshot;
-    _PUICSliderButtonSnapshot *_minSnapshot;
+    PUICEventThrottler *_crownThrottler;
+    _PUICSliderAccessoryState *_minimumImageState;
+    _PUICSliderAccessoryState *_maximumImageState;
     _Bool _shouldAutomaticallAdjustValueOnTouch;
     _Bool _shouldFadeAccessoryImages;
     float _pillHighlightedGlowOpacity;
@@ -40,17 +40,18 @@
 - (void).cxx_destruct;
 - (id)_emptyThumbImage;
 - (id)_thumbImage;
+- (void)_cancelTouchTarget;
 - (long long)_touchTargetFromTouches:(id)arg1;
 - (void)_updateCrownGlowLayer;
 - (void)_updateTrackViews;
-- (void)_cancelTouch;
-- (void)_animateUnpressView:(id)arg1 withSnapshot:(id)arg2;
-- (void)_animatePressView:(id)arg1 withSnapshot:(id)arg2;
-- (void)_longPressTimer:(id)arg1;
+- (void)_setMaximumImageAlpha:(float)arg1 animated:(_Bool)arg2;
+- (void)_setMinimumImageAlpha:(float)arg1 animated:(_Bool)arg2;
+- (void)_animatePressView:(id)arg1 state:(id)arg2;
 - (void)_fadeAccessoryImagesForValue:(float)arg1 animated:(_Bool)arg2;
 - (void)_setValue:(float)arg1 animated:(_Bool)arg2 sendAction:(_Bool)arg3;
 - (void)crownInputSequencerIdleDidChange:(id)arg1;
 - (void)crownInputSequencerOffsetDidChange:(id)arg1;
+- (void)_updateSequencerConfiguration;
 - (void)_wheelChangedWithEvent:(id)arg1;
 - (_Bool)canBecomeFirstResponder;
 @property(readonly, nonatomic) double cornerRadius;
@@ -68,12 +69,11 @@
 - (void)setEnabled:(_Bool)arg1 animated:(_Bool)arg2;
 - (void)setEnabled:(_Bool)arg1;
 - (void)tintColorDidChange;
+- (void)animationDidStop:(id)arg1 finished:(_Bool)arg2;
 - (void)touchesCancelled:(id)arg1 withEvent:(id)arg2;
 - (void)touchesEnded:(id)arg1 withEvent:(id)arg2;
 - (void)touchesMoved:(id)arg1 withEvent:(id)arg2;
-- (void)animationDidStop:(id)arg1 finished:(_Bool)arg2;
 - (void)touchesBegan:(id)arg1 withEvent:(id)arg2;
-- (_Bool)pointInside:(struct CGPoint)arg1 withEvent:(id)arg2;
 - (void)layoutSubviews;
 - (id)initWithSliderStyle:(long long)arg1;
 

@@ -17,10 +17,7 @@
 - (void).cxx_destruct;
 - (void)willMoveToParentViewController:(id)arg1;
 - (_Bool)_viewControllerUnderlapsStatusBar;
-- (id)popToRootViewControllerAnimated:(_Bool)arg1;
-- (id)popToViewController:(id)arg1 animated:(_Bool)arg2;
-- (id)popViewControllerAnimated:(_Bool)arg1;
-- (void)pushViewController:(id)arg1 animated:(_Bool)arg2;
+- (void)didShowViewController:(id)arg1 animated:(_Bool)arg2;
 - (id)_navigationBarHiddenByDefault:(_Bool)arg1;
 - (id)navigationBar;
 - (void)viewDidLoad;

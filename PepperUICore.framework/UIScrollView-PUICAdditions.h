@@ -12,29 +12,40 @@
 
 @interface UIScrollView (PUICAdditions) <PUICCrownInputSequencerDelegate>
 + (void)load;
-- (void)_puic_setContentOffset:(struct CGPoint)arg1 notifyDelegate:(_Bool)arg2;
-- (id)_puic_contentOffsetAnimator;
 - (double)_puic_crownInputSequencerOffsetForContentOffset:(struct CGPoint)arg1;
 - (struct CGPoint)_puic_contentOffsetForCrownInputSequencerOffset:(double)arg1;
+- (double)_puic_visibleContentLength;
+- (double)_puic_scrollableContentLength;
 - (void)_puic_configureCrownInputSequencerLengthForScrollViewContentSize;
 - (void)_puic_configureCrownInputSequencer;
+- (void)_puic_setScrollEnabled:(_Bool)arg1;
 - (void)_puic_setContentInset:(struct UIEdgeInsets)arg1;
 - (void)_puic_setContentSize:(struct CGSize)arg1;
+- (_Bool)_puic_isTracking;
+- (_Bool)_puic_isDecelerating;
+- (_Bool)_puic_isDragging;
+- (void)_puic_averageCrownVelocityDidChange;
 - (void)_puic_notifyDidScroll;
-- (void)hideCrownIndicator;
-- (void)showCrownIndicator;
+- (_Bool)_puic_isVisible;
+- (void)_puic_contentOffsetDidChange;
+- (void)_wheelChangedWithEvent:(id)arg1;
+- (_Bool)_puic_isTouchTracking;
 - (id)_puic_associatedObject;
-- (_Bool)_puic_hasEnqueuedContentOffsetAnimations;
-- (void)_puic_additivelySetContentOffset:(struct CGPoint)arg1;
+- (_Bool)_crownInputSequencerShouldSuppressInput:(id)arg1;
+- (void)crownInputSequencerDidEndDecelerating:(id)arg1;
+- (void)crownInputSequencerWillBeginDecelerating:(id)arg1;
+- (void)crownInputSequencerDidBecomeIdle:(id)arg1 willDecelerate:(_Bool)arg2;
+- (void)crownInputSequencerWillBecomeIdle:(id)arg1 withCrownVelocity:(double)arg2 targetOffset:(inout double *)arg3;
 - (_Bool)crownInputSequencer:(id)arg1 shouldRubberBandAtBoundary:(long long)arg2;
-- (void)crownInputSequencerActiveDetentDidChange:(id)arg1;
 - (void)crownInputSequencerIdleDidChange:(id)arg1;
 - (void)crownInputSequencerOffsetDidChange:(id)arg1;
-- (void)_wheelChangedWithEvent:(id)arg1;
+- (_Bool)canBecomeFirstResponder;
+- (void)_puic_hideCrownIndicator;
+- (void)flashCrownIndicator;
 @property(readonly, nonatomic, getter=puic_crownInputSequencer) PUICCrownInputSequencer *crownInputSequencer;
 @property(readonly, nonatomic, getter=puic_existingCrownInputSequencer) PUICCrownInputSequencer *existingCrownInputSequencer;
-- (_Bool)canBecomeFirstResponder;
 @property(nonatomic, getter=puic_crownInputScrollDirection, setter=puic_setCrownInputScrollDirection:) long long crownInputScrollDirection;
+- (void)_puic_setDelegate:(id)arg1;
 
 // Remaining properties
 @property(readonly, copy) NSString *debugDescription;

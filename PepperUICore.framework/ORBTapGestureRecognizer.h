@@ -8,7 +8,7 @@
 
 #import "UIGestureRecognizerDelegate.h"
 
-@class NSString, PUICDelayedBlock;
+@class NSArray, NSSet, NSString, PUICDelayedBlock, UIEvent;
 
 @interface ORBTapGestureRecognizer : UIGestureRecognizer <UIGestureRecognizerDelegate>
 {
@@ -18,6 +18,9 @@
     struct CGPoint _touchStartLocation;
     double _longPressStartTime;
     PUICDelayedBlock *_longPressProgressTimer;
+    UIEvent *_longPressTouchesBeganEvent;
+    NSSet *_longPressTouches;
+    NSArray *_longPressGesturesToCancel;
     _Bool _cancelledOtherGestures;
     _Bool _hasLatched;
     _Bool _acceptLongPress;
@@ -34,13 +37,15 @@
 @property(readonly, nonatomic) float progress; // @synthesize progress=_progress;
 @property(readonly, nonatomic) _Bool hasLatched; // @synthesize hasLatched=_hasLatched;
 - (void).cxx_destruct;
+- (void)_cleanupLongPressGesture;
 - (void)_clearLongPressProgressTimer;
 - (void)_scheduleLongPressProgressTimerWithDelay:(double)arg1;
 - (float)_longPressProgress;
 - (void)_updateLongPressForTouchesEnded:(id)arg1;
-- (void)_updateLongPressForTouchesBegan:(id)arg1;
+- (void)_updateLongPressForTouchesBegan:(id)arg1 event:(id)arg2;
 - (void)_setScaleFactor;
 - (_Bool)_touchMovedTooFarFromStartPoint:(id)arg1;
+- (id)_gestureRecognizersForTouches:(id)arg1;
 - (void)_cancelOtherGestureRecognizersIfNecessaryForTouches:(id)arg1 event:(id)arg2;
 - (void)_cleanup;
 - (void)_updateWithProgress:(float)arg1;

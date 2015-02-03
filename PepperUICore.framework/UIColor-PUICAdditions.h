@@ -7,7 +7,18 @@
 #import "UIColor.h"
 
 @interface UIColor (PUICAdditions)
++ (id)systemSmallPlatterColor;
++ (id)systemPlatterColor;
++ (id)systemGrayTextColor;
++ (id)systemMintColor;
++ (id)systemPinkColor;
++ (id)systemPurpleColor;
++ (id)puic_systemSmallPlatterColor;
++ (id)puic_systemPlatterColor;
++ (id)puic_systemGrayTextColor;
 + (id)puic_systemGrayColor;
++ (id)puic_systemMintColor;
++ (id)puic_systemPinkColor;
 + (id)puic_systemPurpleColor;
 + (id)puic_systemYellowColor;
 + (id)puic_systemOrangeColor;

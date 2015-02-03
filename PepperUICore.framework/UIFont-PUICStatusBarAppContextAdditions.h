@@ -8,5 +8,7 @@
 
 @interface UIFont (PUICStatusBarAppContextAdditions)
 + (id)defaultPUICStatusBarFont;
++ (double)defaultPUICStatusBarFontBaseLine;
++ (double)defaultPUICStatusBarFontPointSize;
 @end
 

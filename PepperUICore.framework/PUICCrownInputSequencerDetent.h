@@ -6,31 +6,18 @@
 
 #import "NSObject.h"
 
-@class PUICCrownInputDetentAttractor;
-
 @interface PUICCrownInputSequencerDetent : NSObject
 {
     long long _behavior;
-    PUICCrownInputDetentAttractor *_lowerAttractor;
-    PUICCrownInputDetentAttractor *_upperAttractor;
-    double _offset;
-    double _width;
     double _anchor;
-    double _deadbandTimeInterval;
+    double _width;
+    double _offset;
 }
 
 + (id)detentWithBehavior:(long long)arg1 offset:(double)arg2 width:(double)arg3 anchor:(double)arg4;
 + (id)detentWithBehavior:(long long)arg1 offset:(double)arg2;
 + (id)detentWithOffset:(double)arg1;
-@property(nonatomic) double deadbandTimeInterval; // @synthesize deadbandTimeInterval=_deadbandTimeInterval;
-@property(nonatomic) double anchor; // @synthesize anchor=_anchor;
-@property(nonatomic) double width; // @synthesize width=_width;
-@property(retain, nonatomic) PUICCrownInputDetentAttractor *upperAttractor; // @synthesize upperAttractor=_upperAttractor;
-@property(retain, nonatomic) PUICCrownInputDetentAttractor *lowerAttractor; // @synthesize lowerAttractor=_lowerAttractor;
 @property(nonatomic) double offset; // @synthesize offset=_offset;
-- (void).cxx_destruct;
-- (double)_computeDistanceForAttractor:(id)arg1 inSequencer:(id)arg2 adjacentDetent:(id)arg3;
-- (void)computeLowerAttractorDistance:(double *)arg1 upperAttractorDistance:(double *)arg2 inSequencer:(id)arg3 withPreviousDetent:(id)arg4 nextDetent:(id)arg5;
 - (_Bool)isEqualToCrownInputSequencerDetent:(id)arg1;
 - (_Bool)isEqual:(id)arg1;
 - (id)description;

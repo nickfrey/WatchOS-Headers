@@ -16,8 +16,11 @@
     UIImageView *_currentIndicator;
 }
 
++ (id)_currentIndicatorImageSmallWithColor:(id)arg1;
 + (id)_currentIndicatorImageWithColor:(id)arg1;
++ (id)_indicatorImageSmall;
 + (id)_indicatorImage;
++ (id)_generateIndicatorImageWithSize:(double)arg1 andColor:(id)arg2;
 @property(retain, nonatomic) UIImageView *currentIndicator; // @synthesize currentIndicator=_currentIndicator;
 @property(retain, nonatomic) UIColor *indicatorColor; // @synthesize indicatorColor=_indicatorColor;
 @property(nonatomic) long long currentPage; // @synthesize currentPage=_currentPage;
@@ -25,6 +28,8 @@
 - (void).cxx_destruct;
 - (void)layoutSubviews;
 - (struct CGSize)sizeThatFits:(struct CGSize)arg1;
+- (double)_dotSpacing;
+- (double)_dotSize;
 
 @end
 

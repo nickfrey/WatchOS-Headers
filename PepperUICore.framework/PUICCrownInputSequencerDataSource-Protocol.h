@@ -6,14 +6,11 @@
 
 #import "NSObject.h"
 
-@class PUICCrownInputSequencer, PUICCrownInputSequencerDetent;
+@class PUICCrownInputSequencer;
 
 @protocol PUICCrownInputSequencerDataSource <NSObject>
 
 @optional
-- (PUICCrownInputSequencerDetent *)crownInputSequencer:(PUICCrownInputSequencer *)arg1 nearestDetentToOffset:(double)arg2;
-- (PUICCrownInputSequencerDetent *)crownInputSequencer:(PUICCrownInputSequencer *)arg1 nextDetentAfterOffset:(double)arg2;
-- (PUICCrownInputSequencerDetent *)crownInputSequencer:(PUICCrownInputSequencer *)arg1 previousDetentBeforeOffset:(double)arg2;
 - (void)crownInputSequencer:(PUICCrownInputSequencer *)arg1 previousDetent:(id *)arg2 nextDetent:(id *)arg3 forOffset:(double)arg4;
 @end
 

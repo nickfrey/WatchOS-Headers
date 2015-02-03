@@ -27,6 +27,7 @@
 - (void)applicationProtectedDataWillBecomeUnavailable:(UIApplication *)arg1;
 - (void)applicationWillEnterForeground:(UIApplication *)arg1;
 - (void)applicationDidEnterBackground:(UIApplication *)arg1;
+- (void)application:(UIApplication *)arg1 handleWatchKitExtensionRequest:(NSDictionary *)arg2 reply:(void (^)(NSDictionary *))arg3;
 - (void)application:(UIApplication *)arg1 handleEventsForBackgroundURLSession:(NSString *)arg2 completionHandler:(void (^)(void))arg3;
 - (void)application:(UIApplication *)arg1 performFetchWithCompletionHandler:(void (^)(unsigned long long))arg2;
 - (void)application:(UIApplication *)arg1 didReceiveRemoteNotification:(NSDictionary *)arg2 fetchCompletionHandler:(void (^)(unsigned long long))arg3;

@@ -6,22 +6,28 @@
 
 #import "NSObject.h"
 
-@class NSArray;
+@class UIView;
 
 @interface ORBWindowScaler : NSObject
 {
-    NSArray *_scalingViews;
-    double _topWindowLevel;
     float _scale;
+    float _presentedScale;
+    UIView *_scalingView;
+    CDUnknownBlockType _durationCurve;
+    CDUnknownBlockType _durationDefaultScaleCurve;
 }
 
-+ (id)sharedScaler;
-@property(nonatomic) float scale; // @synthesize scale=_scale;
+@property(copy, nonatomic) CDUnknownBlockType durationDefaultScaleCurve; // @synthesize durationDefaultScaleCurve=_durationDefaultScaleCurve;
+@property(copy, nonatomic) CDUnknownBlockType durationCurve; // @synthesize durationCurve=_durationCurve;
+@property(nonatomic) __weak UIView *scalingView; // @synthesize scalingView=_scalingView;
 - (void).cxx_destruct;
-- (void)setDefaultScale;
-- (void)setupScalingWindows;
-- (void)setCustomViewForScaling:(id)arg1;
-@property(readonly, nonatomic) double topWindowLevel;
+- (void)_resetDurationDefaultScaleCurve;
+- (void)_resetDurationCurve;
+- (void)_setScale:(float)arg1 view:(id)arg2 duration:(double)arg3 completion:(CDUnknownBlockType)arg4;
+- (void)setDefaultScaleWithWindowScalingBelowWindowLevel:(double)arg1 completion:(CDUnknownBlockType)arg2;
+- (void)setDefaultScaleWithRubberBanding:(_Bool)arg1 completion:(CDUnknownBlockType)arg2;
+- (void)setScale:(float)arg1 completion:(CDUnknownBlockType)arg2;
+@property(readonly, nonatomic) double scale;
 - (id)init;
 
 @end

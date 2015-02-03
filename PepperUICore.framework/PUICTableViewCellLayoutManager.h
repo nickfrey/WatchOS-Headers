@@ -9,14 +9,13 @@
 @interface PUICTableViewCellLayoutManager : UITableViewCellLayoutManager
 {
     _Bool _usingCompactLayout;
-    _Bool _compactLayout;
 }
 
 + (double)_likelyFirstLineBaselineOffsetForLabel:(id)arg1;
 + (id)layoutManagerForTableViewCellStyle:(long long)arg1;
 + (void)_setUsesConstraintBasedLayout:(_Bool)arg1;
 + (_Bool)_usesConstraintBasedLayout;
-@property(readonly, nonatomic, getter=isCompactLayout) _Bool compactLayout; // @synthesize compactLayout=_compactLayout;
+@property(readonly, nonatomic, getter=isCompactLayout) _Bool compactLayout; // @synthesize compactLayout=_usingCompactLayout;
 - (struct CGSize)intrinsicContentSizeForCell:(id)arg1 fittingSize:(struct CGSize)arg2;
 - (struct CGSize)intrinsicContentSizeForCell:(id)arg1;
 - (void)getTextLabelRect:(struct CGRect *)arg1 detailTextLabelRect:(struct CGRect *)arg2 forCell:(id)arg3 fittingSize:(struct CGSize)arg4;

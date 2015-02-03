@@ -12,6 +12,9 @@
 
 + (id)_defaultTextColorForTableViewStyle:(long long)arg1 isSectionHeader:(_Bool)arg2;
 + (id)_defaultFontForTableViewStyle:(long long)arg1 isSectionHeader:(_Bool)arg2;
+- (void)layoutSubviews;
+- (double)_marginWidth;
+- (struct CGSize)sizeThatFits:(struct CGSize)arg1;
 - (void)prepareForReuse;
 - (id)initWithReuseIdentifier:(id)arg1;
 

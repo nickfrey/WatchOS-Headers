@@ -6,13 +6,12 @@
 
 #import "NSObject.h"
 
-@class NSString, PUICApplicationStatusBarItem, UIColor, UIFont, UIView;
+@class NSString, PUICApplicationStatusBarItem, UIColor, UIFont, UIImage, UIView;
 
 @protocol PUICStatusBarAppContextViewDataSource <NSObject>
 - (_Bool)isObservingStatusBarAppContextDataSource:(id <PUICStatusBarAppContextViewDataSourceObserver>)arg1;
 - (void)removeStatusBarAppContextDataSourceObserver:(id <PUICStatusBarAppContextViewDataSourceObserver>)arg1;
 - (void)addStatusBarAppContextDataSourceObserver:(id <PUICStatusBarAppContextViewDataSourceObserver>)arg1;
-- (_Bool)statusBarAppContextActivityIndicatorVisible;
 - (_Bool)statusBarAppContextNavUIBackButtonDisabled;
 - (_Bool)statusBarAppContextShowNavUI;
 - (UIColor *)statusBarAppContextBackgroundColor;
@@ -23,6 +22,9 @@
 - (NSString *)statusBarAppContextTitleText;
 
 @optional
+- (UIImage *)statusBarAppContextNavigationImage;
+- (_Bool)statusBarAppContextIsTitleInteractive;
+- (_Bool)statusBarAppContextActivityIndicatorVisible;
 - (PUICApplicationStatusBarItem *)dataAsApplicationStatusBarItem;
 @end
 

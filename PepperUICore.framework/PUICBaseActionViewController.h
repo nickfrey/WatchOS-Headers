@@ -28,6 +28,7 @@
 - (double)transitionDuration:(id)arg1;
 - (id)animationControllerForDismissedController:(id)arg1;
 - (id)animationControllerForPresentedController:(id)arg1 presentingController:(id)arg2 sourceController:(id)arg3;
+- (void)blurDidGenerate;
 - (void)_handleContentSizeCategoryDidChangeNotification:(id)arg1;
 - (void)dismissWithCompletionHandler:(CDUnknownBlockType)arg1;
 - (void)presentWithCompletionHandler:(CDUnknownBlockType)arg1;
@@ -37,6 +38,8 @@
 - (void)setupDidAppear;
 - (void)setupWillAppear;
 - (void)_generateBlur;
+- (void)_swipeBack;
+- (void)viewDidDisappear:(_Bool)arg1;
 - (void)viewDidLoad;
 - (struct CGRect)_defaultInitialViewFrame;
 - (void)_setSourceView:(id)arg1;

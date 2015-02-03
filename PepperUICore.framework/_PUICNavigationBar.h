@@ -10,6 +10,7 @@
 {
 }
 
+- (_Bool)_isAlwaysHidden;
 - (_Bool)_suppressBackIndicator;
 - (_Bool)_wantsAdaptiveBackdrop;
 

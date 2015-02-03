@@ -10,6 +10,7 @@
 {
 }
 
++ (_Bool)isLoaded;
 + (id)excludedWindow;
 
 @end

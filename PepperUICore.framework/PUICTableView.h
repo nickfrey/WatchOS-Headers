@@ -11,39 +11,44 @@
 #import "PUICTableViewCellActionBarDelegate.h"
 #import "UIGestureRecognizerDelegate.h"
 
-@class NSIndexPath, NSString, NSTimer, PUICSectionIndexOverlayView, PUICTableViewCellActionBar, PUICTableViewCellDeleteScanLineView, UIPanGestureRecognizer, UIView;
+@class NSArray, NSDictionary, NSIndexPath, NSString, NSTimer, PUICCrownInputSequencer, PUICSectionIndexOverlayView, PUICTableViewCellActionBar, UIPanGestureRecognizer, UIView;
 
 @interface PUICTableView : UITableView <PUICCrownInputSequencerDelegate, PUICCrownInputSequencerDataSource, UIGestureRecognizerDelegate, PUICTableViewCellActionBarDelegate>
 {
-    _Bool _sectionIndexOverlayHidden;
-    PUICSectionIndexOverlayView *_sectionIndexOverlayView;
-    UIView *_sectionIndexOverlayDimmingView;
-    NSString *_sectionIndexOverlayTitle;
-    NSTimer *_delayedSectionIndexOverlayHidingTimer;
     UIPanGestureRecognizer *_swipeActionPanRecognizer;
     double _initialTranslation;
     PUICTableViewCellActionBar *_actionBar;
-    PUICTableViewCellDeleteScanLineView *_deleteScanline;
     _Bool _swipingLeft;
     struct {
-        unsigned int dataSourceSectionForSectionIndexTitle:1;
         unsigned int dataSourceSectionIndexTitlesForTableView:1;
+        unsigned int dataSourceTableViewSectionForSectionIndexTitleAtIndex:1;
         unsigned int dataSourceCanEditRow:1;
         unsigned int delegateDeleteConfirmationButton:1;
         unsigned int delegateSwipeAccessoryButton:1;
         unsigned int delegateSwipeControlMask:1;
         unsigned int delegateTitleForDeleteButton:1;
         unsigned int delegateTitleForAccessoryButton:1;
-        unsigned int dataSourceProvidesTitlesForSectionIndexOverlay:1;
         unsigned int delegateWillPerformAction:1;
         unsigned int delegateDidPerformAction:1;
         unsigned int delegateEditActionsForRow:1;
         unsigned int madeSwipedCellViewsTransparent:1;
     } _puicFlags;
+    _Bool _sectionIndexOverlayHidden;
+    PUICSectionIndexOverlayView *_sectionIndexOverlayView;
+    UIView *_sectionIndexOverlayDimmingView;
+    NSString *_sectionIndexOverlayTitle;
+    NSTimer *_delayedSectionIndexOverlayHidingTimer;
+    PUICCrownInputSequencer *_sectionIndexOverlaySequencer;
+    PUICCrownInputSequencer *_crownVelocityTrackingSequencer;
+    _Bool _hasLoadedSectionIndexTitles;
+    NSArray *_sectionIndexTitles;
+    NSDictionary *_sectionToSectionTitleMap;
+    long long _externalSectionIndexMinimumDisplayRowCount;
     _Bool _showsSectionIndexOverlayOnCrownScroll;
     NSIndexPath *_swipedIndexPath;
 }
 
++ (void)_setFrame:(struct CGRect)arg1 onTransformedView:(id)arg2;
 @property(retain, nonatomic) NSIndexPath *swipedIndexPath; // @synthesize swipedIndexPath=_swipedIndexPath;
 @property(nonatomic) _Bool showsSectionIndexOverlayOnCrownScroll; // @synthesize showsSectionIndexOverlayOnCrownScroll=_showsSectionIndexOverlayOnCrownScroll;
 - (void).cxx_destruct;
@@ -56,15 +61,22 @@
 - (void)_delayedSectionIndexOverlayHidingTimerFired:(id)arg1;
 - (void)_cleanupDelayedSectionIndexOverlayHidingTimer;
 - (void)_cancelDelayedSectionIndexOverlayHiding;
-- (void)_scheduleDelayedSectionIndexOverlayHiding;
 - (void)_updateSectionIndexOverlayViewText;
-- (void)_numberOfRowsDidChange;
-- (id)_indexPathForFirstVisibleRowAtCrownInputSequencerOffset:(double)arg1;
-- (id)_indexPathsForVisibleRowsAtCrownInputSequencerOffset:(double)arg1;
-- (void)crownInputSequencer:(id)arg1 previousDetent:(id *)arg2 nextDetent:(id *)arg3 forOffset:(double)arg4;
-- (void)_crownInputSequencerIdleDidChangeNotification:(id)arg1;
-- (void)_crownInputSequencerOffsetDidChangeNotification:(id)arg1;
-- (void)_puic_configureCrownInputSequencer;
+- (void)_updateSectionIndexOverlayContentsAndVisibility;
+- (void)_scheduleDelayedSectionIndexOverlayHiding;
+- (_Bool)_canShowSectionIndexOverlay;
+- (void)_puic_contentOffsetDidChange;
+- (long long)_sectionIndexForSectionTitleAtIndex:(long long)arg1;
+- (unsigned long long)_numberOfSectionIndexTitles;
+- (void)_wheelChangedWithEvent:(id)arg1;
+- (id)_crownVelocityTrackingSequencer;
+- (id)_sectionIndexOverlaySequencer;
+- (void)_updateSectionIndexOverlaySequencer;
+- (_Bool)_crownInputSequencerShouldSuppressInput:(id)arg1;
+- (void)crownInputSequencerAverageCrownVelocityDidChange:(id)arg1;
+- (void)crownInputSequencerIdleDidChange:(id)arg1;
+- (void)crownInputSequencerOffsetDidChange:(id)arg1;
+- (void)_setSectionIndexOverlayRubberbandFactor:(double)arg1;
 - (double)openThresholdForActionBar:(id)arg1;
 - (unsigned long long)nextStateForActionBar:(id)arg1;
 - (void)actionBar:(id)arg1 tappedButtonForAction:(id)arg2;
@@ -81,7 +93,6 @@
 - (double)_rubberBandOffsetForOffset:(double)arg1 usingActionBar:(id)arg2;
 - (void)_swipeRecognizerChanged:(id)arg1;
 - (void)_swipeRecognizerBegan:(id)arg1;
-- (_Bool)_actionBarShouldBeTransparentWhenHidden;
 - (void)swipeRecognizerDidRecognize:(id)arg1;
 - (_Bool)gestureRecognizerShouldBegin:(id)arg1;
 - (_Bool)_canSwipeToEditRowAtIndexPath:(id)arg1;
@@ -89,6 +100,7 @@
 - (_Bool)cellSwipeEnabled;
 - (void)_setSectionIndexOverlayHidden:(_Bool)arg1 animated:(_Bool)arg2;
 - (void)_setSectionIndexOverlayTitle:(id)arg1;
+- (void)_updateSectionTitlesIfNecessary;
 - (void)touchesBegan:(id)arg1 withEvent:(id)arg2;
 - (void)setContentOffset:(struct CGPoint)arg1;
 - (id)deleteConfirmationIndexPath;
@@ -96,10 +108,14 @@
 - (_Bool)_shouldDisplayExtraSeparatorsAtOffset:(double *)arg1;
 @property(nonatomic) id <PUICTableViewDelegate> delegate;
 @property(nonatomic) id <PUICTableViewDataSource> dataSource;
-- (void)setSectionIndexMinimumDisplayRowCount:(long long)arg1;
 - (void)_layoutSectionIndexOverlayView;
 - (void)layoutSubviews;
 - (void)setBackgroundColor:(id)arg1;
+- (long long)sectionIndexMinimumDisplayRowCount;
+- (void)setSectionIndexMinimumDisplayRowCount:(long long)arg1;
+- (void)reloadSections:(id)arg1 withRowAnimation:(long long)arg2;
+- (void)reloadSectionIndexTitles;
+- (void)reloadData;
 - (void)dealloc;
 - (id)initWithCoder:(id)arg1;
 - (id)initWithFrame:(struct CGRect)arg1 style:(long long)arg2;

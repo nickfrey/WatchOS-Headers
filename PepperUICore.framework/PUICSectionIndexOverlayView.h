@@ -6,19 +6,15 @@
 
 #import "UIView.h"
 
-@class NSString, UILabel, _UIBackdropView;
+@class NSString, UILabel;
 
 @interface PUICSectionIndexOverlayView : UIView
 {
-    _UIBackdropView *_backdropView;
-    _Bool _hasValidRoundedRectImage;
     UILabel *_textLabel;
 }
 
 - (void).cxx_destruct;
 @property(copy, nonatomic) NSString *text;
-- (void)setFrame:(struct CGRect)arg1;
-- (void)setBounds:(struct CGRect)arg1;
 - (void)layoutSubviews;
 - (id)initWithFrame:(struct CGRect)arg1;
 
