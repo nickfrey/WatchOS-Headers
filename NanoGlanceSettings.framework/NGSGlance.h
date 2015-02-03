@@ -15,12 +15,14 @@
     _Bool _cannotBeDisabled;
     _Bool _active;
     _Bool _defaultGlance;
+    _Bool _prelaunch;
     NSString *_name;
     NSString *_appBundleIdentifier;
     NSString *_glanceBundleIdentifier;
     NSString *_sockPuppetIdentifier;
 }
 
+@property(nonatomic) _Bool prelaunch; // @synthesize prelaunch=_prelaunch;
 @property(nonatomic, getter=isDefaultGlance) _Bool defaultGlance; // @synthesize defaultGlance=_defaultGlance;
 @property(nonatomic, getter=isActive) _Bool active; // @synthesize active=_active;
 @property(nonatomic) _Bool cannotBeDisabled; // @synthesize cannotBeDisabled=_cannotBeDisabled;

@@ -13,12 +13,8 @@
     _Bool _protectedDatabaseAttached;
     NSString *_protectedDatabasePath;
     NSString *_protectedDatabaseName;
-    struct sqlite3_vfs *_defaultVFS;
-    struct sqlite3_vfs *_protectionVFS;
 }
 
-@property(nonatomic) struct sqlite3_vfs *protectionVFS; // @synthesize protectionVFS=_protectionVFS;
-@property(nonatomic) struct sqlite3_vfs *defaultVFS; // @synthesize defaultVFS=_defaultVFS;
 @property(retain, nonatomic) NSString *protectedDatabaseName; // @synthesize protectedDatabaseName=_protectedDatabaseName;
 @property(retain, nonatomic) NSString *protectedDatabasePath; // @synthesize protectedDatabasePath=_protectedDatabasePath;
 @property(readonly, nonatomic) _Bool protectedDatabaseAttached; // @synthesize protectedDatabaseAttached=_protectedDatabaseAttached;

@@ -9,6 +9,10 @@
 @class NSDictionary, NSString;
 
 @protocol SPLocalServerProtocol <NSObject>
+- (void)setLogLevel:(NSDictionary *)arg1;
+- (void)wakeExtensionForWatchApp:(NSString *)arg1;
+- (void)hideUserNotification;
+- (void)showUserNotification:(long long)arg1 applicationName:(NSString *)arg2;
 - (void)getCompanionExtensionPIDForCompanionAppWithIdentifier:(NSString *)arg1 completion:(void (^)(NSError *, int))arg2;
 - (void)getSockPuppetAppRunningStatusForCompanionAppWithIdentifier:(NSString *)arg1 completion:(void (^)(NSError *, _Bool))arg2;
 - (void)terminateSockPuppetAppForCompanionAppWithIdentifier:(NSString *)arg1 completion:(void (^)(NSError *))arg2;
@@ -16,6 +20,8 @@
 - (void)fetchApplicationWithContainingApplicationBundleID:(NSString *)arg1 completion:(void (^)(NSDictionary *, NSError *))arg2;
 - (void)removeApplicationWithIdentifier:(NSString *)arg1 installer:(NSString *)arg2 completion:(void (^)(long long))arg3;
 - (void)installApplicationWithIdentifier:(NSString *)arg1 installer:(NSString *)arg2 completion:(void (^)(long long))arg3;
+- (void)cancelPendingInstallations;
+- (void)installAllApplicationsForProcessWithIdentifier:(NSString *)arg1;
 - (void)fetchInstalledGlancesWithCompletion:(void (^)(NSDictionary *))arg1;
 - (void)fetchInstalledApplicationsWithCompletion:(void (^)(NSDictionary *))arg1;
 @end

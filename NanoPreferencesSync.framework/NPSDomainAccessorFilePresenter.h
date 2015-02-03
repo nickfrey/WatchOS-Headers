@@ -12,14 +12,14 @@
 
 @interface NPSDomainAccessorFilePresenter : NSObject <NSFilePresenter>
 {
-    id <NPSDomainAccessorFilePresenterDelegate> _delegate;
     NSURL *_domainURL;
-    NSOperationQueue *_coordinationOperationQueue;
+    id <NPSDomainAccessorFilePresenterDelegate> _delegate;
+    NSOperationQueue *_presenterOperationQueue;
 }
 
-@property(retain, nonatomic) NSOperationQueue *coordinationOperationQueue; // @synthesize coordinationOperationQueue=_coordinationOperationQueue;
-@property(retain, nonatomic) NSURL *domainURL; // @synthesize domainURL=_domainURL;
+@property(retain, nonatomic) NSOperationQueue *presenterOperationQueue; // @synthesize presenterOperationQueue=_presenterOperationQueue;
 @property(readonly, nonatomic) __weak id <NPSDomainAccessorFilePresenterDelegate> delegate; // @synthesize delegate=_delegate;
+@property(retain, nonatomic) NSURL *domainURL; // @synthesize domainURL=_domainURL;
 - (void).cxx_destruct;
 - (_Bool)presentedItemNeedsWatching;
 - (void)relinquishPresentedItemToWriter:(CDUnknownBlockType)arg1;
@@ -27,7 +27,7 @@
 @property(readonly, copy) NSURL *presentedItemURL;
 - (id)synchronizeForReadingOnly:(_Bool)arg1 handler:(CDUnknownBlockType)arg2;
 - (void)dealloc;
-- (id)initWithDelegate:(id)arg1;
+- (id)initWithDelegate:(id)arg1 domainURL:(id)arg2;
 
 // Remaining properties
 @property(readonly, copy) NSString *debugDescription;

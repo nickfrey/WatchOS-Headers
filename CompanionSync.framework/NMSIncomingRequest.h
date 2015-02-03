@@ -6,9 +6,11 @@
 
 #import "NSObject.h"
 
+#import "NMSObfuscatableDescriptionProviding.h"
+
 @class NMSMessageCenter, NMSOutgoingResponse, NSData, NSString;
 
-@interface NMSIncomingRequest : NSObject
+@interface NMSIncomingRequest : NSObject <NMSObfuscatableDescriptionProviding>
 {
     _Bool _expectsResponse;
     unsigned short _messageID;
@@ -31,10 +33,15 @@
 @property(nonatomic) unsigned short messageID; // @synthesize messageID=_messageID;
 @property(nonatomic) __weak NMSMessageCenter *messageCenter; // @synthesize messageCenter=_messageCenter;
 - (void).cxx_destruct;
-- (id)debugDescription;
-- (id)description;
+- (id)CPObfuscatedDescriptionObject;
+@property(readonly, copy) NSString *description;
 - (void)configureResponse;
 - (void)dealloc;
+
+// Remaining properties
+@property(readonly, copy) NSString *debugDescription;
+@property(readonly) unsigned long long hash;
+@property(readonly) Class superclass;
 
 @end
 

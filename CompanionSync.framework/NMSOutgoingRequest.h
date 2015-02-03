@@ -6,9 +6,11 @@
 
 #import "NSObject.h"
 
+#import "NMSObfuscatableDescriptionProviding.h"
+
 @class NMSMessageCenter, NSData, NSDictionary, NSString;
 
-@interface NMSOutgoingRequest : NSObject
+@interface NMSOutgoingRequest : NSObject <NMSObfuscatableDescriptionProviding>
 {
     _Bool _shouldEncrypt;
     unsigned short _messageID;
@@ -36,9 +38,14 @@
 @property(nonatomic) unsigned short messageID; // @synthesize messageID=_messageID;
 @property(retain, nonatomic) NSData *data; // @synthesize data=_data;
 - (void).cxx_destruct;
-- (id)debugDescription;
-- (id)description;
+- (id)CPObfuscatedDescriptionObject;
+@property(readonly, copy) NSString *description;
 - (id)init;
+
+// Remaining properties
+@property(readonly, copy) NSString *debugDescription;
+@property(readonly) unsigned long long hash;
+@property(readonly) Class superclass;
 
 @end
 

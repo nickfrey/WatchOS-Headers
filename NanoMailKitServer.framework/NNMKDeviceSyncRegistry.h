@@ -19,12 +19,10 @@
     NNMKSyncedMailbox *_syncedMailbox;
     double _deviceScreenWidth;
     double _deviceScreenScale;
-    NSString *_initialSyncIDSIdentifierNotYetAckd;
     NNMKSQLiteConnection *_database;
 }
 
 @property(retain, nonatomic) NNMKSQLiteConnection *database; // @synthesize database=_database;
-@property(retain, nonatomic) NSString *initialSyncIDSIdentifierNotYetAckd; // @synthesize initialSyncIDSIdentifierNotYetAckd=_initialSyncIDSIdentifierNotYetAckd;
 @property(nonatomic) _Bool isMoreMessagesRequestPending; // @synthesize isMoreMessagesRequestPending=_isMoreMessagesRequestPending;
 @property(nonatomic) double deviceScreenScale; // @synthesize deviceScreenScale=_deviceScreenScale;
 @property(nonatomic) double deviceScreenWidth; // @synthesize deviceScreenWidth=_deviceScreenWidth;
@@ -44,10 +42,11 @@
 - (void)_removeControlValueForKey:(id)arg1;
 - (void)_setControlValueForKey:(id)arg1 withBlockForBinding:(CDUnknownBlockType)arg2;
 - (void)_loadAllControlValues;
+- (id)datesForIDSIdentifiersScheduledToBeResent;
+- (void)rescheduleIDSIdentifier:(id)arg1 resendInterval:(unsigned long long)arg2 withDateToResend:(id)arg3;
 - (void)markIDSIdentifierAsAckd:(id)arg1;
-- (void)addObjectId:(id)arg1 objectType:(id)arg2 forIDSIdentifierNotYetAckd:(id)arg3;
-- (id)objectIdForIDSIdentifierNotYetAckd:(id)arg1 objectType:(id *)arg2;
-- (_Bool)idsIdentifierHasBeenAckd:(id)arg1;
+- (id)objectIdForIDSIdentifierNotYetAckd:(id)arg1 objectType:(id *)arg2 resendInterval:(unsigned long long *)arg3;
+- (void)addObjectId:(id)arg1 objectType:(id)arg2 resendInterval:(unsigned long long)arg3 forIDSIdentifierNotYetAckd:(id)arg4;
 - (id)syncedAccountIdsResendRequested;
 - (void)removeSyncedAccountForAccountWithId:(id)arg1;
 - (void)addOrUpdateSyncedAccount:(id)arg1;

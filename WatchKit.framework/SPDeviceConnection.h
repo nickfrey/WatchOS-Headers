@@ -8,25 +8,37 @@
 
 #import "SPLocalApplicationProtocol.h"
 
-@class NSString, NSXPCConnection;
+@class NSHashTable, NSString, NSXPCConnection;
 
 @interface SPDeviceConnection : NSObject <SPLocalApplicationProtocol>
 {
     _Bool _connectionIsValid;
     id <SPDeviceConnectionDelegate> _delegate;
     NSXPCConnection *_serverConnection;
+    NSHashTable *_observers;
 }
 
++ (id)allocWithZone:(struct _NSZone *)arg1;
 + (id)sharedDeviceConnection;
+@property(retain) NSHashTable *observers; // @synthesize observers=_observers;
 @property _Bool connectionIsValid; // @synthesize connectionIsValid=_connectionIsValid;
 @property(retain) NSXPCConnection *serverConnection; // @synthesize serverConnection=_serverConnection;
 @property(nonatomic) __weak id <SPDeviceConnectionDelegate> delegate; // @synthesize delegate=_delegate;
 - (void).cxx_destruct;
 - (void)receiveData:(id)arg1;
-- (void)applicationIdentifierWithReply:(CDUnknownBlockType)arg1;
+- (void)_enumerateObserversSafely:(CDUnknownBlockType)arg1;
+- (void)removeObserver:(id)arg1;
+- (void)addObserver:(id)arg1;
+- (void)wakeExtensionForWatchApp:(id)arg1;
+- (id)localeForUserNotification;
+- (void)hideUserNotification;
+- (void)showUserNotification:(long long)arg1 bundleID:(id)arg2;
+- (void)setLogLevel:(id)arg1;
 - (void)fetchApplicationWithContainingApplicationBundleID:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)removeApplication:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)installApplication:(id)arg1 completion:(CDUnknownBlockType)arg2;
+- (void)cancelPendingInstallations;
+- (void)installAllApplications;
 - (void)fetchInstalledGlancesWithCompletion:(CDUnknownBlockType)arg1;
 - (void)fetchInstalledApplicationsWithCompletion:(CDUnknownBlockType)arg1;
 - (void)createXPCConnection;

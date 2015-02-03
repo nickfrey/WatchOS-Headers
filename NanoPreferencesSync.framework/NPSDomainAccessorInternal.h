@@ -8,7 +8,7 @@
 
 #import "NPSDomainAccessorFilePresenterDelegate.h"
 
-@class NPSDomainAccessorFilePresenter, NSMutableDictionary, NSMutableSet, NSObject<OS_dispatch_queue>, NSOperationQueue, NSString, NSURL, NSUUID;
+@class NPSDomainAccessorFilePresenter, NSMutableDictionary, NSMutableSet, NSObject<OS_dispatch_queue>, NSString, NSURL, NSUUID;
 
 @interface NPSDomainAccessorInternal : NSObject <NPSDomainAccessorFilePresenterDelegate>
 {
@@ -18,7 +18,7 @@
     NSString *_pairingStorePath;
     NSString *_domain;
     NSURL *_domainURL;
-    NSOperationQueue *_internalQueue;
+    NSObject<OS_dispatch_queue> *_internalQueue;
     NSObject<OS_dispatch_queue> *_externalQueue;
     unsigned long long _referenceCounter;
     NSMutableSet *_dirtyKeysForWriting;
@@ -34,6 +34,7 @@
 + (_Bool)valueIsValid:(id)arg1;
 + (_Bool)domainIsValid:(id)arg1;
 + (id)urlForDomain:(id)arg1 pairingDataStore:(id)arg2;
++ (void)invalidateAndReleaseUnreferencedAccessors;
 + (void)decrementInternalAccessorReferenceCount:(id)arg1;
 + (id)internalAccessorForPairingID:(id)arg1 pairingDataStore:(id)arg2 domain:(id)arg3;
 + (void)applicationDidResume;
@@ -46,14 +47,13 @@
 @property(nonatomic) _Bool nanoSettingsDirectoryExists; // @synthesize nanoSettingsDirectoryExists=_nanoSettingsDirectoryExists;
 @property(nonatomic) unsigned long long referenceCounter; // @synthesize referenceCounter=_referenceCounter;
 @property(retain, nonatomic) NSObject<OS_dispatch_queue> *externalQueue; // @synthesize externalQueue=_externalQueue;
-@property(retain, nonatomic) NSOperationQueue *internalQueue; // @synthesize internalQueue=_internalQueue;
+@property(retain, nonatomic) NSObject<OS_dispatch_queue> *internalQueue; // @synthesize internalQueue=_internalQueue;
 @property(retain, nonatomic) NSURL *domainURL; // @synthesize domainURL=_domainURL;
 @property(retain, nonatomic) NSString *domain; // @synthesize domain=_domain;
 @property(retain, nonatomic) NSString *pairingStorePath; // @synthesize pairingStorePath=_pairingStorePath;
 @property(retain, nonatomic) NSUUID *pairingID; // @synthesize pairingID=_pairingID;
 - (void).cxx_destruct;
-- (void)willBecomeNonCurrent;
-- (id)coordinationOperationQueue;
+- (void)filePresenterBecameNonCurrent:(id)arg1;
 - (id)createNanoSettingsDirectory;
 - (id)canSynchronizeForWritingURL:(id)arg1 readFirst:(_Bool)arg2;
 - (id)canSynchronizeForReadingURL:(id)arg1;
@@ -93,6 +93,7 @@
 - (id)copyKeyList;
 - (void)dealloc;
 - (id)initWithPairingID:(id)arg1 pairingDataStore:(id)arg2 domain:(id)arg3;
+- (void)_invalidatePresenter;
 - (void)invalidatePresenter;
 
 @end

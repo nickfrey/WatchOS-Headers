@@ -14,9 +14,9 @@
 @property(nonatomic) __weak id <NNMKMessageContentSyncServiceServerDelegate> delegate; // @synthesize delegate=_delegate;
 - (void).cxx_destruct;
 - (void)readProtobufData:(id)arg1 type:(unsigned long long)arg2;
-- (void)failedSendingProtobufWithIDSIdentifier:(id)arg1;
+- (void)failedSendingProtobufWithIDSIdentifier:(id)arg1 errorCode:(long long)arg2;
 - (void)successfullySentProtobufWithIDSIdentifier:(id)arg1;
-- (id)syncScreenshot:(id)arg1 notificationPriority:(_Bool)arg2 userRequested:(_Bool)arg3;
+- (id)notifyInitialContentSyncCompleted:(id)arg1;
 - (id)syncImageAttachment:(id)arg1 notificationPriority:(_Bool)arg2 userRequested:(_Bool)arg3;
 - (id)syncMessageContent:(id)arg1 notificationPriority:(_Bool)arg2 userRequested:(_Bool)arg3;
 - (id)initWithQueue:(id)arg1;

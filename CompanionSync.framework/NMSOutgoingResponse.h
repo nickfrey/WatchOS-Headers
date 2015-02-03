@@ -6,9 +6,11 @@
 
 #import "NSObject.h"
 
+#import "NMSObfuscatableDescriptionProviding.h"
+
 @class NMSIncomingRequest, NSData, NSDictionary, NSString;
 
-@interface NMSOutgoingResponse : NSObject
+@interface NMSOutgoingResponse : NSObject <NMSObfuscatableDescriptionProviding>
 {
     _Bool _sent;
     NMSIncomingRequest *_request;
@@ -31,11 +33,16 @@
 @property(retain, nonatomic) NSData *data; // @synthesize data=_data;
 @property(nonatomic) __weak NMSIncomingRequest *request; // @synthesize request=_request;
 - (void).cxx_destruct;
-- (id)debugDescription;
-- (id)description;
+- (id)CPObfuscatedDescriptionObject;
+@property(readonly, copy) NSString *description;
 - (void)send;
 - (void)dealloc;
 - (id)init;
+
+// Remaining properties
+@property(readonly, copy) NSString *debugDescription;
+@property(readonly) unsigned long long hash;
+@property(readonly) Class superclass;
 
 @end
 

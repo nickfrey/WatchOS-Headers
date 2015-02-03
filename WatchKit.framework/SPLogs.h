@@ -10,6 +10,10 @@
 {
 }
 
++ (void)setDebugLogLevel:(id)arg1;
++ (_Bool)debugLogLevel;
++ (int)fileLoggingLevel;
++ (_Bool)watchLogging;
 + (void)setupLoggingForDomain:(id)arg1;
 + (void)setupLoggingLevelForDomain:(id)arg1;
 

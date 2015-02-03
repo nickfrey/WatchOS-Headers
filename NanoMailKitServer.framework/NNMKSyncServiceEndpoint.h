@@ -35,7 +35,7 @@
 - (id)sendProtobufData:(id)arg1 type:(unsigned long long)arg2 priority:(unsigned long long)arg3 repeatPreventionId:(id)arg4 shortTimeout:(_Bool)arg5;
 - (id)sendProtobufData:(id)arg1 type:(unsigned long long)arg2 priority:(unsigned long long)arg3 shortTimeout:(_Bool)arg4;
 - (void)readProtobufData:(id)arg1 type:(unsigned long long)arg2;
-- (void)failedSendingProtobufWithIDSIdentifier:(id)arg1;
+- (void)failedSendingProtobufWithIDSIdentifier:(id)arg1 errorCode:(long long)arg2;
 - (void)successfullySentProtobufWithIDSIdentifier:(id)arg1;
 - (void)resetRepeatPreventionHistory;
 - (void)dealloc;

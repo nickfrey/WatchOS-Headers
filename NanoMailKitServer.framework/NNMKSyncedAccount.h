@@ -14,8 +14,10 @@
     _Bool _resendRequested;
     NSString *_accountId;
     NSString *_displayName;
+    unsigned long long _resendInterval;
 }
 
+@property(nonatomic) unsigned long long resendInterval; // @synthesize resendInterval=_resendInterval;
 @property(nonatomic) _Bool resendRequested; // @synthesize resendRequested=_resendRequested;
 @property(nonatomic) _Bool shouldArchive; // @synthesize shouldArchive=_shouldArchive;
 @property(retain, nonatomic) NSString *displayName; // @synthesize displayName=_displayName;

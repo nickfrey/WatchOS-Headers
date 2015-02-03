@@ -22,6 +22,7 @@
 @property(retain, nonatomic) NSString *directoryPath; // @synthesize directoryPath=_directoryPath;
 - (void).cxx_destruct;
 - (id)_sortedJournalFiles;
+- (id)_nextFilePath;
 - (void)_flush;
 - (unsigned long long)_currentFilesCount;
 - (void)mergeUsingBlock:(CDUnknownBlockType)arg1;

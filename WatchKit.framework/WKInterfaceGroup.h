@@ -17,6 +17,7 @@
 - (void)setBackgroundImageData:(id)arg1;
 - (void)setBackgroundImage:(id)arg1;
 - (void)setBackgroundColor:(id)arg1;
+- (void)setCornerRadius:(double)arg1;
 
 @end
 

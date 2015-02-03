@@ -10,6 +10,5 @@
 
 @protocol SPLocalApplicationProtocol <NSObject>
 - (void)receiveData:(NSData *)arg1;
-- (void)applicationIdentifierWithReply:(void (^)(NSString *))arg1;
 @end
 

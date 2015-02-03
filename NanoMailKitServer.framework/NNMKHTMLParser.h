@@ -64,6 +64,7 @@
 - (id)_topStringAttributes;
 - (void)_enumerateAttributes:(const char **)arg1 withBlock:(CDUnknownBlockType)arg2;
 - (id)_valueForAttributeNamed:(id)arg1 inAttributes:(const char **)arg2;
+- (unsigned long long)_writingDirectionFromString:(id)arg1;
 - (unsigned long long)_textAlignmentFromString:(id)arg1;
 - (id)_stringAttributeValueForCSSStyleName:(id)arg1 inStyleAttribute:(id)arg2;
 - (id)_stringAttributesForStyleAttribute:(id)arg1;

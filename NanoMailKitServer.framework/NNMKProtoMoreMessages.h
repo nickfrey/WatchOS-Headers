@@ -14,12 +14,14 @@
 {
     NSMutableArray *_addedMessages;
     NSData *_dateForRequestingMoreMessages;
+    NSData *_dateSynced;
     unsigned int _fullSyncVersion;
     CDStruct_a125a100 _has;
 }
 
 @property(retain, nonatomic) NSData *dateForRequestingMoreMessages; // @synthesize dateForRequestingMoreMessages=_dateForRequestingMoreMessages;
 @property(retain, nonatomic) NSMutableArray *addedMessages; // @synthesize addedMessages=_addedMessages;
+@property(retain, nonatomic) NSData *dateSynced; // @synthesize dateSynced=_dateSynced;
 @property(nonatomic) unsigned int fullSyncVersion; // @synthesize fullSyncVersion=_fullSyncVersion;
 - (void).cxx_destruct;
 - (void)mergeFrom:(id)arg1;
@@ -36,6 +38,7 @@
 - (unsigned long long)addedMessagesCount;
 - (void)addAddedMessage:(id)arg1;
 - (void)clearAddedMessages;
+@property(readonly, nonatomic) _Bool hasDateSynced;
 @property(nonatomic) _Bool hasFullSyncVersion;
 
 @end

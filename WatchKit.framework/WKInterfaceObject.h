@@ -12,13 +12,18 @@
 {
     NSString *_interfaceProperty;
     NSString *_viewControllerID;
-    long long _index;
+    NSString *_propertyIndex;
+    long long _tableIndex;
+    long long _rowIndex;
 }
 
-@property(nonatomic) long long index; // @synthesize index=_index;
+@property(nonatomic) long long rowIndex; // @synthesize rowIndex=_rowIndex;
+@property(nonatomic) long long tableIndex; // @synthesize tableIndex=_tableIndex;
+@property(retain, nonatomic) NSString *propertyIndex; // @synthesize propertyIndex=_propertyIndex;
 @property(copy, nonatomic) NSString *viewControllerID; // @synthesize viewControllerID=_viewControllerID;
 @property(copy, nonatomic) NSString *interfaceProperty; // @synthesize interfaceProperty=_interfaceProperty;
 - (void).cxx_destruct;
+- (void)setRotation:(double)arg1;
 - (void)setHeight:(double)arg1;
 - (void)setWidth:(double)arg1;
 - (void)setAlpha:(double)arg1;
@@ -29,8 +34,11 @@
 - (void)_setImageData:(id)arg1 forProperty:(id)arg2;
 - (void)_setImage:(id)arg1 forProperty:(id)arg2;
 - (void)_setupWithDescription:(id)arg1 forController:(id)arg2;
-- (id)_initWithInterfaceProperty:(id)arg1 viewControllerID:(id)arg2 index:(long long)arg3;
+- (id)_initWithInterfaceProperty:(id)arg1 viewControllerID:(id)arg2 propertyIndex:(long long)arg3 tableIndex:(long long)arg4 rowIndex:(long long)arg5;
 - (id)init;
+- (void)setAccessibilityImageRegions:(id)arg1;
+- (void)setAccessibilityTraits:(unsigned long long)arg1;
+- (void)setIsAccessibilityElement:(_Bool)arg1;
 - (void)setAccessibilityValue:(id)arg1;
 - (void)setAccessibilityHint:(id)arg1;
 - (void)setAccessibilityLabel:(id)arg1;

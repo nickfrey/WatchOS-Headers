@@ -11,16 +11,25 @@
 @interface WKInterfaceController : NSObject
 {
     NSArray *_topLevelObjects;
+    NSArray *_properties;
     NSString *_viewControllerID;
     struct CGRect _contentFrame;
 }
 
++ (_Bool)openParentApplication:(id)arg1 reply:(CDUnknownBlockType)arg2;
++ (void)_removePageControllersAtIndexes:(id)arg1;
++ (void)_movePageControllerAtIndex:(long long)arg1 toIndex:(long long)arg2;
++ (void)_insertPageControllersAtIndexes:(id)arg1 withNames:(id)arg2 contexts:(id)arg3;
++ (void)reloadRootControllersWithNames:(id)arg1 contexts:(id)arg2;
 + (struct CGRect)screenBounds;
 + (double)screenScale;
 @property(retain, nonatomic) NSString *viewControllerID; // @synthesize viewControllerID=_viewControllerID;
+@property(copy, nonatomic) NSArray *properties; // @synthesize properties=_properties;
 @property(retain, nonatomic) NSArray *topLevelObjects; // @synthesize topLevelObjects=_topLevelObjects;
 @property(nonatomic) struct CGRect contentFrame; // @synthesize contentFrame=_contentFrame;
 - (void).cxx_destruct;
+- (void)invalidateUserActivity;
+- (void)updateUserActivity:(id)arg1 userInfo:(id)arg2 webpageURL:(id)arg3;
 - (void)updateUserActivity:(id)arg1 userInfo:(id)arg2;
 - (void)clearAllMenuItems;
 - (void)addMenuItemWithItemIcon:(long long)arg1 title:(id)arg2 action:(SEL)arg3;
@@ -31,7 +40,7 @@
 - (id)contextForSegueWithIdentifier:(id)arg1 inTable:(id)arg2 rowIndex:(long long)arg3;
 - (id)contextForSegueWithIdentifier:(id)arg1;
 - (void)dismissTextInputController;
-- (void)presentTextInputControllerWithSuggestions:(id)arg1 completion:(CDUnknownBlockType)arg2;
+- (void)presentTextInputControllerWithSuggestions:(id)arg1 allowedInputMode:(long long)arg2 completion:(CDUnknownBlockType)arg3;
 - (void)dismissController;
 - (void)presentControllerWithNames:(id)arg1 contexts:(id)arg2;
 - (void)presentControllerWithName:(id)arg1 context:(id)arg2;
@@ -40,13 +49,15 @@
 - (void)popController;
 - (void)pushControllerWithName:(id)arg1 context:(id)arg2;
 - (void)setTitle:(id)arg1;
-- (id)actionForUserActivity:(id)arg1 context:(id *)arg2;
+- (void)handleUserActivity:(id)arg1;
 - (void)handleActionWithIdentifier:(id)arg1 forLocalNotification:(id)arg2;
 - (void)handleActionWithIdentifier:(id)arg1 forRemoteNotification:(id)arg2;
 - (void)table:(id)arg1 didSelectRowAtIndex:(long long)arg2;
 - (void)didDeactivate;
 - (void)willActivate;
 - (id)initWithContext:(id)arg1;
+- (void)awakeWithContext:(id)arg1;
+- (id)init;
 - (void)_setContentFrame:(struct CGRect)arg1;
 
 @end

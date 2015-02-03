@@ -6,14 +6,14 @@
 
 #import "NSObject.h"
 
-@class NSMutableArray;
+@class NSArray;
 
 @interface SYChangeList : NSObject
 {
-    NSMutableArray *_changes;
+    NSArray *_changes;
 }
 
-@property(readonly, nonatomic) NSMutableArray *changes; // @synthesize changes=_changes;
+@property(readonly, nonatomic) NSArray *changes; // @synthesize changes=_changes;
 - (void).cxx_destruct;
 - (id)initWithChange:(id)arg1;
 - (id)init;

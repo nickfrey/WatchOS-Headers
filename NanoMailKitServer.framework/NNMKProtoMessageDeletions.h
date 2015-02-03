@@ -8,16 +8,18 @@
 
 #import "NSCopying.h"
 
-@class NSMutableArray;
+@class NSData, NSMutableArray;
 
 @interface NNMKProtoMessageDeletions : PBCodable <NSCopying>
 {
+    NSData *_dateSynced;
     unsigned int _fullSyncVersion;
     NSMutableArray *_messageDeletions;
     CDStruct_a125a100 _has;
 }
 
 @property(retain, nonatomic) NSMutableArray *messageDeletions; // @synthesize messageDeletions=_messageDeletions;
+@property(retain, nonatomic) NSData *dateSynced; // @synthesize dateSynced=_dateSynced;
 @property(nonatomic) unsigned int fullSyncVersion; // @synthesize fullSyncVersion=_fullSyncVersion;
 - (void).cxx_destruct;
 - (void)mergeFrom:(id)arg1;
@@ -33,6 +35,7 @@
 - (unsigned long long)messageDeletionsCount;
 - (void)addMessageDeletion:(id)arg1;
 - (void)clearMessageDeletions;
+@property(readonly, nonatomic) _Bool hasDateSynced;
 @property(nonatomic) _Bool hasFullSyncVersion;
 
 @end

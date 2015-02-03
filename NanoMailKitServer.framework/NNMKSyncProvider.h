@@ -4,7 +4,7 @@
 //     class-dump is Copyright (C) 1997-1998, 2000-2001, 2004-2013 by Steve Nygard.
 //
 
-#import "NSObject.h"
+#import <NanoMailKitServer/NNMKSyncEndpoint.h>
 
 #import "NNMKAccountsSyncServiceServerDelegate.h"
 #import "NNMKFetchesSyncServiceServerDelegate.h"
@@ -12,13 +12,14 @@
 #import "NNMKMessagesSyncServiceServerDelegate.h"
 #import "PSYSyncCoordinatorDelegate.h"
 
-@class BLTPingSubscriber, NNMKAccountsSyncServiceServer, NNMKDeviceSyncRegistry, NNMKFetchesSyncServiceServer, NNMKMessageContentSyncServiceServer, NNMKMessagesSyncServiceServer, NSDate, NSMutableSet, NSObject<OS_dispatch_queue>, NSString, NSURL, PSYSyncCoordinator;
+@class BLTPingSubscriber, NNMKAccountsSyncServiceServer, NNMKDeviceSyncRegistry, NNMKFetchesSyncServiceServer, NNMKMessageContentSyncServiceServer, NNMKMessagesSyncServiceServer, NNMKPairedDeviceInfo, NSDate, NSMutableSet, NSObject<OS_dispatch_queue>, NSString, NSURL, PSYSyncCoordinator;
 
-@interface NNMKSyncProvider : NSObject <NNMKMessagesSyncServiceServerDelegate, NNMKMessageContentSyncServiceServerDelegate, NNMKAccountsSyncServiceServerDelegate, NNMKFetchesSyncServiceServerDelegate, PSYSyncCoordinatorDelegate>
+@interface NNMKSyncProvider : NNMKSyncEndpoint <NNMKMessagesSyncServiceServerDelegate, NNMKMessageContentSyncServiceServerDelegate, NNMKAccountsSyncServiceServerDelegate, NNMKFetchesSyncServiceServerDelegate, PSYSyncCoordinatorDelegate>
 {
     _Bool _messagesVerificationTriggered;
     _Bool _messagesQueryAvailable;
     _Bool _isFirstMessagesRequestPending;
+    _Bool _trackingInitialSync;
     id <NNMKSyncProviderDelegate> _delegate;
     NSObject<OS_dispatch_queue> *_providerQueue;
     BLTPingSubscriber *_notificationsPingSubscriber;
@@ -31,8 +32,19 @@
     NSString *_pendingMoreMessagesForConversationIdRequestConversationId;
     NSDate *_pendingMoreMessagesForConversationIdRequestBeforeDateReceived;
     NSMutableSet *_messageIdsToIgnoreStatusUpdates;
+    unsigned long long _initialSyncResendInterval;
+    double _initialSyncProgress;
+    unsigned long long _initialSyncMessagesCount;
+    NSMutableSet *_initialSyncMessageIdsToSyncContent;
+    NSMutableSet *_initialSyncMessageIdsOfContentToAck;
 }
 
+@property(retain, nonatomic) NSMutableSet *initialSyncMessageIdsOfContentToAck; // @synthesize initialSyncMessageIdsOfContentToAck=_initialSyncMessageIdsOfContentToAck;
+@property(retain, nonatomic) NSMutableSet *initialSyncMessageIdsToSyncContent; // @synthesize initialSyncMessageIdsToSyncContent=_initialSyncMessageIdsToSyncContent;
+@property(nonatomic) unsigned long long initialSyncMessagesCount; // @synthesize initialSyncMessagesCount=_initialSyncMessagesCount;
+@property(nonatomic) double initialSyncProgress; // @synthesize initialSyncProgress=_initialSyncProgress;
+@property(nonatomic) _Bool trackingInitialSync; // @synthesize trackingInitialSync=_trackingInitialSync;
+@property(nonatomic) unsigned long long initialSyncResendInterval; // @synthesize initialSyncResendInterval=_initialSyncResendInterval;
 @property(retain, nonatomic) NSMutableSet *messageIdsToIgnoreStatusUpdates; // @synthesize messageIdsToIgnoreStatusUpdates=_messageIdsToIgnoreStatusUpdates;
 @property(retain, nonatomic) NSDate *pendingMoreMessagesForConversationIdRequestBeforeDateReceived; // @synthesize pendingMoreMessagesForConversationIdRequestBeforeDateReceived=_pendingMoreMessagesForConversationIdRequestBeforeDateReceived;
 @property(retain, nonatomic) NSString *pendingMoreMessagesForConversationIdRequestConversationId; // @synthesize pendingMoreMessagesForConversationIdRequestConversationId=_pendingMoreMessagesForConversationIdRequestConversationId;
@@ -51,10 +63,12 @@
 - (void).cxx_destruct;
 - (_Bool)_messageHasContentCompletelySynced:(id)arg1;
 - (id)_syncedMailboxForGetters;
+- (void)_incrementInitialSyncProgressBy:(double)arg1;
 - (void)_requestDelegateForVerificationOfMessagesAndIds:(id)arg1 afterDate:(id)arg2;
 - (void)_requestDelegateForResendingAccountWithId:(id)arg1;
 - (void)_requestDelegateForResendingMessageWithId:(id)arg1;
 - (void)_requestDelegateToSendMessageTo:(id)arg1 cc:(id)arg2 subject:(id)arg3 body:(id)arg4;
+- (void)_requestDelegateForFetchManualForConversationId:(id)arg1;
 - (void)_requestDelegateForFetchResume;
 - (void)_requestDelegateToStopDownloadingAllContentAndAttachments;
 - (void)_requestDelegateToStopDownloadingContentAndAttachmentsForMessageWithId:(id)arg1;
@@ -65,57 +79,74 @@
 - (void)_requestDelegateForMoreMessages;
 - (void)_requestDelegateForAccounts;
 - (void)_notifyDelegateThatMessagesStatusWereUpdated:(id)arg1;
+- (void)_resendPendingAccountWithIds:(id)arg1 forIDSIdentifier:(id)arg2 newResendInterval:(unsigned long long)arg3;
+- (void)_resendPendingMessageContentWithId:(id)arg1 sentBecauseUserRequested:(_Bool)arg2 idsIdentifier:(id)arg3 newResendInterval:(unsigned long long)arg4;
+- (void)_resendPendingMessagesWithIds:(id)arg1 forIDSIdentifier:(id)arg2 newResendInterval:(unsigned long long)arg3;
+- (void)_resendInitialSyncWithIDSIdentifier:(id)arg1 newResendInterval:(unsigned long long)arg2;
+- (void)_resendObjectId:(id)arg1 objectType:(id)arg2 resendInterval:(unsigned long long)arg3 idsIdentifier:(id)arg4;
+- (void)_scheduleIdsIdentifierForResend:(id)arg1 currentResendInterval:(unsigned long long)arg2 newResendInterval:(unsigned long long)arg3;
+- (void)_handleDidSendProtobufSuccessfullyWithIDSIdentifier:(id)arg1;
+- (void)_handleDidFailSendingProtobufWithIDSIdentifier:(id)arg1 errorCode:(long long)arg2;
+- (void)_handleInitialSyncCompleted;
+- (void)_handleMessageCompletelySynced:(id)arg1;
 - (void)_executePendingContentRequests;
 - (void)_sendFirstUnsyncedAndUnrequestedContents;
 - (void)_executePendingResends;
 - (void)_executePendingRequests;
 - (void)_warnReceiverNeedsUnlock;
 - (id)_messageProtobufForMessage:(id)arg1;
+- (_Bool)_isDateReceivedOkForCurrentSyncedMailbox:(id)arg1;
 - (_Bool)_isMessageStatusOkForCurrentSyncedMailbox:(unsigned long long)arg1;
 - (_Bool)_currentSyncedMailboxAddsDeletesMessagesByStatusUpdates;
 - (_Bool)_isMessageOkForCurrentSyncedMailbox:(id)arg1;
 - (id)_filterOutMessagesReceivedByDateReceived:(id)arg1;
 - (id)_filterOutMessagesReceived:(id)arg1 byAlreadySynced:(_Bool)arg2 bySyncedMailboxType:(_Bool)arg3;
+- (void)_notifyClientNotifyInitialContentSyncCompleted;
 - (void)_runSyncVerification;
 - (void)_triggerFullMessagesSync;
+- (id)_bbSubsectionIdsForMessage:(id)arg1;
 - (_Bool)_willPresentNotificationForMessage:(id)arg1;
 - (void)_markConversationWithId:(id)arg1 forNotify:(_Bool)arg2;
 - (void)_addMessages:(id)arg1 messagesAreNew:(_Bool)arg2;
+- (_Bool)_verifyDatabaseOkForFullSyncVersion:(unsigned long long)arg1;
+- (void)_storeScreenRelatedValuesForPairedDevice:(id)arg1;
 - (void)_verifyPairingForcingSync:(_Bool)arg1;
 - (void)_handleDidUnpair;
 - (void)_handleDidPairWithNewDevice;
 - (void)syncCoordinatorDidReceiveStartSyncCommand:(id)arg1;
+- (void)fetchesSyncServiceServer:(id)arg1 didNotifyInitialSyncFinished:(id)arg2;
 - (void)fetchesSyncServiceServer:(id)arg1 didRequestFullSync:(id)arg2;
 - (void)fetchesSyncServiceServer:(id)arg1 didRequestContent:(id)arg2;
 - (void)fetchesSyncServiceServer:(id)arg1 didRequestMoreMessagesForConversation:(id)arg2;
 - (void)fetchesSyncServiceServer:(id)arg1 didRequestMoreMessages:(id)arg2;
-- (void)fetchesSyncServiceServer:(id)arg1 didRequestFetchResume:(id)arg2;
+- (void)fetchesSyncServiceServer:(id)arg1 didRequestFetch:(id)arg2;
 - (void)accountsSyncServiceServer:(id)arg1 didSendProtobufSuccessfullyWithIDSIdentifier:(id)arg2;
-- (void)accountsSyncServiceServer:(id)arg1 didFailSendingProtobufWithIDSIdentifier:(id)arg2;
+- (void)accountsSyncServiceServer:(id)arg1 didFailSendingProtobufWithIDSIdentifier:(id)arg2 errorCode:(long long)arg3;
 - (void)messageContentSyncServiceServer:(id)arg1 didSendProtobufSuccessfullyWithIDSIdentifier:(id)arg2;
-- (void)messageContentSyncServiceServer:(id)arg1 didFailSendingProtobufWithIDSIdentifier:(id)arg2;
+- (void)messageContentSyncServiceServer:(id)arg1 didFailSendingProtobufWithIDSIdentifier:(id)arg2 errorCode:(long long)arg3;
 - (void)messagesSyncServiceServer:(id)arg1 didRequestCompactMessages:(id)arg2;
 - (void)messagesSyncServiceServer:(id)arg1 didWarnMessagesFilteredOut:(id)arg2;
 - (void)messagesSyncServiceServer:(id)arg1 didRequestSendMessage:(id)arg2;
 - (void)messagesSyncServiceServer:(id)arg1 didDeleteMessages:(id)arg2;
 - (void)messagesSyncServiceServer:(id)arg1 didUpdateMessagesStatus:(id)arg2;
 - (void)messagesSyncServiceServer:(id)arg1 didSendProtobufSuccessfullyWithIDSIdentifier:(id)arg2;
-- (void)messagesSyncServiceServer:(id)arg1 didFailSendingProtobufWithIDSIdentifier:(id)arg2;
-@property(readonly, nonatomic) double maximumScreenshotsHeight;
-@property(readonly, nonatomic) double pairedDeviceScreenScale;
-@property(readonly, nonatomic) double pairedDeviceScreenWidth;
+- (void)messagesSyncServiceServer:(id)arg1 didFailSendingProtobufWithIDSIdentifier:(id)arg2 errorCode:(long long)arg3;
+- (void)resendIDSIdentifier:(id)arg1;
+- (id)datesForIDSIdentifiersScheduledToBeResent;
+@property(readonly, nonatomic) NNMKPairedDeviceInfo *pairedDeviceInfo;
 @property(readonly, nonatomic) _Bool organizeByThread;
 @property(readonly, nonatomic) NSString *syncedMailboxCustomName;
 @property(readonly, nonatomic) NSURL *syncedMailboxURL;
 @property(readonly, nonatomic) NSString *syncedMailboxAccountId;
 @property(readonly, nonatomic) unsigned long long syncedMailboxType;
 @property(readonly, nonatomic) _Bool messagesSyncActive;
+- (id)bulletinFlagsForMessageStatus:(unsigned long long)arg1 dateReceived:(id)arg2 messageWillBeAddedToSyncProvider:(_Bool)arg3;
+- (void)notifyFetchManualCompleted;
 - (void)notifyOrganizeByThreadChanged;
 - (void)notifySyncedMailboxChanged;
 - (void)notifyMessagesQueryAvailable;
 - (void)notifyMessagesQueryUnavailable;
 - (void)addUpdateOrDeleteAccounts:(id)arg1;
-- (void)addScreenshot:(id)arg1 forMessageId:(id)arg2;
 - (void)addImageAttachment:(id)arg1 forMessageId:(id)arg2 contentId:(id)arg3;
 - (void)reportMessageContentDownloadFailureForMessageId:(id)arg1;
 - (void)addMessageContent:(id)arg1 preview:(id)arg2;

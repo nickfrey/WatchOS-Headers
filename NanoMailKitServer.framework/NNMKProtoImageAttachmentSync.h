@@ -13,6 +13,7 @@
 @interface NNMKProtoImageAttachmentSync : PBCodable <NSCopying>
 {
     NSString *_contentId;
+    NSData *_dateSynced;
     unsigned int _fullSyncVersion;
     NSData *_imageData;
     NSString *_messageId;
@@ -22,6 +23,7 @@
 @property(retain, nonatomic) NSData *imageData; // @synthesize imageData=_imageData;
 @property(retain, nonatomic) NSString *contentId; // @synthesize contentId=_contentId;
 @property(retain, nonatomic) NSString *messageId; // @synthesize messageId=_messageId;
+@property(retain, nonatomic) NSData *dateSynced; // @synthesize dateSynced=_dateSynced;
 @property(nonatomic) unsigned int fullSyncVersion; // @synthesize fullSyncVersion=_fullSyncVersion;
 - (void).cxx_destruct;
 - (void)mergeFrom:(id)arg1;
@@ -36,6 +38,7 @@
 @property(readonly, nonatomic) _Bool hasImageData;
 @property(readonly, nonatomic) _Bool hasContentId;
 @property(readonly, nonatomic) _Bool hasMessageId;
+@property(readonly, nonatomic) _Bool hasDateSynced;
 @property(nonatomic) _Bool hasFullSyncVersion;
 
 @end

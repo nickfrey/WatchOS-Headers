@@ -13,6 +13,7 @@
 @interface NNMKProtoInitialMessagesSync : PBCodable <NSCopying>
 {
     NSData *_dateForRequestingMoreMessages;
+    NSData *_dateSynced;
     unsigned int _fullSyncVersion;
     NSMutableArray *_initialMessages;
     NSString *_syncedMailboxAccountId;
@@ -31,6 +32,7 @@
 @property(nonatomic) unsigned int syncedMailboxType; // @synthesize syncedMailboxType=_syncedMailboxType;
 @property(retain, nonatomic) NSData *dateForRequestingMoreMessages; // @synthesize dateForRequestingMoreMessages=_dateForRequestingMoreMessages;
 @property(retain, nonatomic) NSMutableArray *initialMessages; // @synthesize initialMessages=_initialMessages;
+@property(retain, nonatomic) NSData *dateSynced; // @synthesize dateSynced=_dateSynced;
 @property(nonatomic) unsigned int fullSyncVersion; // @synthesize fullSyncVersion=_fullSyncVersion;
 - (void).cxx_destruct;
 - (void)mergeFrom:(id)arg1;
@@ -51,6 +53,7 @@
 - (unsigned long long)initialMessagesCount;
 - (void)addInitialMessage:(id)arg1;
 - (void)clearInitialMessages;
+@property(readonly, nonatomic) _Bool hasDateSynced;
 @property(nonatomic) _Bool hasFullSyncVersion;
 
 @end

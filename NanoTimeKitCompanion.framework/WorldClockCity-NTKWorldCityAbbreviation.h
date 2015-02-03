@@ -10,6 +10,7 @@
 
 @interface WorldClockCity (NTKWorldCityAbbreviation)
 - (id)_bundleWithAbbreviations;
+- (id)_filePathForAbbreviationsResource;
 @property(readonly, nonatomic) NSString *abbreviation;
 @end
 

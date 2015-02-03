@@ -191,31 +191,6 @@ struct _xmlSAXHandler {
 
 struct _xmlValidState;
 
-struct sqlite3_vfs {
-    int _field1;
-    int _field2;
-    int _field3;
-    struct sqlite3_vfs *_field4;
-    char *_field5;
-    void *_field6;
-    CDUnknownFunctionPointerType _field7;
-    CDUnknownFunctionPointerType _field8;
-    CDUnknownFunctionPointerType _field9;
-    CDUnknownFunctionPointerType _field10;
-    CDUnknownFunctionPointerType _field11;
-    CDUnknownFunctionPointerType _field12;
-    CDUnknownFunctionPointerType _field13;
-    CDUnknownFunctionPointerType _field14;
-    CDUnknownFunctionPointerType _field15;
-    CDUnknownFunctionPointerType _field16;
-    CDUnknownFunctionPointerType _field17;
-    CDUnknownFunctionPointerType _field18;
-    CDUnknownFunctionPointerType _field19;
-    CDUnknownFunctionPointerType _field20;
-    CDUnknownFunctionPointerType _field21;
-    CDUnknownFunctionPointerType _field22;
-};
-
 #pragma mark Typedef'd Structures
 
 // Ambiguous groups

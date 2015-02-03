@@ -10,7 +10,9 @@
 {
 }
 
-+ (void)setupLogging;
++ (void)_setupLoggingFacility:(id)arg1;
++ (void)setupLoggingFacility:(id)arg1;
++ (void)setupLoggingFacilities;
 
 @end
 

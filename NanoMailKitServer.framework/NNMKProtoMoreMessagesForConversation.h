@@ -8,18 +8,20 @@
 
 #import "NSCopying.h"
 
-@class NSMutableArray, NSString;
+@class NSData, NSMutableArray, NSString;
 
 @interface NNMKProtoMoreMessagesForConversation : PBCodable <NSCopying>
 {
     NSMutableArray *_addedMessages;
     NSString *_conversationId;
+    NSData *_dateSynced;
     unsigned int _fullSyncVersion;
     CDStruct_a125a100 _has;
 }
 
 @property(retain, nonatomic) NSMutableArray *addedMessages; // @synthesize addedMessages=_addedMessages;
 @property(retain, nonatomic) NSString *conversationId; // @synthesize conversationId=_conversationId;
+@property(retain, nonatomic) NSData *dateSynced; // @synthesize dateSynced=_dateSynced;
 @property(nonatomic) unsigned int fullSyncVersion; // @synthesize fullSyncVersion=_fullSyncVersion;
 - (void).cxx_destruct;
 - (void)mergeFrom:(id)arg1;
@@ -36,6 +38,7 @@
 - (void)addAddedMessage:(id)arg1;
 - (void)clearAddedMessages;
 @property(readonly, nonatomic) _Bool hasConversationId;
+@property(readonly, nonatomic) _Bool hasDateSynced;
 @property(nonatomic) _Bool hasFullSyncVersion;
 
 @end

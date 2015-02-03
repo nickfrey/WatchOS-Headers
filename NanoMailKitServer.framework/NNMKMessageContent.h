@@ -21,7 +21,6 @@
 
 + (id)classesForUnarchivingTextData;
 + (_Bool)supportsSecureCoding;
-+ (unsigned long long)numberOfFixedCharactersInTextData;
 @property(nonatomic) _Bool partiallyLoaded; // @synthesize partiallyLoaded=_partiallyLoaded;
 @property(retain, nonatomic) NSArray *attachments; // @synthesize attachments=_attachments;
 @property(retain, nonatomic) NSData *textData; // @synthesize textData=_textData;

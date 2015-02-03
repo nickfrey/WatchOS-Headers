@@ -9,6 +9,7 @@
 @class NRDevice, NSData, NSError, NSNumber, NSUUID;
 
 @protocol NRPairedDeviceRegistryXPCFrameworkDelegate <NRPropertyXPCFrameworkDelegate>
+- (void)xpcLastUnpairReasonDidChange:(unsigned long long)arg1;
 - (void)xpcDidReceiveBTPairingRequest:(NRDevice *)arg1 deviceID:(NSUUID *)arg2;
 - (void)xpcCompatibilityStateDidChange:(unsigned short)arg1 withDevice:(NRDevice *)arg2 andDeviceID:(NSUUID *)arg3;
 - (void)xpcRemoteUnpairingDidBegin;

@@ -11,8 +11,10 @@
     id <NGSSettingsManagerDelegate> _delegate;
 }
 
++ (id)sharedSettingsManager;
 @property(nonatomic) __weak id <NGSSettingsManagerDelegate> delegate; // @synthesize delegate=_delegate;
 - (void).cxx_destruct;
+- (void)_handleLocaleChange:(id)arg1;
 - (id)_fetchSockPuppetGlances;
 - (void)_updateSockPuppetGlances;
 - (void)loadSettings;

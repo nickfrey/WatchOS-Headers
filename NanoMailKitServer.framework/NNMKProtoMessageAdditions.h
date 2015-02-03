@@ -13,6 +13,7 @@
 @interface NNMKProtoMessageAdditions : PBCodable <NSCopying>
 {
     NSData *_dateForRequestingMoreMessages;
+    NSData *_dateSynced;
     unsigned int _fullSyncVersion;
     NSMutableArray *_messageAdditions;
     _Bool _messagesAreNew;
@@ -25,6 +26,7 @@
 @property(nonatomic) _Bool messagesAreNew; // @synthesize messagesAreNew=_messagesAreNew;
 @property(retain, nonatomic) NSData *dateForRequestingMoreMessages; // @synthesize dateForRequestingMoreMessages=_dateForRequestingMoreMessages;
 @property(retain, nonatomic) NSMutableArray *messageAdditions; // @synthesize messageAdditions=_messageAdditions;
+@property(retain, nonatomic) NSData *dateSynced; // @synthesize dateSynced=_dateSynced;
 @property(nonatomic) unsigned int fullSyncVersion; // @synthesize fullSyncVersion=_fullSyncVersion;
 - (void).cxx_destruct;
 - (void)mergeFrom:(id)arg1;
@@ -42,6 +44,7 @@
 - (unsigned long long)messageAdditionsCount;
 - (void)addMessageAddition:(id)arg1;
 - (void)clearMessageAdditions;
+@property(readonly, nonatomic) _Bool hasDateSynced;
 @property(nonatomic) _Bool hasFullSyncVersion;
 
 @end

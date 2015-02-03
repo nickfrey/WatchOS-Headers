@@ -15,6 +15,6 @@
 - (void)messagesSyncServiceServer:(NNMKMessagesSyncServiceServer *)arg1 didDeleteMessages:(NNMKProtoMessageDeletions *)arg2;
 - (void)messagesSyncServiceServer:(NNMKMessagesSyncServiceServer *)arg1 didUpdateMessagesStatus:(NNMKProtoMessageStatusUpdates *)arg2;
 - (void)messagesSyncServiceServer:(NNMKMessagesSyncServiceServer *)arg1 didSendProtobufSuccessfullyWithIDSIdentifier:(NSString *)arg2;
-- (void)messagesSyncServiceServer:(NNMKMessagesSyncServiceServer *)arg1 didFailSendingProtobufWithIDSIdentifier:(NSString *)arg2;
+- (void)messagesSyncServiceServer:(NNMKMessagesSyncServiceServer *)arg1 didFailSendingProtobufWithIDSIdentifier:(NSString *)arg2 errorCode:(long long)arg3;
 @end
 

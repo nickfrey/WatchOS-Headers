@@ -26,7 +26,7 @@
 @property(copy, nonatomic) NSDictionary *contextInfo; // @synthesize contextInfo=_contextInfo;
 - (void).cxx_destruct;
 - (void)rollback;
-- (void)commit;
+- (void)commitBlocking:(_Bool)arg1;
 - (void)deleteObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3;
 - (void)updateObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3;
 - (void)addObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3;

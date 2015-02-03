@@ -15,6 +15,8 @@
 }
 
 - (void)launchGizmoAppForCompanionAppWithIdentifier:(id)arg1 withURLString:(id)arg2;
+- (void)remoteInterfaceDidDeactivate:(id)arg1;
+- (void)launchCompanionAppForGizmoAppWithIdentifier:(id)arg1 withUserInfoData:(id)arg2 reply:(CDUnknownBlockType)arg3;
 - (void)sendTimingData:(id)arg1 identifier:(id)arg2 clientIdentifiers:(id)arg3 index:(long long)arg4;
 - (void)fetchNotificationForNotificationID:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)sendData:(id)arg1 identifier:(id)arg2 clientIdentifiers:(id)arg3;

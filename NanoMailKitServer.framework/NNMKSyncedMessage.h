@@ -14,7 +14,6 @@
     _Bool _contentSyncedUsingNotificationPriority;
     _Bool _contentSyncedBecauseUserRequested;
     _Bool _contentSynced;
-    _Bool _screenshotYetToBeSynced;
     _Bool _contentRequestedByUser;
     _Bool _resendRequested;
     NSString *_messageId;
@@ -23,13 +22,16 @@
     NSDate *_dateReceived;
     NSMutableSet *_attachmentsContentIdsNotYetSynced;
     NSString *_conversationId;
+    unsigned long long _resendInterval;
+    unsigned long long _contentResendInterval;
 }
 
+@property(nonatomic) unsigned long long contentResendInterval; // @synthesize contentResendInterval=_contentResendInterval;
+@property(nonatomic) unsigned long long resendInterval; // @synthesize resendInterval=_resendInterval;
 @property(nonatomic) _Bool resendRequested; // @synthesize resendRequested=_resendRequested;
 @property(retain, nonatomic) NSString *conversationId; // @synthesize conversationId=_conversationId;
 @property(retain, nonatomic) NSMutableSet *attachmentsContentIdsNotYetSynced; // @synthesize attachmentsContentIdsNotYetSynced=_attachmentsContentIdsNotYetSynced;
 @property(nonatomic) _Bool contentRequestedByUser; // @synthesize contentRequestedByUser=_contentRequestedByUser;
-@property(nonatomic) _Bool screenshotYetToBeSynced; // @synthesize screenshotYetToBeSynced=_screenshotYetToBeSynced;
 @property(nonatomic) _Bool contentSynced; // @synthesize contentSynced=_contentSynced;
 @property(nonatomic) _Bool contentSyncedBecauseUserRequested; // @synthesize contentSyncedBecauseUserRequested=_contentSyncedBecauseUserRequested;
 @property(nonatomic) _Bool contentSyncedUsingNotificationPriority; // @synthesize contentSyncedUsingNotificationPriority=_contentSyncedUsingNotificationPriority;

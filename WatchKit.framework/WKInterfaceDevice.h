@@ -6,26 +6,25 @@
 
 #import "NSObject.h"
 
-@class NSLocale, NSString;
+@class NSDictionary, NSString;
 
 @interface WKInterfaceDevice : NSObject
 {
     double _screenScale;
-    NSLocale *_currentLocale;
     NSString *_preferredContentSizeCategory;
     struct CGRect _screenBounds;
 }
 
 + (id)currentDevice;
 @property(copy, nonatomic) NSString *preferredContentSizeCategory; // @synthesize preferredContentSizeCategory=_preferredContentSizeCategory;
-@property(retain, nonatomic) NSLocale *currentLocale; // @synthesize currentLocale=_currentLocale;
 @property(nonatomic) double screenScale; // @synthesize screenScale=_screenScale;
 @property(nonatomic) struct CGRect screenBounds; // @synthesize screenBounds=_screenBounds;
 - (void).cxx_destruct;
+@property(readonly, nonatomic) NSDictionary *cachedImages;
 - (void)removeAllCachedImages;
 - (void)removeCachedImageWithName:(id)arg1;
-- (void)addCachedImageWithData:(id)arg1 name:(id)arg2;
-- (void)addCachedImage:(id)arg1 name:(id)arg2;
+- (_Bool)addCachedImageWithData:(id)arg1 name:(id)arg2;
+- (_Bool)addCachedImage:(id)arg1 name:(id)arg2;
 
 @end
 

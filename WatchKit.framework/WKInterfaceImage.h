@@ -13,6 +13,7 @@
 - (void)stopAnimating;
 - (void)startAnimatingWithImagesInRange:(struct _NSRange)arg1 duration:(double)arg2 repeatCount:(long long)arg3;
 - (void)startAnimating;
+- (void)setTintColor:(id)arg1;
 - (void)setImageNamed:(id)arg1;
 - (void)setImageData:(id)arg1;
 - (void)setImage:(id)arg1;

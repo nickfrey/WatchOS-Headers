@@ -6,13 +6,14 @@
 
 #import "NSObject.h"
 
-@class NNMKFetchesSyncServiceServer, NNMKProtoContentRequest, NNMKProtoFetchResumeRequest, NNMKProtoFullSyncRequest, NNMKProtoMoreMessagesForConversationRequest, NNMKProtoMoreMessagesRequest;
+@class NNMKFetchesSyncServiceServer, NNMKProtoContentRequest, NNMKProtoFetchRequest, NNMKProtoFullSyncRequest, NNMKProtoInitialSyncFinishedNotification, NNMKProtoMoreMessagesForConversationRequest, NNMKProtoMoreMessagesRequest;
 
 @protocol NNMKFetchesSyncServiceServerDelegate <NSObject>
+- (void)fetchesSyncServiceServer:(NNMKFetchesSyncServiceServer *)arg1 didNotifyInitialSyncFinished:(NNMKProtoInitialSyncFinishedNotification *)arg2;
 - (void)fetchesSyncServiceServer:(NNMKFetchesSyncServiceServer *)arg1 didRequestFullSync:(NNMKProtoFullSyncRequest *)arg2;
 - (void)fetchesSyncServiceServer:(NNMKFetchesSyncServiceServer *)arg1 didRequestContent:(NNMKProtoContentRequest *)arg2;
 - (void)fetchesSyncServiceServer:(NNMKFetchesSyncServiceServer *)arg1 didRequestMoreMessagesForConversation:(NNMKProtoMoreMessagesForConversationRequest *)arg2;
 - (void)fetchesSyncServiceServer:(NNMKFetchesSyncServiceServer *)arg1 didRequestMoreMessages:(NNMKProtoMoreMessagesRequest *)arg2;
-- (void)fetchesSyncServiceServer:(NNMKFetchesSyncServiceServer *)arg1 didRequestFetchResume:(NNMKProtoFetchResumeRequest *)arg2;
+- (void)fetchesSyncServiceServer:(NNMKFetchesSyncServiceServer *)arg1 didRequestFetch:(NNMKProtoFetchRequest *)arg2;
 @end
 

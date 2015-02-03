@@ -10,21 +10,17 @@
 #import "NMSMessageCenterDelegate.h"
 #import "SYChangeTracking.h"
 
-@class NMSMessageCenter, NSDictionary, NSMutableDictionary, NSMutableIndexSet, NSObject<OS_dispatch_queue>, NSOperationQueue, NSString, NSTimer, NSURL, NSUUID, SYPersistentStore, SYVectorClock;
+@class NMSMessageCenter, NSDictionary, NSMutableDictionary, NSMutableIndexSet, NSObject<OS_dispatch_queue>, NSObject<OS_dispatch_source>, NSString, NSUUID, SYPersistentStore, SYRetryTimer, SYVectorClock;
 
 @interface SYStore : NSObject <IDSServiceDelegate, NMSMessageCenterDelegate, SYChangeTracking>
 {
     NSObject<OS_dispatch_queue> *_qosTargetQueue;
     unsigned long long _batchCounter;
     NSMutableIndexSet *_batchChunkUnackedIndices;
-    NSMutableIndexSet *_acksToIgnore;
-    NSMutableDictionary *_idsChangeSentCallbacks;
-    _Bool _isNanoAppRegistry;
-    _Bool _recordingTransmissions;
-    NSURL *_incomingTransmissionsURL;
-    NSURL *_outgoingTransmissionsURL;
-    NSOperationQueue *_nsq;
     _Bool _tracksChanges;
+    NSMutableDictionary *_sendSignals;
+    SYRetryTimer *_syncRetryTimer;
+    NSObject<OS_dispatch_source> *_overflowRetryTimer;
     struct {
         unsigned int delegateWillUpdate:1;
         unsigned int delegateWillUpdateWithCount:1;
@@ -41,6 +37,7 @@
         unsigned int delegateDidUnpair:1;
         unsigned int delegateSentMessage:1;
         unsigned int delegatePeerProcessedMessage:1;
+        unsigned int delegateSentLastSyncMessage:1;
     } _flags;
     _Bool _allowsDeletes;
     _Bool _encryptPayloads;
@@ -52,41 +49,29 @@
     NSDictionary *_customIDSDeliveryOptions;
     NSString *_service;
     NSString *_databaseFileName;
-    long long _idsPriority;
+    long long _priority;
     SYPersistentStore *_persistentStore;
     NSObject<OS_dispatch_queue> *_queue;
-    NSTimer *_expirationTimer;
     struct __CFString *_loggingFacility;
     NSUUID *_pairedDeviceID;
     NMSMessageCenter *_messageCenter;
     SYVectorClock *_vectorClock;
-    NSString *_fullSyncIdentifier;
-    NSString *_lastSyncEndID;
-    NSString *_waitingForSyncEndID;
-    NSDictionary *_fullSyncUserInfo;
-    NSDictionary *_fullSyncIDSOptions;
     CDUnknownBlockType _nextBatchStep;
 }
 
 + (id)fullSyncActivityDictionary;
 @property(copy, nonatomic) CDUnknownBlockType nextBatchStep; // @synthesize nextBatchStep=_nextBatchStep;
-@property(copy, nonatomic) NSDictionary *fullSyncIDSOptions; // @synthesize fullSyncIDSOptions=_fullSyncIDSOptions;
-@property(copy, nonatomic) NSDictionary *fullSyncUserInfo; // @synthesize fullSyncUserInfo=_fullSyncUserInfo;
-@property(copy, nonatomic) NSString *waitingForSyncEndID; // @synthesize waitingForSyncEndID=_waitingForSyncEndID;
-@property(copy, nonatomic) NSString *lastSyncEndID; // @synthesize lastSyncEndID=_lastSyncEndID;
-@property(copy, nonatomic) NSString *fullSyncIdentifier; // @synthesize fullSyncIdentifier=_fullSyncIdentifier;
 @property(nonatomic) _Bool fullSyncWasRequestedBySlave; // @synthesize fullSyncWasRequestedBySlave=_fullSyncWasRequestedBySlave;
 @property(retain, nonatomic) SYVectorClock *vectorClock; // @synthesize vectorClock=_vectorClock;
 @property(retain, nonatomic) NMSMessageCenter *messageCenter; // @synthesize messageCenter=_messageCenter;
 @property(nonatomic) _Bool registeredNotificationHandlers; // @synthesize registeredNotificationHandlers=_registeredNotificationHandlers;
 @property(retain, nonatomic) NSUUID *pairedDeviceID; // @synthesize pairedDeviceID=_pairedDeviceID;
 @property(nonatomic) struct __CFString *loggingFacility; // @synthesize loggingFacility=_loggingFacility;
-@property(retain, nonatomic) NSTimer *expirationTimer; // @synthesize expirationTimer=_expirationTimer;
 @property(retain, nonatomic) NSObject<OS_dispatch_queue> *queue; // @synthesize queue=_queue;
 @property(retain, nonatomic) SYPersistentStore *persistentStore; // @synthesize persistentStore=_persistentStore;
 @property(nonatomic) _Bool alwaysWins; // @synthesize alwaysWins=_alwaysWins;
 @property(nonatomic) _Bool encryptPayloads; // @synthesize encryptPayloads=_encryptPayloads;
-@property(nonatomic) long long idsPriority; // @synthesize idsPriority=_idsPriority;
+@property(nonatomic) long long priority; // @synthesize priority=_priority;
 @property(retain, nonatomic) NSString *databaseFileName; // @synthesize databaseFileName=_databaseFileName;
 @property(retain, nonatomic) NSString *service; // @synthesize service=_service;
 @property(nonatomic) _Bool allowsDeletes; // @synthesize allowsDeletes=_allowsDeletes;
@@ -106,8 +91,8 @@
 - (void)setNeedsFullSyncWithContext:(id)arg1 idsOptions:(id)arg2;
 - (void)setNeedsFullSync;
 - (void)logChanges:(id)arg1;
-- (void)sendChanges:(id)arg1 context:(id)arg2 options:(id)arg3;
-- (void)handleObjectChanges:(id)arg1 contextInfo:(id)arg2 idsOptions:(id)arg3;
+- (void)sendChanges:(id)arg1 context:(id)arg2 options:(id)arg3 sentSignal:(id)arg4;
+- (void)handleObjectChanges:(id)arg1 contextInfo:(id)arg2 idsOptions:(id)arg3 blockUntilSent:(_Bool)arg4;
 - (void)deleteObject:(id)arg1 context:(id)arg2;
 - (void)deleteObject:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)deleteObject:(id)arg1;
@@ -120,6 +105,8 @@
 - (void)addObject:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)addObject:(id)arg1;
 - (void)addObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3;
+- (void)transaction:(CDUnknownBlockType)arg1 context:(id)arg2 idsOptions:(id)arg3 blockUntilSent:(_Bool)arg4;
+- (void)blockingTransaction:(CDUnknownBlockType)arg1;
 - (void)transaction:(CDUnknownBlockType)arg1 context:(id)arg2 idsOptions:(id)arg3;
 - (void)transaction:(CDUnknownBlockType)arg1 context:(id)arg2;
 - (void)transaction:(CDUnknownBlockType)arg1 completion:(CDUnknownBlockType)arg2;
@@ -144,37 +131,42 @@
 - (_Bool)peerState:(id)arg1 fromPeer:(id)arg2 matchesExpectationForChangeCount:(unsigned long long)arg3 offsetAmount:(unsigned long long *)arg4;
 - (void)_copyPeerClockFromMessageHeaderIfNecessary:(id)arg1;
 - (void)postUserNotification:(id)arg1 message:(id)arg2;
-@property(nonatomic) _Bool inFullSync;
+- (_Bool)inFullSync;
 @property(nonatomic) double timeToLive;
 - (void)setupDatabase;
 - (void)_setupMessageCenter_LOCKED;
 - (void)setupMessageCenter;
+- (void)_handleIDSOverflow;
 - (void)_recordLastSeqNo:(id)arg1;
-- (_Bool)_checkMessageHeader:(id)arg1;
+- (_Bool)_checkMessageHeader:(id)arg1 messageID:(id)arg2;
 - (id)_pathForMessageCenterCache;
 - (void)_vectorClockUpdated;
 - (void)_devicePaired:(id)arg1;
 - (void)_deviceUnpaired:(id)arg1;
 - (_Bool)_isUsingGenericCache;
 - (_Bool)_isPairedWithDevice:(id)arg1;
+@property(nonatomic) long long maxBytesInFlight;
+@property(readonly, nonatomic) long long state;
 @property(nonatomic) unsigned int deliveryQOS;
 @property(readonly, nonatomic, getter=isPaired) _Bool paired;
 - (void)setupPairingNotifications;
 - (void)_listenForPrefsChangeNotifications;
+- (void)_updateMessageCenterPrefs:(id)arg1;
 - (void)_prefsChanged;
-- (void)_recordDataInfo:(id)arg1 atURL:(id)arg2;
-- (void)_setRecordingTransmissions:(_Bool)arg1;
 - (id)_batchChunkUnackedIndices;
 - (void)dealloc;
+- (id)initWithService:(id)arg1 isGStore:(_Bool)arg2 priority:(long long)arg3 isMasterStore:(_Bool)arg4 tracksChanges:(_Bool)arg5;
 - (id)initWithService:(id)arg1 isGStore:(_Bool)arg2 highPriority:(_Bool)arg3 isMasterStore:(_Bool)arg4 tracksChanges:(_Bool)arg5;
+- (id)initWithService:(id)arg1 isGStore:(_Bool)arg2 priority:(long long)arg3 isMasterStore:(_Bool)arg4;
 - (id)initWithService:(id)arg1 isGStore:(_Bool)arg2 highPriority:(_Bool)arg3 isMasterStore:(_Bool)arg4;
 - (id)initWithService:(id)arg1 isGStore:(_Bool)arg2 highPriority:(_Bool)arg3;
 - (id)initWithService:(id)arg1;
 - (id)initWithBundleIdentifier:(id)arg1 isGStore:(_Bool)arg2 highPriority:(_Bool)arg3;
 - (id)initWithBundleIdentifier:(id)arg1;
+- (void)_retrySync;
 - (id)newFullSyncContext;
 - (void)processBatchChunkAck:(unsigned int)arg1;
-- (void)processBatchChunkAtIndex:(unsigned int)arg1 objects:(id)arg2 error:(id *)arg3;
+- (void)processBatchChunkAtIndex:(unsigned int)arg1 encodedObjects:(id)arg2 error:(id *)arg3;
 - (void)processBatchSyncEnd:(unsigned long long)arg1;
 - (void)processBatchSyncStart;
 - (_Bool)performBatchedSyncToCurrentDBVersion;
