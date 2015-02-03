@@ -9,7 +9,6 @@
 @class NSString;
 
 @protocol SPInterfaceDelegate <NSObject>
-- (void)notifyDetentsChanged;
 - (void)setValue:(id)arg1 forKey:(NSString *)arg2;
 - (void)performAction:(NSString *)arg1 withValue:(id)arg2;
 @end

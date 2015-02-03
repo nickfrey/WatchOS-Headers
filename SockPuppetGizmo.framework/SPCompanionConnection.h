@@ -36,12 +36,12 @@
 - (void)launchGizmoAppForCompanionAppWithIdentifier:(id)arg1 withURLString:(id)arg2;
 - (void)interfaceViewController:(id)arg1 setValue:(id)arg2 forKey:(id)arg3;
 - (void)interfaceViewController:(id)arg1 action:(id)arg2 value:(id)arg3;
-- (void)appWithRootInterfaceViewController:(id)arg1 performActionForUserActivity:(id)arg2;
+- (void)appWithRootInterfaceViewControllers:(id)arg1 performActionForUserActivity:(id)arg2;
 - (void)appWithRootInterfaceViewController:(id)arg1 performActionWithItemID:(id)arg2 forNotificationID:(id)arg3;
 - (void)interfaceViewControllerDeactivate:(id)arg1;
 - (void)interfaceViewControllerActivate:(id)arg1;
 - (void)interfaceViewControllerRelease:(id)arg1;
-- (void)interfaceViewController:(id)arg1 createCompanionControllerClass:(id)arg2 properties:(id)arg3 info:(id)arg4;
+- (void)interfaceViewController:(id)arg1 createCompanionControllerClass:(id)arg2 properties:(id)arg3 initializationContextID:(id)arg4 info:(id)arg5;
 - (void)retreiveTimingInfo:(long long)arg1;
 - (void)resetTimingInfo;
 - (void)duetAppWillResignActive;

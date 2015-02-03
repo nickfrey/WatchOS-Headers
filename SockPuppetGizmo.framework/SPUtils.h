@@ -10,6 +10,10 @@
 {
 }
 
++ (unsigned long long)folderSizeAtPath:(id)arg1 volumeBlockSize:(unsigned long long)arg2;
++ (unsigned long long)userVolumeBlockSize;
++ (id)deserializeObject:(id)arg1;
++ (id)serializeObject:(id)arg1;
 + (id)uniqueNumber;
 
 @end

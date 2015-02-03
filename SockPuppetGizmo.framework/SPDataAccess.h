@@ -12,16 +12,20 @@
 
 @interface SPDataAccess : NSObject <SPCompanionConnectionDelegate>
 {
+    _Bool _isReady;
+    _Bool _isActive;
     id <SPDataAccessDelegateProtocol> _delegate;
     NSString *_bundleID;
     SPCompanionConnection *_companionConnection;
 }
 
+@property _Bool isActive; // @synthesize isActive=_isActive;
+@property _Bool isReady; // @synthesize isReady=_isReady;
 @property(retain) SPCompanionConnection *companionConnection; // @synthesize companionConnection=_companionConnection;
 @property(retain) NSString *bundleID; // @synthesize bundleID=_bundleID;
 @property(retain) id <SPDataAccessDelegateProtocol> delegate; // @synthesize delegate=_delegate;
 - (void).cxx_destruct;
-- (void)restoreCompanionConnection;
+- (void)createCompanionConnection;
 - (void)companionConnection:(id)arg1 complicationReply:(id)arg2;
 - (id)initWithBundleID:(id)arg1;
 - (id)init;

@@ -10,15 +10,20 @@
 
 @interface SPComplicationDataAccess : SPDataAccess
 {
+    _Bool _inForeground;
     NSString *_dataClassName;
 }
 
+@property _Bool inForeground; // @synthesize inForeground=_inForeground;
 @property(retain, nonatomic) NSString *dataClassName; // @synthesize dataClassName=_dataClassName;
 - (void).cxx_destruct;
 - (void)dealloc;
 - (void)requestComplicationData;
+- (void)complicationInBackground;
+- (void)complicationInForeground;
 - (void)resignActive;
 - (void)becomeActive;
+- (void)createCompanionConnectionIfNeeded;
 - (void)extensionDidTerminate:(id)arg1;
 - (id)initWithBundleID:(id)arg1 dataClass:(Class)arg2;
 

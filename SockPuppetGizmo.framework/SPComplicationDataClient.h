@@ -17,6 +17,7 @@
     _Bool _paired;
     NSMutableDictionary *_subscribers;
     unsigned long long _nextSubscriberCounter;
+    _Bool _delayedRequestQueuedUp;
     SPComplicationData *_cachedClientData;
 }
 
@@ -26,9 +27,13 @@
 - (int)verifyIncomingData:(id)arg1;
 - (Class)_dataAccessDataClass;
 - (id)_dataAccessBundleID;
+- (void)_broadcastNilToAllSubscribers;
 - (void)_broadcastToSubscriber:(id)arg1;
 - (void)_broadcastToAllSubscribers;
 - (void)fetchCachedDataWithHandler:(CDUnknownBlockType)arg1 forToken:(id)arg2;
+- (void)_broadcastNilIfRequired:(double)arg1;
+- (void)_requestComplicationData;
+- (void)requestComplicationDataUpdateForToken:(struct NSNumber *)arg1;
 - (void)_updateServiceDataInterval;
 - (void)requestDataInterval:(long long)arg1 forToken:(struct NSNumber *)arg2;
 - (void)_updateServiceRegistration;

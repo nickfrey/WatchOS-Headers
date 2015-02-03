@@ -6,7 +6,7 @@
 
 #import "NSObject.h"
 
-@class NSArray, NSDictionary, NSString, SPInterfaceViewController;
+@class NSArray, NSNumber, NSString, SPInterfaceViewController;
 
 @protocol SPInterfaceViewControllerDelegate <NSObject>
 - (void)interfaceViewController:(SPInterfaceViewController *)arg1 setValue:(id)arg2 forKey:(NSString *)arg3;
@@ -14,12 +14,14 @@
 - (void)interfaceViewControllerDidDeactivate:(SPInterfaceViewController *)arg1;
 - (void)interfaceViewControllerWillActivate:(SPInterfaceViewController *)arg1;
 - (void)interfaceViewControllerRelease:(SPInterfaceViewController *)arg1;
-- (void)interfaceViewController:(SPInterfaceViewController *)arg1 createCompanionControllerClass:(NSString *)arg2 properties:(NSArray *)arg3;
+- (void)interfaceViewController:(SPInterfaceViewController *)arg1 createCompanionControllerClass:(NSString *)arg2 properties:(NSArray *)arg3 initializationContextID:(NSNumber *)arg4;
 
 @optional
 - (void)launchGizmoAppForCompanionAppWithIdentifier:(NSString *)arg1 withURLString:(NSString *)arg2;
-- (void)appWithRootInterfaceViewController:(SPInterfaceViewController *)arg1 performActionForUserActivity:(NSDictionary *)arg2;
 - (void)appWithRootInterfaceViewController:(SPInterfaceViewController *)arg1 performActionWithItemID:(NSString *)arg2 forNotificationID:(NSString *)arg3;
 - (struct UIEdgeInsets)interfaceViewControllerContentInsets:(SPInterfaceViewController *)arg1;
+- (void)interfaceViewControllerDidHideDisconnectedView:(SPInterfaceViewController *)arg1;
+- (void)interfaceViewControllerDidShowDisconnectedView:(SPInterfaceViewController *)arg1;
+- (void)interfaceViewControllerDidActivate:(SPInterfaceViewController *)arg1;
 @end
 

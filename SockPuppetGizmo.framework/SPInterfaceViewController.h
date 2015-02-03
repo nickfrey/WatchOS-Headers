@@ -6,86 +6,126 @@
 
 #import "UIViewController.h"
 
-#import "PUICCrownInputSequencerDataSource.h"
 #import "PUICTableViewDataSource.h"
 #import "PUICTableViewDelegate.h"
+#import "SPActivatingViewDelegate.h"
 #import "SPInterfaceDelegate.h"
 
-@class NSArray, NSBundle, NSDictionary, NSMutableArray, NSString, PUICActionGroup, PUICActionItem, PUICActivityIndicatorView, PUICTableView, SPInterfaceGroupView, UIColor, UIImage, UIView;
+@class NSArray, NSBundle, NSDictionary, NSMutableArray, NSNumber, NSString, NSURL, PUICActionGroup, PUICActionItem, PUICTableView, SPActivatingView, SPInterfaceGroupView, UIColor, UIImage, UILabel, UIScrollView, UIView;
 
-@interface SPInterfaceViewController : UIViewController <PUICCrownInputSequencerDataSource, PUICTableViewDataSource, PUICTableViewDelegate, SPInterfaceDelegate>
+@interface SPInterfaceViewController : UIViewController <PUICTableViewDataSource, PUICTableViewDelegate, SPActivatingViewDelegate, SPInterfaceDelegate>
 {
     _Bool _isNotification;
     _Bool _isGlance;
-    _Bool _offsetNotificationContent;
-    _Bool _detentsDirty;
     _Bool _hasInterfaceActions;
+    _Bool _hasLoaded;
     _Bool _kvObservingSimNotificationActionTable;
     id <SPInterfaceViewControllerDelegate> _vcdelegate;
+    NSNumber *_initializationContextID;
     NSString *_teamID;
     NSBundle *_bundle;
+    NSString *_stringsFileName;
     NSArray *_simulatorNotificationButtonsInfo;
     UIImage *_simulatorNotificationAppIcon;
     NSString *_simulatorNotificationAppName;
     UIColor *_customNotificationSashColor;
+    UIColor *_customNotificationTitleColor;
     NSString *_staticNotificationAlertLabelText;
     NSString *_activityType;
     NSDictionary *_activityUserInfo;
+    NSURL *_activityWebpageURL;
     NSDictionary *_interfaceDescription;
     SPInterfaceGroupView *_rootGroupView;
     NSString *_UUID;
+    NSArray *_properties;
     PUICActionGroup *_actionGroup;
     NSMutableArray *_extraActions;
-    PUICActivityIndicatorView *_spinnerView;
+    SPActivatingView *_activatingView;
     UIView *_simulatorNotificationSash;
     PUICTableView *_simulatorNotificationActionTable;
     NSArray *_simulatorNotificationActionItems;
     PUICActionItem *_simulatorNotificationDismissItem;
     NSDictionary *_simulatorNotificationActionTagToIdentifierMap;
+    UIScrollView *_simulatorNotificationScrollView;
+    UILabel *_simulatorNotificationTimeLabel;
 }
 
 + (id)interfaceViewControllerForIdentifier:(id)arg1;
 + (void)initialize;
+@property(retain, nonatomic) UILabel *simulatorNotificationTimeLabel; // @synthesize simulatorNotificationTimeLabel=_simulatorNotificationTimeLabel;
+@property(retain, nonatomic) UIScrollView *simulatorNotificationScrollView; // @synthesize simulatorNotificationScrollView=_simulatorNotificationScrollView;
 @property(copy, nonatomic) NSDictionary *simulatorNotificationActionTagToIdentifierMap; // @synthesize simulatorNotificationActionTagToIdentifierMap=_simulatorNotificationActionTagToIdentifierMap;
 @property(retain, nonatomic) PUICActionItem *simulatorNotificationDismissItem; // @synthesize simulatorNotificationDismissItem=_simulatorNotificationDismissItem;
 @property(retain, nonatomic) NSArray *simulatorNotificationActionItems; // @synthesize simulatorNotificationActionItems=_simulatorNotificationActionItems;
 @property(retain, nonatomic) PUICTableView *simulatorNotificationActionTable; // @synthesize simulatorNotificationActionTable=_simulatorNotificationActionTable;
 @property(retain, nonatomic) UIView *simulatorNotificationSash; // @synthesize simulatorNotificationSash=_simulatorNotificationSash;
 @property(nonatomic) _Bool kvObservingSimNotificationActionTable; // @synthesize kvObservingSimNotificationActionTable=_kvObservingSimNotificationActionTable;
-@property(retain, nonatomic) PUICActivityIndicatorView *spinnerView; // @synthesize spinnerView=_spinnerView;
+@property(nonatomic) _Bool hasLoaded; // @synthesize hasLoaded=_hasLoaded;
+@property(retain, nonatomic) SPActivatingView *activatingView; // @synthesize activatingView=_activatingView;
 @property(nonatomic) _Bool hasInterfaceActions; // @synthesize hasInterfaceActions=_hasInterfaceActions;
 @property(retain, nonatomic) NSMutableArray *extraActions; // @synthesize extraActions=_extraActions;
 @property(retain, nonatomic) PUICActionGroup *actionGroup; // @synthesize actionGroup=_actionGroup;
-@property(nonatomic) _Bool detentsDirty; // @synthesize detentsDirty=_detentsDirty;
+@property(copy, nonatomic) NSArray *properties; // @synthesize properties=_properties;
 @property(retain, nonatomic) NSString *UUID; // @synthesize UUID=_UUID;
 @property(retain, nonatomic) SPInterfaceGroupView *rootGroupView; // @synthesize rootGroupView=_rootGroupView;
 @property(retain, nonatomic) NSDictionary *interfaceDescription; // @synthesize interfaceDescription=_interfaceDescription;
+@property(readonly, copy, nonatomic) NSURL *activityWebpageURL; // @synthesize activityWebpageURL=_activityWebpageURL;
 @property(readonly, copy, nonatomic) NSDictionary *activityUserInfo; // @synthesize activityUserInfo=_activityUserInfo;
 @property(copy, nonatomic) NSString *activityType; // @synthesize activityType=_activityType;
 @property(copy, nonatomic) NSString *staticNotificationAlertLabelText; // @synthesize staticNotificationAlertLabelText=_staticNotificationAlertLabelText;
+@property(retain, nonatomic) UIColor *customNotificationTitleColor; // @synthesize customNotificationTitleColor=_customNotificationTitleColor;
 @property(retain, nonatomic) UIColor *customNotificationSashColor; // @synthesize customNotificationSashColor=_customNotificationSashColor;
 @property(retain, nonatomic) NSString *simulatorNotificationAppName; // @synthesize simulatorNotificationAppName=_simulatorNotificationAppName;
 @property(retain, nonatomic) UIImage *simulatorNotificationAppIcon; // @synthesize simulatorNotificationAppIcon=_simulatorNotificationAppIcon;
 @property(retain, nonatomic) NSArray *simulatorNotificationButtonsInfo; // @synthesize simulatorNotificationButtonsInfo=_simulatorNotificationButtonsInfo;
-@property(nonatomic) _Bool offsetNotificationContent; // @synthesize offsetNotificationContent=_offsetNotificationContent;
 @property(nonatomic) _Bool isGlance; // @synthesize isGlance=_isGlance;
 @property(nonatomic) _Bool isNotification; // @synthesize isNotification=_isNotification;
+@property(copy, nonatomic) NSString *stringsFileName; // @synthesize stringsFileName=_stringsFileName;
 @property(retain, nonatomic) NSBundle *bundle; // @synthesize bundle=_bundle;
 @property(retain, nonatomic) NSString *teamID; // @synthesize teamID=_teamID;
+@property(retain, nonatomic) NSNumber *initializationContextID; // @synthesize initializationContextID=_initializationContextID;
 @property(nonatomic) __weak id <SPInterfaceViewControllerDelegate> vcdelegate; // @synthesize vcdelegate=_vcdelegate;
 - (void).cxx_destruct;
-- (void)crownInputSequencer:(id)arg1 previousDetent:(id *)arg2 nextDetent:(id *)arg3 forOffset:(double)arg4;
+- (void)scrollViewDidEndDecelerating:(id)arg1;
+- (void)scrollViewWillBeginDragging:(id)arg1;
+- (_Bool)_appExtensionFirstUnlock;
+- (_Bool)_appExtensionAvailableBeforeFirstUnlock;
+- (_Bool)_evalShowCompanionLockedScreen;
+- (_Bool)_showCompanionLockedScreen:(_Bool)arg1;
+- (void)_dismissCompanionLockedScreenForGlance;
+- (_Bool)_showCompanionLockedScreenForGlanceIfNecessary;
+- (_Bool)_showCompanionLockedScreenForAppIfNecessary;
+- (id)_appName;
+- (id)_loadImageFromFile;
+- (_Bool)_saveImageToFile:(id)arg1;
+- (_Bool)_createScreenImage;
+- (id)_imageFileModDate;
+- (_Bool)_imageFileExists;
+- (id)_imageFilePathURL;
+- (id)_imageFileName;
+- (void)_saveLoadingView;
+- (id)_getActivatingView;
+- (id)lastUpdatedDateForActivatingView:(id)arg1;
+- (id)snapshotForActivatingView:(id)arg1;
+- (id)appNameForActivatingView:(id)arg1;
+- (long long)disconnectedModeForActivatingView:(id)arg1;
+- (long long)loadingModeForActivatingView:(id)arg1;
+- (struct CGRect)frameForActivatingView:(id)arg1;
+- (id)parentViewForActivatingView:(id)arg1;
+- (void)activatingViewDidHide:(id)arg1;
+- (void)activatingViewWillShow:(id)arg1;
+- (void)activatingViewDidHideDisconnectedView:(id)arg1;
+- (void)activatingViewWillShowDisconnectedView:(id)arg1;
 - (void)updateUserActivity:(id)arg1;
 - (void)setUserActivity;
 - (void)setValue:(id)arg1 forKey:(id)arg2;
 - (void)performAction:(id)arg1 withValue:(id)arg2;
-- (void)performActionForUserActivity:(id)arg1;
 - (void)performActionWithItemID:(id)arg1 forNotificationID:(id)arg2;
 - (void)setInterfaceValue:(id)arg1 forKey:(id)arg2 property:(id)arg3;
 - (void)setInterfaceItemValue:(id)arg1 property:(id)arg2;
-- (void)notifyDetentsChanged;
 - (void)updateSimulatorActionTableFrame;
 - (void)observeValueForKeyPath:(id)arg1 ofObject:(id)arg2 change:(id)arg3 context:(void *)arg4;
+- (void)prepareInterfaceForIB;
 - (void)viewDidLayoutSubviews;
 - (void)viewWillLayoutSubviews;
 - (void)viewDidDisappear:(_Bool)arg1;
@@ -94,9 +134,10 @@
 - (void)viewWillAppear:(_Bool)arg1;
 - (void)_applicationDidEnterBackground:(id)arg1;
 - (void)_applicationWillEnterForeground:(id)arg1;
+- (void)_applicationDidBecomeActive:(id)arg1;
 - (void)setNeedsStatusBarAppearanceUpdate;
-- (void)_hideLoadingView;
 - (void)_finishedExtendedLaunchTest;
+- (void)_hideLoadingView;
 - (void)_showLoadingView;
 - (void)loadView;
 - (id)rootView;
@@ -111,13 +152,14 @@
 - (id)tableView:(id)arg1 cellForRowAtIndexPath:(id)arg2;
 - (long long)tableView:(id)arg1 numberOfRowsInSection:(long long)arg2;
 - (long long)numberOfSectionsInTableView:(id)arg1;
+- (void)handleNotificationAppIconTap:(id)arg1;
 - (void)createSimulatorNotificationButtonsInView:(id)arg1;
-- (void)addTopRoundedCornersMaskToView:(id)arg1;
+- (struct CGSize)sizeThatFitsFromRootGroupView:(struct CGSize)arg1;
 - (void)logInterfaceViewControllers;
 - (void)didRecieveContentSizeDidChangeNotification:(id)arg1;
 - (void)dealloc;
 - (id)initWithNibName:(id)arg1 bundle:(id)arg2;
-- (id)initWithRootItemDescription:(id)arg1 bundle:(id)arg2;
+- (id)initWithRootItemDescription:(id)arg1 bundle:(id)arg2 stringsFileName:(id)arg3;
 
 // Remaining properties
 @property(readonly, copy) NSString *debugDescription;

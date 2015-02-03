@@ -8,27 +8,33 @@
 
 #import "UIScrollViewDelegate.h"
 
-@class NSArray, NSString, PUICPageIndicatorView, UIScrollView;
+@class NSArray, NSMutableArray, NSString, PUICPageIndicatorView, UIScrollView;
 
 @interface SPPageViewController : UIViewController <UIScrollViewDelegate>
 {
     NSArray *_viewControllers;
     UIScrollView *_scrollView;
     PUICPageIndicatorView *_pageControl;
+    NSMutableArray *_visiblePages;
 }
 
+@property(retain, nonatomic) NSMutableArray *visiblePages; // @synthesize visiblePages=_visiblePages;
 @property(retain, nonatomic) PUICPageIndicatorView *pageControl; // @synthesize pageControl=_pageControl;
 @property(retain, nonatomic) UIScrollView *scrollView; // @synthesize scrollView=_scrollView;
 @property(copy, nonatomic) NSArray *viewControllers; // @synthesize viewControllers=_viewControllers;
 - (void).cxx_destruct;
-- (void)scrollViewDidEndDragging:(id)arg1 willDecelerate:(_Bool)arg2;
 - (void)scrollViewDidEndDecelerating:(id)arg1;
 - (void)scrollViewDidEndScrollingAnimation:(id)arg1;
+- (void)scrollViewDidScroll:(id)arg1;
 - (void)viewDidDisappear:(_Bool)arg1;
+- (void)viewWillDisappear:(_Bool)arg1;
+- (void)viewDidAppear:(_Bool)arg1;
 - (void)viewWillAppear:(_Bool)arg1;
 - (_Bool)prefersStatusBarHidden;
 - (void)observeValueForKeyPath:(id)arg1 ofObject:(id)arg2 change:(id)arg3 context:(void *)arg4;
-- (void)updateVisiblePage;
+- (id)topScrollViewForViewController:(id)arg1;
+- (void)updateVisiblePages;
+- (void)updateCurrentPage;
 - (long long)currentViewControllerIndex;
 - (void)setCurrentViewControllerAtIndex:(long long)arg1 animated:(_Bool)arg2;
 - (void)viewDidLayoutSubviews;

@@ -11,6 +11,7 @@
 @protocol SPGizmoAppServerProtocol <NSObject>
 - (void)retreiveTimingInfo:(long long)arg1;
 - (void)resetTimingInfo;
+- (void)ping;
 - (void)processCacheDictionary:(NSDictionary *)arg1 serverIdentifier:(NSString *)arg2;
 - (void)processCacheDictionary:(NSDictionary *)arg1 serverIdentifier:(NSString *)arg2 completion:(void (^)(NSDictionary *))arg3;
 - (void)willDeactivateDataConnection:(NSString *)arg1 clientIdentifier:(NSString *)arg2;

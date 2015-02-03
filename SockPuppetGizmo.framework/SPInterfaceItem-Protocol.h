@@ -6,9 +6,8 @@
 
 #import "SPInterfaceObject.h"
 
-@class NSArray;
-
 @protocol SPInterfaceItem <SPInterfaceObject>
+- (_Bool)hasIntrinsicHeight;
 - (void)setFixedSize:(struct CGSize)arg1;
 - (struct CGSize)fixedSize;
 - (void)setWidth:(double)arg1;
@@ -21,7 +20,7 @@
 - (void)setInterfaceAlignment:(long long)arg1;
 
 @optional
+- (void)prepareInterfaceItemForIB;
 - (void)contentSizeCategoryDidChange;
-- (NSArray *)collectDetents:(float)arg1;
 @end
 

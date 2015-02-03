@@ -19,8 +19,8 @@
 @property(retain, nonatomic) NSUserActivity *userActivity; // @synthesize userActivity=_userActivity;
 - (void).cxx_destruct;
 - (void)invalidateActivity;
-- (void)setWithActivityType:(id)arg1 userInfo:(id)arg2;
-- (void)setWithActivityType:(id)arg1 userInfo:(id)arg2 teamID:(id)arg3;
+- (void)setWithActivityType:(id)arg1 userInfo:(id)arg2 webpageURL:(id)arg3;
+- (void)setWithActivityType:(id)arg1 userInfo:(id)arg2 webpageURL:(id)arg3 teamID:(id)arg4 completion:(CDUnknownBlockType)arg5;
 - (id)init;
 
 @end

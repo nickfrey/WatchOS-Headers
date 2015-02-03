@@ -21,7 +21,7 @@
 @property(nonatomic) long long lowerTemplateType; // @synthesize lowerTemplateType=_lowerTemplateType;
 @property(nonatomic) long long upperTemplateType; // @synthesize upperTemplateType=_upperTemplateType;
 - (void).cxx_destruct;
-- (void)layoutUpperItemsAsBody1Medium;
+- (void)adjustVerticalPositionForUpperMediumLabel:(id)arg1;
 - (void)layoutUpperItemsWithLeftGroupAtGridLine:(long long)arg1;
 - (void)layoutFullWidthGroupItem:(id)arg1 withCompactHeight:(double)arg2 regularHeight:(double)arg3;
 - (void)layoutLowerItemsAtFirstLine:(long long)arg1 secondLine:(long long)arg2 thirdLine:(long long)arg3 fourthLine:(long long)arg4;
@@ -33,7 +33,7 @@
 - (void)configureLowerItems;
 - (void)configureUpperItems;
 - (void)validateGlanceTemplateItems;
-- (id)initWithItemDescription:(id)arg1 bundle:(id)arg2;
+- (id)initWithItemDescription:(id)arg1 bundle:(id)arg2 stringsFileName:(id)arg3;
 
 @end
 

@@ -6,7 +6,7 @@
 
 #import "NSObject.h"
 
-@class NSArray, NSDictionary, NSString, SPCompanionConnection, SPComplicationData;
+@class NSArray, NSDictionary, NSIndexSet, NSNumber, NSString, SPCompanionConnection, SPComplicationData;
 
 @protocol SPCompanionConnectionDelegate <NSObject>
 
@@ -15,12 +15,16 @@
 - (void)companionConnection:(SPCompanionConnection *)arg1 userActivity:(NSDictionary *)arg2;
 - (void)companionConnection:(SPCompanionConnection *)arg1 complicationReply:(SPComplicationData *)arg2;
 - (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewControllerDismissViewController:(NSString *)arg2;
-- (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewController:(NSString *)arg2 presentViewControllers:(NSArray *)arg3;
-- (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewController:(NSString *)arg2 presentViewController:(NSString *)arg3 info:(NSDictionary *)arg4;
+- (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewController:(NSString *)arg2 presentViewControllers:(NSArray *)arg3 initializationContextIDs:(NSArray *)arg4;
+- (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewController:(NSString *)arg2 presentViewController:(NSString *)arg3 info:(NSDictionary *)arg4 initializationContextID:(NSNumber *)arg5;
+- (void)companionConnection:(SPCompanionConnection *)arg1 removeRootInterfaceViewControllerAtIndexes:(NSIndexSet *)arg2;
+- (void)companionConnection:(SPCompanionConnection *)arg1 moveRootInterfaceViewControllerAtIndex:(long long)arg2 toIndex:(long long)arg3;
+- (void)companionConnection:(SPCompanionConnection *)arg1 insertRootInterfaceViewControllerWithNames:(NSArray *)arg2 atIndexes:(NSIndexSet *)arg3 initializationContextIDs:(NSArray *)arg4;
+- (void)companionConnection:(SPCompanionConnection *)arg1 reloadRootInterfaceViewControllersWithNames:(NSArray *)arg2 initializationContextIDs:(NSArray *)arg3;
 - (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewControllerBecomeCurrentPageViewController:(NSString *)arg2;
 - (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewControllerPopToRootViewController:(NSString *)arg2;
 - (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewControllerPopViewController:(NSString *)arg2;
-- (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewController:(NSString *)arg2 pushViewController:(NSString *)arg3;
+- (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewController:(NSString *)arg2 pushViewController:(NSString *)arg3 initializationContextID:(NSNumber *)arg4;
 - (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewController:(NSString *)arg2 setValue:(id)arg3 forKey:(NSString *)arg4 property:(NSString *)arg5;
 - (void)extensionDidTerminate:(SPCompanionConnection *)arg1;
 @end
