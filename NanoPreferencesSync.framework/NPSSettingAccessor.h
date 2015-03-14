@@ -13,6 +13,7 @@
     _Bool _hasChangesToWrite;
     NSString *_domain;
     long long _type;
+    NSString *_container;
     NSString *_containerPath;
     NPSDomainAccessor *_nanoDomainAccessor;
 }
@@ -22,6 +23,7 @@
 @property(nonatomic) _Bool hasChangesToWrite; // @synthesize hasChangesToWrite=_hasChangesToWrite;
 @property(retain, nonatomic) NPSDomainAccessor *nanoDomainAccessor; // @synthesize nanoDomainAccessor=_nanoDomainAccessor;
 @property(retain, nonatomic) NSString *containerPath; // @synthesize containerPath=_containerPath;
+@property(retain, nonatomic) NSString *container; // @synthesize container=_container;
 @property(nonatomic) long long type; // @synthesize type=_type;
 @property(retain, nonatomic) NSString *domain; // @synthesize domain=_domain;
 - (void).cxx_destruct;

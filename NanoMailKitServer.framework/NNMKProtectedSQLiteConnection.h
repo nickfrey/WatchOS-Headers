@@ -21,8 +21,8 @@
 - (void).cxx_destruct;
 - (id)_vfsModuleName;
 - (void)dettachProtectedDatabase;
-- (void)attachProtectedDatabase;
-- (id)initWithUnprotectedDatabaseFileName:(id)arg1 protectedDatabaseFileName:(id)arg2 inDirectory:(id)arg3 protectedDatabaseName:(id)arg4;
+- (int)attachProtectedDatabase;
+- (id)initWithUnprotectedDatabaseFileName:(id)arg1 protectedDatabaseFileName:(id)arg2 inDirectory:(id)arg3 protectedDatabaseName:(id)arg4 errorCode:(int *)arg5;
 
 @end
 

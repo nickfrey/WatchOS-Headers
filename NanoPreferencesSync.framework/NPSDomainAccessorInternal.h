@@ -37,8 +37,10 @@
 + (void)invalidateAndReleaseUnreferencedAccessors;
 + (void)decrementInternalAccessorReferenceCount:(id)arg1;
 + (id)internalAccessorForPairingID:(id)arg1 pairingDataStore:(id)arg2 domain:(id)arg3;
-+ (void)applicationDidResume;
++ (void)extensionWillResignActive;
++ (void)extensionDidBecomeActive;
 + (void)applicationDidEnterBackground;
++ (void)applicationDidResume;
 + (void)initialize;
 @property(retain, nonatomic) NPSDomainAccessorFilePresenter *filePresenter; // @synthesize filePresenter=_filePresenter;
 @property(retain, nonatomic) NSMutableDictionary *map; // @synthesize map=_map;

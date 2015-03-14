@@ -12,6 +12,7 @@
 
 @interface NNMKSyncServiceEndpoint : NSObject <IDSServiceDelegate>
 {
+    _Bool _isConnected;
     NSObject<OS_dispatch_queue> *_serviceQueue;
     IDSService *_idsService;
     NSString *_idsServiceName;
@@ -24,16 +25,23 @@
 @property(retain, nonatomic) NSString *idsServiceName; // @synthesize idsServiceName=_idsServiceName;
 @property(retain, nonatomic) IDSService *idsService; // @synthesize idsService=_idsService;
 @property(retain, nonatomic) NSObject<OS_dispatch_queue> *serviceQueue; // @synthesize serviceQueue=_serviceQueue;
+@property(nonatomic) _Bool isConnected; // @synthesize isConnected=_isConnected;
 - (void).cxx_destruct;
+- (_Bool)_isConnected;
+- (void)_handleConnectivityChange;
 - (void)_removeExpiredRepeatPreventionRecords;
 - (void)_storeRepeatPreventionId:(id)arg1 priority:(unsigned long long)arg2;
 - (_Bool)_willIdRepeat:(id)arg1;
+- (void)service:(id)arg1 nearbyDevicesChanged:(id)arg2;
+- (void)service:(id)arg1 devicesChanged:(id)arg2;
+- (void)service:(id)arg1 activeAccountsChanged:(id)arg2;
 - (void)service:(id)arg1 account:(id)arg2 identifier:(id)arg3 hasBeenDeliveredWithContext:(id)arg4;
 - (void)service:(id)arg1 account:(id)arg2 identifier:(id)arg3 didSendWithSuccess:(_Bool)arg4 error:(id)arg5;
 - (void)service:(id)arg1 account:(id)arg2 incomingUnhandledProtobuf:(id)arg3 fromID:(id)arg4 context:(id)arg5;
 - (id)_sendProtobufData:(id)arg1 type:(unsigned long long)arg2 priority:(unsigned long long)arg3 shortTimeout:(_Bool)arg4;
 - (id)sendProtobufData:(id)arg1 type:(unsigned long long)arg2 priority:(unsigned long long)arg3 repeatPreventionId:(id)arg4 shortTimeout:(_Bool)arg5;
 - (id)sendProtobufData:(id)arg1 type:(unsigned long long)arg2 priority:(unsigned long long)arg3 shortTimeout:(_Bool)arg4;
+- (void)connectivityChanged;
 - (void)readProtobufData:(id)arg1 type:(unsigned long long)arg2;
 - (void)failedSendingProtobufWithIDSIdentifier:(id)arg1 errorCode:(long long)arg2;
 - (void)successfullySentProtobufWithIDSIdentifier:(id)arg1;

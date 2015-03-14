@@ -13,14 +13,17 @@
 @interface NNMKProtoFetchRequest : PBRequest <NSCopying>
 {
     NSString *_conversationId;
+    unsigned int _fullSyncVersion;
     _Bool _manuallyTriggered;
     struct {
+        unsigned int fullSyncVersion:1;
         unsigned int manuallyTriggered:1;
     } _has;
 }
 
 @property(retain, nonatomic) NSString *conversationId; // @synthesize conversationId=_conversationId;
 @property(nonatomic) _Bool manuallyTriggered; // @synthesize manuallyTriggered=_manuallyTriggered;
+@property(nonatomic) unsigned int fullSyncVersion; // @synthesize fullSyncVersion=_fullSyncVersion;
 - (void).cxx_destruct;
 - (void)mergeFrom:(id)arg1;
 - (unsigned long long)hash;
@@ -33,6 +36,7 @@
 - (id)description;
 @property(readonly, nonatomic) _Bool hasConversationId;
 @property(nonatomic) _Bool hasManuallyTriggered;
+@property(nonatomic) _Bool hasFullSyncVersion;
 
 @end
 

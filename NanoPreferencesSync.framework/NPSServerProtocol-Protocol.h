@@ -10,5 +10,6 @@
 
 @protocol NPSServerProtocol <NSObject>
 - (void)synchronizeUserDefaultsDomain:(NSString *)arg1 keys:(NSSet *)arg2 containerPath:(NSString *)arg3;
+- (void)synchronizeUserDefaultsDomain:(NSString *)arg1 keys:(NSSet *)arg2 container:(NSString *)arg3;
 @end
 

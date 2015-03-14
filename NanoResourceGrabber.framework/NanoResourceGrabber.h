@@ -15,15 +15,17 @@
     NSObject<OS_dispatch_queue> *_queue;
 }
 
-+ (id)getLocalIconForBundleID:(id)arg1 iconVariant:(int)arg2 cacheable:(char *)arg3;
 + (id)sharedInstance;
 @property(retain, nonatomic) NSObject<OS_dispatch_queue> *queue; // @synthesize queue=_queue;
 @property(nonatomic) _Bool connectionMayBeValid; // @synthesize connectionMayBeValid=_connectionMayBeValid;
 @property(retain, nonatomic) NSXPCConnection *nrgdConnection; // @synthesize nrgdConnection=_nrgdConnection;
 - (void).cxx_destruct;
+- (void)getCachedIconForBundleID:(id)arg1 iconVariant:(int)arg2 outIconImage:(id *)arg3;
 - (void)getCachedIconForBundleID:(id)arg1 iconVariant:(int)arg2 outIconImage:(id *)arg3 outIconHash:(id *)arg4;
 - (void)_getCachedIconForBundleID:(id)arg1 iconVariant:(int)arg2 reply:(CDUnknownBlockType)arg3;
 - (void)setIcon:(id)arg1 forIconVariant:(int)arg2 inBundleID:(id)arg3;
+- (void)_getLocalIconForBundleID:(id)arg1 iconVariant:(int)arg2 block:(CDUnknownBlockType)arg3 withTimeout:(double)arg4;
+- (void)_getRemoteIconForBundleID:(id)arg1 iconVariant:(int)arg2 block:(CDUnknownBlockType)arg3 withTimeout:(double)arg4;
 - (void)_getIconForBundleID:(id)arg1 iconVariant:(int)arg2 block:(CDUnknownBlockType)arg3 checkLocal:(_Bool)arg4 withTimeout:(double)arg5;
 - (void)getRemoteIconForBundleIDThread:(id)arg1 iconVariant:(int)arg2 block:(CDUnknownBlockType)arg3;
 - (void)getRemoteIconForBundleID:(id)arg1 iconVariant:(int)arg2 block:(CDUnknownBlockType)arg3;

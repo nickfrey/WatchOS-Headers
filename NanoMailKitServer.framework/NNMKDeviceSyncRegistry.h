@@ -64,6 +64,7 @@
 - (void)addOrUpdateSyncedMessage:(id)arg1;
 - (id)syncedMessageForMessageWithId:(id)arg1;
 - (_Bool)containsSyncedMessageForMessageWithId:(id)arg1;
+- (void)cleanUpForNewFullAccountsSync;
 - (void)cleanUpForNewFullMessagesSync;
 - (void)endUpdates;
 - (void)beginUpdates;

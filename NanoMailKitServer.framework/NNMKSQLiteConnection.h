@@ -16,6 +16,7 @@
     NSMutableDictionary *_cachedPreparedStatementsKeyedBySQLPattern;
 }
 
++ (_Bool)errorCodeMeansCorruptedDatabase:(int)arg1;
 @property(retain, nonatomic) NSMutableDictionary *cachedPreparedStatementsKeyedBySQLPattern; // @synthesize cachedPreparedStatementsKeyedBySQLPattern=_cachedPreparedStatementsKeyedBySQLPattern;
 @property(retain, nonatomic) NSObject<OS_dispatch_queue> *dbQueue; // @synthesize dbQueue=_dbQueue;
 @property(nonatomic) _Bool isInTransaction; // @synthesize isInTransaction=_isInTransaction;
@@ -23,13 +24,15 @@
 - (void).cxx_destruct;
 - (int)_runRetryingIfNeeded:(CDUnknownBlockType)arg1;
 - (id)_lastErrorMessage;
+- (int)_lastErrorCode;
 - (int)_executeSQL:(id)arg1;
 - (int)_stepPreparedStatement:(struct sqlite3_stmt *)arg1;
 - (struct sqlite3_stmt *)_preparedStatementForPattern:(id)arg1 cacheStatement:(_Bool)arg2;
 - (void)_closeDatabase;
-- (_Bool)_openDatabaseWithPath:(id)arg1 protectData:(_Bool)arg2;
+- (_Bool)_openDatabaseWithPath:(id)arg1 protectData:(_Bool)arg2 errorCode:(int *)arg3;
 - (_Bool)tableExists:(id)arg1 inDatabase:(id)arg2;
 - (id)lastErrorMessage;
+- (int)lastErrorCode;
 - (_Bool)rollbackTransaction;
 - (_Bool)commitTransaction;
 - (_Bool)beginTransaction;
@@ -38,7 +41,7 @@
 - (struct sqlite3_stmt *)preparedStatementForPattern:(id)arg1 cacheStatement:(_Bool)arg2;
 - (struct sqlite3_stmt *)preparedStatementForPattern:(id)arg1;
 - (void)dealloc;
-- (id)initWithPath:(id)arg1 protectData:(_Bool)arg2;
+- (id)initWithPath:(id)arg1 protectData:(_Bool)arg2 errorCode:(int *)arg3;
 
 @end
 

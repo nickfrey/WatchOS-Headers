@@ -103,6 +103,8 @@
 - (id)_filterOutMessagesReceived:(id)arg1 byAlreadySynced:(_Bool)arg2 bySyncedMailboxType:(_Bool)arg3;
 - (void)_notifyClientNotifyInitialContentSyncCompleted;
 - (void)_runSyncVerification;
+- (void)_triggerFullMessagesSyncWithAccountsSync:(_Bool)arg1;
+- (void)_triggerFullMessagesAndAccountsSync;
 - (void)_triggerFullMessagesSync;
 - (id)_bbSubsectionIdsForMessage:(id)arg1;
 - (_Bool)_willPresentNotificationForMessage:(id)arg1;
@@ -132,7 +134,6 @@
 - (void)messagesSyncServiceServer:(id)arg1 didSendProtobufSuccessfullyWithIDSIdentifier:(id)arg2;
 - (void)messagesSyncServiceServer:(id)arg1 didFailSendingProtobufWithIDSIdentifier:(id)arg2 errorCode:(long long)arg3;
 - (void)resendIDSIdentifier:(id)arg1;
-- (id)datesForIDSIdentifiersScheduledToBeResent;
 @property(readonly, nonatomic) NNMKPairedDeviceInfo *pairedDeviceInfo;
 @property(readonly, nonatomic) _Bool organizeByThread;
 @property(readonly, nonatomic) NSString *syncedMailboxCustomName;

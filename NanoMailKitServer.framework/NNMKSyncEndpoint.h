@@ -10,6 +10,7 @@
 
 @interface NNMKSyncEndpoint : NSObject
 {
+    NSObject<OS_dispatch_queue> *_endpointQueue;
     NSObject<OS_dispatch_queue> *_resendingQueue;
     NSMutableDictionary *_datesForIDSIdentifiersScheduledToBeResent;
     NSMutableDictionary *_lastResendIntervalKeyedByIDSIdentifier;
@@ -18,14 +19,15 @@
 @property(retain, nonatomic) NSMutableDictionary *lastResendIntervalKeyedByIDSIdentifier; // @synthesize lastResendIntervalKeyedByIDSIdentifier=_lastResendIntervalKeyedByIDSIdentifier;
 @property(retain, nonatomic) NSMutableDictionary *datesForIDSIdentifiersScheduledToBeResent; // @synthesize datesForIDSIdentifiersScheduledToBeResent=_datesForIDSIdentifiersScheduledToBeResent;
 @property(retain, nonatomic) NSObject<OS_dispatch_queue> *resendingQueue; // @synthesize resendingQueue=_resendingQueue;
+@property(retain, nonatomic) NSObject<OS_dispatch_queue> *endpointQueue; // @synthesize endpointQueue=_endpointQueue;
 - (void).cxx_destruct;
 - (void)resendIDSIdentifier:(id)arg1;
 - (void)dequeueIDSIdentifierForResend:(id)arg1;
 - (unsigned long long)newResendIntervalForPreviousResendInterval:(unsigned long long)arg1 errorCode:(long long)arg2;
 - (void)resendReadyIDSIdentifiers;
 - (void)enqueueIDSIdentifierForResend:(id)arg1 atDate:(id)arg2 silent:(_Bool)arg3;
-- (void)enqueueIDSIdentifiersForResend;
-- (id)init;
+- (void)enqueueIDSIdentifiersForResend:(id)arg1;
+- (id)initWithQueue:(id)arg1;
 
 @end
 

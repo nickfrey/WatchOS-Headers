@@ -16,9 +16,10 @@
 + (id)defaultWorkspace;
 @property(retain, nonatomic) NSXPCConnection *connection; // @synthesize connection=_connection;
 - (void).cxx_destruct;
+- (void)_loadConnectionIfNeeded;
+- (void)_connectionInvalidated;
 - (id)_workspaceServiceWithErrorHandler:(CDUnknownBlockType)arg1;
 - (void)getWorkspaceInfoWithCompletion:(CDUnknownBlockType)arg1;
-- (id)init;
 
 @end
 
