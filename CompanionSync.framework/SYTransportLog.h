@@ -15,6 +15,7 @@
 }
 
 + (id)sharedInstance;
++ (id)_logPath;
 @property(copy, nonatomic) NSString *facility; // @synthesize facility=_facility;
 - (void).cxx_destruct;
 - (void)_logMessage:(id)arg1 file:(const char *)arg2 line:(int)arg3 function:(const char *)arg4;

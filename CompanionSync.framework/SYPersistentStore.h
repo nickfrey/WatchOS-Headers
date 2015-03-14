@@ -91,9 +91,11 @@
 @property(readonly, nonatomic) unsigned long long changeCount;
 @property(nonatomic) double timeToLive;
 @property(readonly, nonatomic) NSString *path;
+@property(nonatomic, getter=isPerformingDeltaSync) _Bool performingDeltaSync;
 - (void)resetSequenceNumbersForPeer:(id)arg1;
 - (_Bool)sequenceNumberIsDuplicate:(unsigned long long)arg1 forPeer:(id)arg2;
 - (unsigned long long)lastSequenceNumberForPeerID:(id)arg1;
+- (unsigned long long)_lastSequenceNumberForPeerID_LOCKED:(id)arg1;
 - (void)setLastSequenceNumber:(unsigned long long)arg1 fromPeer:(id)arg2;
 - (unsigned long long)nextSequenceNumber;
 - (void)_cacheTTL;

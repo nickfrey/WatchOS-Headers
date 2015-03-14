@@ -6,12 +6,13 @@
 
 #import "NSObject.h"
 
-@class NSArray, NSDate, NSString;
+@class NSArray, NSDate, NSObject<OS_dispatch_queue>, NSString;
 
 @interface NMSWindowData : NSObject
 {
     NSString *_path;
     struct __CFString *_loggingFacility;
+    NSObject<OS_dispatch_queue> *_syncQ;
     struct sqlite3 *_db;
     struct sqlite3_stmt *_addMessageInFlight;
     struct sqlite3_stmt *_getMessageLength;
@@ -39,7 +40,7 @@
 - (unsigned long long)removeAndReturnLengthOfMessageWithID:(id)arg1;
 - (void)addMessageWithID:(id)arg1 ofLength:(unsigned long long)arg2 timeoutTime:(double)arg3;
 - (void)removeAllMessages;
-- (_Bool)_transaction:(_Bool)arg1 block:(CDUnknownBlockType)arg2;
+- (_Bool)_syncTransaction:(_Bool)arg1 block:(CDUnknownBlockType)arg2;
 - (_Bool)_openDBForceRecreate:(_Bool)arg1;
 - (int)_getSchemaVersion;
 - (void)dealloc;

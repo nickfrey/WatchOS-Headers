@@ -14,6 +14,7 @@
 + (_Bool)shouldDisplaySyncErrorMessage;
 + (void)adjustLoggingForPrefsUpdate:(struct __CFString *)arg1;
 + (id)setupLogging:(id)arg1;
++ (id)logFolder;
 + (struct __CFString *)facility;
 + (void)initialize;
 

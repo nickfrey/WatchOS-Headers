@@ -19,6 +19,7 @@
     struct sqlite3 *_db;
     struct sqlite3_stmt *_fetch;
     struct sqlite3_stmt *_insert;
+    struct sqlite3_stmt *_reset;
     struct sqlite3_stmt *_remove;
     struct sqlite3_stmt *_removeAll;
     struct sqlite3_stmt *_byDate;
@@ -27,6 +28,7 @@
 - (void).cxx_destruct;
 - (void)enumerateObjectsSortedByExpirationDate:(CDUnknownBlockType)arg1;
 - (void)removeAllObjects;
+- (void)resetObject:(id)arg1 forKey:(id)arg2;
 - (void)removeObjectForKey:(id)arg1;
 - (id)objectForKey:(id)arg1;
 - (void)setObject:(id)arg1 forKey:(id)arg2 expires:(id)arg3;

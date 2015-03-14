@@ -8,7 +8,7 @@
 
 #import "SYChangeTracking.h"
 
-@class NSDictionary, NSMutableArray, SYStore;
+@class NSDictionary, NSMutableArray, NSString, SYStore;
 
 @interface SYTransaction : NSObject <SYChangeTracking>
 {
@@ -26,7 +26,8 @@
 @property(copy, nonatomic) NSDictionary *contextInfo; // @synthesize contextInfo=_contextInfo;
 - (void).cxx_destruct;
 - (void)rollback;
-- (void)commitBlocking:(_Bool)arg1;
+- (void)commitBlocking:(_Bool)arg1 reportError:(CDUnknownBlockType)arg2;
+- (void)commit;
 - (void)deleteObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3;
 - (void)updateObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3;
 - (void)addObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3;
@@ -40,6 +41,12 @@
 - (void)updateObject:(id)arg1;
 - (void)addObject:(id)arg1;
 - (id)initWithStore:(id)arg1;
+
+// Remaining properties
+@property(readonly, copy) NSString *debugDescription;
+@property(readonly, copy) NSString *description;
+@property(readonly) unsigned long long hash;
+@property(readonly) Class superclass;
 
 @end
 

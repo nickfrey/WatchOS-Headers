@@ -8,11 +8,11 @@
 
 #import "IDSServiceDelegate.h"
 #import "NMSMessageCenterDelegate.h"
-#import "SYChangeTracking.h"
+#import "SYChangeTrackingWithErrors.h"
 
 @class NMSMessageCenter, NSDictionary, NSMutableDictionary, NSMutableIndexSet, NSObject<OS_dispatch_queue>, NSObject<OS_dispatch_source>, NSString, NSUUID, SYPersistentStore, SYRetryTimer, SYVectorClock;
 
-@interface SYStore : NSObject <IDSServiceDelegate, NMSMessageCenterDelegate, SYChangeTracking>
+@interface SYStore : NSObject <IDSServiceDelegate, NMSMessageCenterDelegate, SYChangeTrackingWithErrors>
 {
     NSObject<OS_dispatch_queue> *_qosTargetQueue;
     unsigned long long _batchCounter;
@@ -21,6 +21,7 @@
     NSMutableDictionary *_sendSignals;
     SYRetryTimer *_syncRetryTimer;
     NSObject<OS_dispatch_source> *_overflowRetryTimer;
+    _Bool _deferredFullSync;
     struct {
         unsigned int delegateWillUpdate:1;
         unsigned int delegateWillUpdateWithCount:1;
@@ -92,24 +93,34 @@
 - (void)setNeedsFullSync;
 - (void)logChanges:(id)arg1;
 - (void)sendChanges:(id)arg1 context:(id)arg2 options:(id)arg3 sentSignal:(id)arg4;
-- (void)handleObjectChanges:(id)arg1 contextInfo:(id)arg2 idsOptions:(id)arg3 blockUntilSent:(_Bool)arg4;
+- (void)handleObjectChanges:(id)arg1 contextInfo:(id)arg2 idsOptions:(id)arg3 blockUntilSent:(_Bool)arg4 reportError:(CDUnknownBlockType)arg5;
 - (void)deleteObject:(id)arg1 context:(id)arg2;
 - (void)deleteObject:(id)arg1 completion:(CDUnknownBlockType)arg2;
+- (_Bool)deleteObject:(id)arg1 error:(id *)arg2;
 - (void)deleteObject:(id)arg1;
 - (void)deleteObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3;
+- (_Bool)deleteObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3 error:(id *)arg4;
 - (void)updateObject:(id)arg1 context:(id)arg2;
 - (void)updateObject:(id)arg1 completion:(CDUnknownBlockType)arg2;
+- (_Bool)updateObject:(id)arg1 error:(id *)arg2;
 - (void)updateObject:(id)arg1;
 - (void)updateObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3;
+- (_Bool)updateObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3 error:(id *)arg4;
 - (void)addObject:(id)arg1 context:(id)arg2;
 - (void)addObject:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)addObject:(id)arg1;
+- (_Bool)addObject:(id)arg1 error:(id *)arg2;
 - (void)addObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3;
+- (_Bool)addObject:(id)arg1 context:(id)arg2 idsOptions:(id)arg3 error:(id *)arg4;
+- (_Bool)_allowDeltaSyncWithContext:(id)arg1 error:(id *)arg2;
+- (void)_transaction:(CDUnknownBlockType)arg1 context:(id)arg2 idsOptions:(id)arg3 blockUntilSent:(_Bool)arg4 reportError:(CDUnknownBlockType)arg5;
 - (void)transaction:(CDUnknownBlockType)arg1 context:(id)arg2 idsOptions:(id)arg3 blockUntilSent:(_Bool)arg4;
+- (void)blockingTransaction:(CDUnknownBlockType)arg1 handlingError:(CDUnknownBlockType)arg2;
 - (void)blockingTransaction:(CDUnknownBlockType)arg1;
 - (void)transaction:(CDUnknownBlockType)arg1 context:(id)arg2 idsOptions:(id)arg3;
 - (void)transaction:(CDUnknownBlockType)arg1 context:(id)arg2;
 - (void)transaction:(CDUnknownBlockType)arg1 completion:(CDUnknownBlockType)arg2;
+- (void)transaction:(CDUnknownBlockType)arg1 handlingError:(CDUnknownBlockType)arg2;
 - (void)transaction:(CDUnknownBlockType)arg1;
 - (id)newMessageHeader;
 - (void)sendMessage:(id)arg1 ofType:(unsigned short)arg2 respondingTo:(id)arg3 userInfo:(id)arg4 idsOptions:(id)arg5;
@@ -145,6 +156,7 @@
 - (void)_deviceUnpaired:(id)arg1;
 - (_Bool)_isUsingGenericCache;
 - (_Bool)_isPairedWithDevice:(id)arg1;
+@property(readonly, nonatomic) _Bool hasCompletedFullSync;
 @property(nonatomic) long long maxBytesInFlight;
 @property(readonly, nonatomic) long long state;
 @property(nonatomic) unsigned int deliveryQOS;
@@ -174,6 +186,9 @@
 - (void)_restartBatchSyncWithState:(id)arg1 then:(CDUnknownBlockType)arg2;
 - (void)_postBatchEndMessageWithState:(id)arg1 error:(id)arg2 then:(CDUnknownBlockType)arg3;
 - (void)_postBatchStartMessageWithState:(id)arg1 then:(CDUnknownBlockType)arg2;
+@property(readonly, nonatomic) _Bool inDeltaSync;
+- (void)didEndDeltaSync;
+- (void)willBeginDeltaSync;
 @property(nonatomic) _Bool tracksChanges;
 
 // Remaining properties

@@ -13,6 +13,8 @@
 @interface NMSMessagePersistentContext : NSObject <NSSecureCoding>
 {
     _Bool _fromRequest;
+    _Bool _sendAcked;
+    _Bool _processAcked;
     unsigned short _messageID;
     NSString *_idsIdentifier;
     NSDictionary *_userInfo;
@@ -21,6 +23,8 @@
 }
 
 + (_Bool)supportsSecureCoding;
+@property(nonatomic) _Bool processAcked; // @synthesize processAcked=_processAcked;
+@property(nonatomic) _Bool sendAcked; // @synthesize sendAcked=_sendAcked;
 @property(nonatomic, getter=isFromRequest) _Bool fromRequest; // @synthesize fromRequest=_fromRequest;
 @property(retain, nonatomic) NSDate *date; // @synthesize date=_date;
 @property(retain, nonatomic) NSDictionary *customIDSFlags; // @synthesize customIDSFlags=_customIDSFlags;
