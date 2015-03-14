@@ -26,6 +26,7 @@
 @property(nonatomic) __weak id <SPDeviceConnectionDelegate> delegate; // @synthesize delegate=_delegate;
 - (void).cxx_destruct;
 - (void)receiveData:(id)arg1;
+- (void)installProvisioningProfileWithURL:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)_enumerateObserversSafely:(CDUnknownBlockType)arg1;
 - (void)removeObserver:(id)arg1;
 - (void)addObserver:(id)arg1;
@@ -33,7 +34,11 @@
 - (id)localeForUserNotification;
 - (void)hideUserNotification;
 - (void)showUserNotification:(long long)arg1 bundleID:(id)arg2;
+- (void)getAlwaysInstallWithCompletion:(CDUnknownBlockType)arg1;
+- (void)setAlwaysInstall:(id)arg1;
 - (void)setLogLevel:(id)arg1;
+- (void)fetchWatchAppBundleURLWithinCompanionAppWithWatchAppIdentifier:(id)arg1 completion:(CDUnknownBlockType)arg2;
+- (void)fetchWatchAppBundleURLWithinCompanionAppWithIdentifier:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)fetchApplicationWithContainingApplicationBundleID:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)removeApplication:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)installApplication:(id)arg1 completion:(CDUnknownBlockType)arg2;

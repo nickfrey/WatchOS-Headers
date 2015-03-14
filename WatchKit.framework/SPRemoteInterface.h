@@ -21,6 +21,7 @@
     NSString *_rootViewControllerID;
     NSString *_navigatingViewControllerID;
     CDUnknownBlockType _textInputCompletion;
+    NSMutableArray *_openParentRequests;
 }
 
 + (id)controller:(id)arg1 setupProperties:(id)arg2 viewControllerID:(id)arg3 tableIndex:(long long)arg4 rowIndex:(long long)arg5 classForType:(CDUnknownFunctionPointerType)arg6;
@@ -54,6 +55,7 @@
 + (id)cacheIdentifier;
 + (id)_remoteIdentifier;
 + (id)startRemoteInterface;
+@property(retain, nonatomic) NSMutableArray *openParentRequests; // @synthesize openParentRequests=_openParentRequests;
 @property(copy, nonatomic) CDUnknownBlockType textInputCompletion; // @synthesize textInputCompletion=_textInputCompletion;
 @property(retain, nonatomic) NSString *navigatingViewControllerID; // @synthesize navigatingViewControllerID=_navigatingViewControllerID;
 @property(retain, nonatomic) NSString *rootViewControllerID; // @synthesize rootViewControllerID=_rootViewControllerID;
@@ -69,6 +71,7 @@
 - (void)getComplicationData:(id)arg1;
 - (void)dataInterfaceWillResignActive:(id)arg1;
 - (void)dataInterfaceDidBecomeActive:(id)arg1;
+- (void)applicationIsStillActive;
 - (void)applicationWillResignActive:(id)arg1;
 - (void)applicationDidBecomeActive:(id)arg1;
 - (void)applicationDidFinishConnecting:(id)arg1;
@@ -103,6 +106,7 @@
 - (void)sendCacheRequestMessage:(id)arg1;
 - (void)launchGizmoAppForCompanionAppWithIdentifier:(id)arg1 withURLString:(id)arg2;
 - (_Bool)openParentApplication:(id)arg1 reply:(CDUnknownBlockType)arg2;
+- (void)_sendOpenParentApplicationRequest;
 - (void)updateUserActivity:(id)arg1 userInfo:(id)arg2 webpageURL:(id)arg3 controller:(id)arg4;
 - (void)fetchNotificationForNotificationID:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)sendComplicationObject:(id)arg1;

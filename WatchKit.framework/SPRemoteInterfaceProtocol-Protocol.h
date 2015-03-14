@@ -11,6 +11,7 @@
 @protocol SPRemoteInterfaceProtocol <NSObject>
 - (void)dataInterfaceWillResignActive:(NSString *)arg1;
 - (void)dataInterfaceDidBecomeActive:(NSString *)arg1;
+- (void)applicationIsStillActive;
 - (void)applicationWillResignActive:(NSString *)arg1;
 - (void)applicationDidBecomeActive:(NSString *)arg1;
 - (void)applicationDidFinishConnecting:(NSString *)arg1;
