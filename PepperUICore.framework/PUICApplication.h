@@ -37,6 +37,7 @@
 @property(nonatomic) double maxZoomLevel; // @synthesize maxZoomLevel=_maxZoomLevel;
 @property(nonatomic) double zoomLevel; // @synthesize zoomLevel=_zoomLevel;
 - (void).cxx_destruct;
+- (_Bool)_isSpringBoardShowingAnAlert;
 - (void)_applicationHandleSiriTask:(id)arg1;
 - (_Bool)isNetworkActivityIndicatorVisible;
 - (void)setNetworkActivityIndicatorVisible:(_Bool)arg1;
@@ -45,6 +46,14 @@
 @property(readonly, nonatomic) UIColor *primaryApplicationColor;
 - (void)dealloc;
 - (_Bool)_shouldDelayTouchesForControlCenter;
+- (_Bool)isStatusBarDisconnectedIndicatorSuppressed;
+- (void)statusBarSuppressDisconnectedIndicator:(_Bool)arg1;
+- (_Bool)isStatusBarDoNotDisturbIndicatorSuppressed;
+- (void)statusBarSuppressDoNotDisturbIndicator:(_Bool)arg1;
+- (_Bool)isStatusBarAirplaneModeIndicatorSuppressed;
+- (void)statusBarSuppressAirplaneModeIndicator:(_Bool)arg1;
+- (_Bool)isStatusBarChargingIndicatorSuppressed;
+- (void)statusBarSuppressChargingIndicator:(_Bool)arg1;
 - (_Bool)_statusBarShouldAnimationTitleContextChanges;
 - (void)_setStatusBarShouldAnimateTitleContentChanges:(_Bool)arg1;
 - (unsigned long long)_statusBarGlobalContextLayoutBehavior;

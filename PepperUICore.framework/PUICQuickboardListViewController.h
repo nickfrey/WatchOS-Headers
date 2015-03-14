@@ -9,7 +9,7 @@
 #import "PUICTableViewDataSource.h"
 #import "PUICTableViewDelegate.h"
 
-@class NSMutableArray, NSString, PUICTableView, PUICTableViewCell, RadiosPreferences, UIButton, UIView;
+@class NSMutableArray, NSString, PUICQuickboardListItemCell, PUICTableView, RadiosPreferences, UIButton, UIView;
 
 @interface PUICQuickboardListViewController : PUICQuickboardViewController <PUICTableViewDelegate, PUICTableViewDataSource>
 {
@@ -20,10 +20,10 @@
     RadiosPreferences *_radiosPreferences;
     NSMutableArray *_cachedHeights;
     NSMutableArray *_dismissedItemViews;
-    PUICTableViewCell *_selectedCell;
+    PUICQuickboardListItemCell *_selectedCell;
 }
 
-@property(retain, nonatomic) PUICTableViewCell *selectedCell; // @synthesize selectedCell=_selectedCell;
+@property(retain, nonatomic) PUICQuickboardListItemCell *selectedCell; // @synthesize selectedCell=_selectedCell;
 - (void).cxx_destruct;
 - (void)dismissView:(id)arg1 toPositionY:(double)arg2 delayFactor:(unsigned long long)arg3;
 - (void)addDismissalAnimations;

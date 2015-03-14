@@ -64,6 +64,12 @@
 - (void)_didEnterBackground:(id)arg1;
 - (void)_willEnterForeground:(id)arg1;
 - (void)didMoveToSuperview;
+@property(nonatomic, getter=isDoNotDisturbIndicatorSuppressed) _Bool suppressDoNotDisturbIndicator;
+@property(nonatomic, getter=isDisconnectedIndicatorSuppressed) _Bool suppressDisconnectedIndicator;
+@property(nonatomic, getter=isAirplaneModeIndicatorSuppressed) _Bool suppressAirplaneModeIndicator;
+@property(nonatomic, getter=isChargingIndicatorSuppressed) _Bool suppressChargingIndicator;
+- (void)_stateUnsupressed:(id)arg1;
+- (void)_stateSuppressed:(id)arg1;
 - (void)_releaseVisibleAssertion;
 - (void)_takeVisibleAssertion;
 - (void)willMoveToSuperview:(id)arg1;

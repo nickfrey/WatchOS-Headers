@@ -84,7 +84,6 @@
 - (void)resetSwipedRowAnimated:(_Bool)arg1 withCompletion:(CDUnknownBlockType)arg2;
 - (void)setSwipedIndexPath:(id)arg1 animated:(_Bool)arg2;
 - (void)_performDestructiveAction:(id)arg1 atIndexPath:(id)arg2;
-- (void)_resetSwipeViewPositionImmediately;
 - (void)_performNonDestructiveAction:(id)arg1 atIndexPath:(id)arg2;
 - (void)deleteRowAtIndexPath:(id)arg1 animated:(_Bool)arg2;
 - (id)_swipedCell;

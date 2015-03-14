@@ -21,6 +21,7 @@
     UIWindow *_actionWindow;
 }
 
++ (void)dismissCurrentActionControllerAnimated:(_Bool)arg1;
 + (void)dismissCurrentActionController;
 + (_Bool)gestureRecognizer:(id)arg1 shouldRecognizeSimultaneouslyWithGestureRecognizer:(id)arg2;
 + (id)_actionControllerOrbTapGestureRecognizer;
@@ -33,6 +34,7 @@
 + (void)_setActionControllerOrbGestureEnabled:(_Bool)arg1 inWindow:(id)arg2;
 + (void)ORBTapGestureRecognizerDidLatch:(id)arg1;
 + (void)_beginPresentingActionController;
++ (_Bool)gestureRecognizerShouldBegin:(id)arg1;
 + (void)_orbGestureRecognized:(id)arg1;
 + (id)presentationControllerForPresentedViewController:(id)arg1 presentingViewController:(id)arg2 sourceViewController:(id)arg3;
 + (double)transitionDuration:(id)arg1;

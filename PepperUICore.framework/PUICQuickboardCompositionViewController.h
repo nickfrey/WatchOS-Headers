@@ -8,7 +8,7 @@
 
 #import "PUICQuickboardViewControllerDelegate.h"
 
-@class NSArray, NSAttributedString, NSData, NSString, PUICHighlightingView, PUICPlaceholderTextView, UIButton, UIGestureRecognizer, UIImage, UIImageView, UIScrollView, UIView;
+@class NSArray, NSAttributedString, NSData, NSString, PUICHighlightingView, PUICPlaceholderTextView, PUICSideBySideButtonsView, UIGestureRecognizer, UIImage, UIImageView, UIScrollView, UIView;
 
 @interface PUICQuickboardCompositionViewController : UIViewController <PUICQuickboardViewControllerDelegate>
 {
@@ -19,11 +19,11 @@
     PUICPlaceholderTextView *_recipientsTextView;
     PUICHighlightingView *_messageContainer;
     PUICPlaceholderTextView *_messageTextView;
-    UIButton *_cancelButton;
-    UIButton *_sendButton;
+    PUICSideBySideButtonsView *_buttonsView;
     UIGestureRecognizer *_recipientsFieldSelectionRecognizer;
     _Bool _needsContentRevealedOnQuickboardDismissal;
     _Bool _prefersStatusBarHidden;
+    _Bool _postedPresentationNotification;
     NSString *_originalTitle;
     UIImage *_audioRecordingImage;
     UIImageView *_backgroundImageView;
@@ -67,7 +67,6 @@
 - (double)quickboard:(id)arg1 selectionFrameOriginYInDestinationView:(id *)arg2;
 - (void)quickboardInputCancelled:(id)arg1;
 - (void)quickboard:(id)arg1 textEntered:(id)arg2;
-- (void)updateStoreDemoStateOnQuickBoardDimissal;
 - (void)dismissQuickboardWithCompletion:(CDUnknownBlockType)arg1;
 - (void)presentMessageQuickboardAnimated:(_Bool)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)sendButtonTapped;

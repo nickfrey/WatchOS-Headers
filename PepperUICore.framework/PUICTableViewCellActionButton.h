@@ -17,6 +17,8 @@
 + (id)actionButtonWithStyle:(unsigned long long)arg1;
 @property(retain, nonatomic) PUICTableViewRowAction *action; // @synthesize action=_action;
 - (void).cxx_destruct;
+- (void)_fadeOutForDestructiveAction;
+- (void)_setHighlightedAppearance:(_Bool)arg1;
 - (void)setHighlighted:(_Bool)arg1;
 - (void)setTintColor:(id)arg1;
 - (void)layoutSubviews;

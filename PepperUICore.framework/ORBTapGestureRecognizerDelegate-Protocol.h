@@ -11,8 +11,6 @@
 @protocol ORBTapGestureRecognizerDelegate <NSObject>
 
 @optional
-- (void)ORBTapGestureRecognizer:(ORBTapGestureRecognizer *)arg1 didChangeProgress:(float)arg2;
-- (void)ORBTapGestureRecognizer:(ORBTapGestureRecognizer *)arg1 setScaleFactor:(float)arg2;
 - (void)ORBTapGestureRecognizerDidLatch:(ORBTapGestureRecognizer *)arg1;
 @end
 

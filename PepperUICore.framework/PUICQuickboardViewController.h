@@ -57,6 +57,7 @@
 - (void)transparentPunchOutView:(id)arg1;
 - (void)punchOutView:(id)arg1;
 - (void)addContentViewAnimations:(_Bool)arg1;
+- (void)cleanupAnimations;
 - (void)finishDismissalWithOptions:(unsigned long long)arg1;
 - (void)addDismissalAnimationsWithOptions:(unsigned long long)arg1;
 - (void)finishPresentationWithOptions:(unsigned long long)arg1;

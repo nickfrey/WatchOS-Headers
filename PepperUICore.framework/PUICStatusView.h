@@ -6,7 +6,7 @@
 
 #import "UIView.h"
 
-@class NSMutableArray;
+@class NSMutableArray, NSMutableSet, NSSet;
 
 @interface PUICStatusView : UIView
 {
@@ -17,6 +17,7 @@
     CDUnknownBlockType _postTransitionAction;
     CDUnknownBlockType _postTransitionCompletion;
     _Bool _cancelAnimations;
+    NSMutableSet *_suppressedStates;
     id <PUICStatusViewDataSource> _dataSource;
     unsigned long long _horizontalAlignment;
     unsigned long long _verticalAlignment;
@@ -38,6 +39,13 @@
 - (void)_showFinalStateAnimated:(_Bool)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)_showStateNamed:(id)arg1 animated:(_Bool)arg2 completion:(CDUnknownBlockType)arg3;
 - (void)_showState:(unsigned long long)arg1 animated:(_Bool)arg2 completion:(CDUnknownBlockType)arg3;
+- (id)_suppressedStates:(_Bool)arg1;
+@property(readonly, copy, nonatomic) NSSet *suppressedStates;
+- (_Bool)isAnyStateSuppressed;
+- (void)unsuppressAllStates;
+- (void)unsupressStateNamed:(id)arg1;
+- (_Bool)areStatesNamedSuppressed:(id)arg1;
+- (void)suppressStatesNamed:(id)arg1;
 - (void)showFinalStateAnimated:(_Bool)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)showStateNamed:(id)arg1 animated:(_Bool)arg2 completion:(CDUnknownBlockType)arg3;
 - (void)showState:(unsigned long long)arg1 animated:(_Bool)arg2 completion:(CDUnknownBlockType)arg3;
@@ -45,9 +53,13 @@
 - (void)_addPostTransitionAction:(CDUnknownBlockType)arg1 withActionCompletion:(CDUnknownBlockType)arg2;
 - (id)visibleState;
 - (_Bool)isAnimating;
+- (_Bool)isAnyStateActive:(_Bool)arg1;
 - (_Bool)isAnyStateActive;
+- (_Bool)isStateActiveByIndex:(unsigned long long)arg1 checkSuppressed:(_Bool)arg2;
 - (_Bool)isStateActiveByIndex:(unsigned long long)arg1;
+- (_Bool)isStateActive:(id)arg1 checkSuppressed:(_Bool)arg2;
 - (_Bool)isStateActive:(id)arg1;
+- (_Bool)_isStateActive:(id)arg1 checkSuppressed:(_Bool)arg2;
 - (id)stateByIndex:(unsigned long long)arg1;
 - (id)stateForName:(id)arg1;
 - (unsigned long long)numberOfStates;

@@ -93,6 +93,10 @@
 - (_Bool)isHidden;
 - (void)requestStyle:(long long)arg1 animated:(_Bool)arg2;
 - (void)requestStyle:(long long)arg1 animationParameters:(id)arg2;
+@property(nonatomic, getter=isDoNotDisturbIndicatorSuppressed) _Bool suppressDoNotDisturbIndicator;
+@property(nonatomic, getter=isDisconnectedIndicatorSuppressed) _Bool suppressDisconnectedIndicator;
+@property(nonatomic, getter=isAirplaneModeIndicatorSuppressed) _Bool suppressAirplaneModeIndicator;
+@property(nonatomic, getter=isChargingIndicatorSuppressed) _Bool suppressChargingIndicator;
 - (id)keyViewController:(_Bool)arg1;
 - (void)setKeyViewController:(id)arg1 animated:(_Bool)arg2;
 - (double)defaultDoubleHeight;

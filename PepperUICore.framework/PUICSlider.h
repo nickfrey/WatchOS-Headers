@@ -8,7 +8,7 @@
 
 #import "PUICCrownInputSequencerDelegate.h"
 
-@class CAShapeLayer, NSString, PUICCrownInputSequencer, PUICEventThrottler, UIImage, _PUICSliderAccessoryState;
+@class NSObject<OS_dispatch_source>, NSString, PUICCrownInputSequencer, UIView, _PUICSliderAccessoryState;
 
 @interface PUICSlider : UISlider <PUICCrownInputSequencerDelegate>
 {
@@ -17,14 +17,15 @@
     PUICCrownInputSequencer *_crownInputSequencer;
     struct CGRect _currentTrackLayoutBounds;
     float _stepValue;
+    float _value;
     float _disabledValue;
     _Bool _isEnabled;
-    CAShapeLayer *_crownGlowLayer;
-    UIImage *_thumbImage;
-    UIImage *_emptyThumbImage;
-    PUICEventThrottler *_crownThrottler;
     _PUICSliderAccessoryState *_minimumImageState;
     _PUICSliderAccessoryState *_maximumImageState;
+    UIView *_fillView;
+    UIView *_gutterView;
+    UIView *_crownGlowView;
+    NSObject<OS_dispatch_source> *_crownGlowDismissTimer;
     _Bool _shouldAutomaticallAdjustValueOnTouch;
     _Bool _shouldFadeAccessoryImages;
     float _pillHighlightedGlowOpacity;
@@ -38,8 +39,8 @@
 @property(nonatomic) unsigned long long numberOfSteps; // @synthesize numberOfSteps=_numberOfSteps;
 @property(nonatomic) id <PUICSliderDelegate> delegate; // @synthesize delegate=_delegate;
 - (void).cxx_destruct;
-- (id)_emptyThumbImage;
-- (id)_thumbImage;
+- (id)_minTrackView;
+- (id)_maxTrackView;
 - (void)_cancelTouchTarget;
 - (long long)_touchTargetFromTouches:(id)arg1;
 - (void)_updateCrownGlowLayer;
@@ -49,7 +50,9 @@
 - (void)_animatePressView:(id)arg1 state:(id)arg2;
 - (void)_fadeAccessoryImagesForValue:(float)arg1 animated:(_Bool)arg2;
 - (void)_setValue:(float)arg1 animated:(_Bool)arg2 sendAction:(_Bool)arg3;
+- (float)value;
 - (void)crownInputSequencerIdleDidChange:(id)arg1;
+- (void)_cancelCrownGlowDismissTimer;
 - (void)crownInputSequencerOffsetDidChange:(id)arg1;
 - (void)_updateSequencerConfiguration;
 - (void)_wheelChangedWithEvent:(id)arg1;

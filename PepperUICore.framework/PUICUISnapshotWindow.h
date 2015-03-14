@@ -15,6 +15,7 @@
 }
 
 - (void).cxx_destruct;
+- (_Bool)_canAffectStatusBarAppearance;
 - (void)popVisible;
 - (void)pushVisible;
 - (void)setSnapshot:(id)arg1;

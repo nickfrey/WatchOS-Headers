@@ -38,6 +38,7 @@
 - (void)_enterForeground:(id)arg1;
 - (void)setAnimating:(_Bool)arg1 skipBeginOrEndAnimations:(_Bool)arg2;
 @property(nonatomic, getter=isAnimating) _Bool animating; // @dynamic animating;
+- (void)_removeAllAnimations:(_Bool)arg1;
 - (void)_stopAnimatingNow;
 - (void)animationDidStop:(id)arg1 finished:(_Bool)arg2;
 - (void)_rotateNow;
@@ -58,6 +59,7 @@
 - (id)initWithFrame:(struct CGRect)arg1;
 - (id)initWithActivityIndicatorStyle:(long long)arg1;
 - (void)_commonInit;
+- (int)_numFrames;
 
 @end
 

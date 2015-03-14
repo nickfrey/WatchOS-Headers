@@ -64,6 +64,7 @@
 - (id)_puicContentView;
 - (void)_adjustBackgroundPill;
 @property(nonatomic) _Bool usesCustomBackground;
+- (id)_imageView:(_Bool)arg1;
 - (void)setUserInteractionEnabled:(_Bool)arg1;
 @property(nonatomic, getter=isInteractive) _Bool interactive;
 - (struct CGSize)cellSizeForContentSize:(struct CGSize)arg1;

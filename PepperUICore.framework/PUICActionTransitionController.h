@@ -26,6 +26,7 @@
 - (void)_endTransition:(_Bool)arg1;
 - (void)finishTransition;
 - (void)cancelTransition;
+- (_Bool)isWaitingToFinish;
 - (void)startInteractiveTransition:(id)arg1;
 
 // Remaining properties

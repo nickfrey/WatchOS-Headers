@@ -6,24 +6,21 @@
 
 #import "NSObject.h"
 
-@class NSMutableDictionary;
-
 @interface ORBConfig : NSObject
 {
-    NSMutableDictionary *_configDictionary;
     _Bool _blurEnabled;
+    _Bool _shouldIgnoreEdgesAndCorners;
     float _progressMinimum;
     float _progressLatch;
     float _progressMaximum;
 }
 
 + (id)sharedConfig;
+@property(nonatomic) _Bool shouldIgnoreEdgesAndCorners; // @synthesize shouldIgnoreEdgesAndCorners=_shouldIgnoreEdgesAndCorners;
 @property(nonatomic, getter=isBlurEnabled) _Bool blurEnabled; // @synthesize blurEnabled=_blurEnabled;
 @property(nonatomic) float progressMaximum; // @synthesize progressMaximum=_progressMaximum;
 @property(nonatomic) float progressLatch; // @synthesize progressLatch=_progressLatch;
 @property(nonatomic) float progressMinimum; // @synthesize progressMinimum=_progressMinimum;
-- (void).cxx_destruct;
-- (void)_synchronize;
 - (id)init;
 
 @end

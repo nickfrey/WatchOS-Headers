@@ -25,6 +25,7 @@
 - (void).cxx_destruct;
 - (void)_buttonHit:(id)arg1;
 - (void)moveToOffset:(double)arg1 animated:(_Bool)arg2 initialVelocity:(double)arg3;
+- (void)animateContentsForDestructiveActionWithCompletion:(CDUnknownBlockType)arg1;
 - (void)resetView;
 - (void)didMoveToSuperview;
 - (void)willMoveToSuperview:(id)arg1;
