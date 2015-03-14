@@ -11,6 +11,7 @@
 @protocol SPGizmoApplicationProtocol <NSObject>
 - (void)fetchConnectionIdentifierWithReply:(void (^)(NSString *, NSString *))arg1;
 - (void)receiveData:(NSData *)arg1;
+- (void)companionDaemonDidRestart;
 - (void)extensionDidTerminate;
 @end
 

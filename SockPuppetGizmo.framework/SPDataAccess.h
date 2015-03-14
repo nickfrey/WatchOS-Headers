@@ -26,6 +26,7 @@
 @property(retain) id <SPDataAccessDelegateProtocol> delegate; // @synthesize delegate=_delegate;
 - (void).cxx_destruct;
 - (void)createCompanionConnection;
+- (void)companionConnection:(id)arg1 firstUnlock:(_Bool)arg2;
 - (void)companionConnection:(id)arg1 complicationReply:(id)arg2;
 - (id)initWithBundleID:(id)arg1;
 - (id)init;

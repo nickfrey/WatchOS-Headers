@@ -24,6 +24,7 @@
 - (void)resignActive;
 - (void)becomeActive;
 - (void)createCompanionConnectionIfNeeded;
+- (void)companionDaemonDidRestart:(id)arg1;
 - (void)extensionDidTerminate:(id)arg1;
 - (id)initWithBundleID:(id)arg1 dataClass:(Class)arg2;
 

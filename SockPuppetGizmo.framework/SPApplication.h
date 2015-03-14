@@ -31,6 +31,7 @@
 - (id)_statusBarControllingWindow;
 - (_Bool)_fakingRequiresHighResolution;
 - (void)_createStatusBarWithRequestedStyle:(long long)arg1 orientation:(long long)arg2 hidden:(_Bool)arg3;
+- (void)applicationWillSuspend;
 - (void)finishedExtendedLaunchTest;
 - (id)_extendLaunchTest;
 

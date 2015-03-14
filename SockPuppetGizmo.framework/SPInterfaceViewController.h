@@ -11,12 +11,13 @@
 #import "SPActivatingViewDelegate.h"
 #import "SPInterfaceDelegate.h"
 
-@class NSArray, NSBundle, NSDictionary, NSMutableArray, NSNumber, NSString, NSURL, PUICActionGroup, PUICActionItem, PUICTableView, SPActivatingView, SPInterfaceGroupView, UIColor, UIImage, UILabel, UIScrollView, UIView;
+@class NSArray, NSBundle, NSDictionary, NSMutableArray, NSNumber, NSString, NSURL, PUICActionGroup, PUICActionItem, PUICTableView, SPActivatingView, SPInterfaceGroupView, UIColor, UIImage, UIImageView, UILabel, UIScrollView;
 
 @interface SPInterfaceViewController : UIViewController <PUICTableViewDataSource, PUICTableViewDelegate, SPActivatingViewDelegate, SPInterfaceDelegate>
 {
     _Bool _isNotification;
     _Bool _isGlance;
+    _Bool _customNotificationWantsHeaderBlur;
     _Bool _hasInterfaceActions;
     _Bool _hasLoaded;
     _Bool _kvObservingSimNotificationActionTable;
@@ -41,7 +42,7 @@
     PUICActionGroup *_actionGroup;
     NSMutableArray *_extraActions;
     SPActivatingView *_activatingView;
-    UIView *_simulatorNotificationSash;
+    UIImageView *_simulatorNotificationSash;
     PUICTableView *_simulatorNotificationActionTable;
     NSArray *_simulatorNotificationActionItems;
     PUICActionItem *_simulatorNotificationDismissItem;
@@ -51,6 +52,7 @@
 }
 
 + (id)interfaceViewControllerForIdentifier:(id)arg1;
++ (void)updateStaticValues;
 + (void)initialize;
 @property(retain, nonatomic) UILabel *simulatorNotificationTimeLabel; // @synthesize simulatorNotificationTimeLabel=_simulatorNotificationTimeLabel;
 @property(retain, nonatomic) UIScrollView *simulatorNotificationScrollView; // @synthesize simulatorNotificationScrollView=_simulatorNotificationScrollView;
@@ -58,7 +60,7 @@
 @property(retain, nonatomic) PUICActionItem *simulatorNotificationDismissItem; // @synthesize simulatorNotificationDismissItem=_simulatorNotificationDismissItem;
 @property(retain, nonatomic) NSArray *simulatorNotificationActionItems; // @synthesize simulatorNotificationActionItems=_simulatorNotificationActionItems;
 @property(retain, nonatomic) PUICTableView *simulatorNotificationActionTable; // @synthesize simulatorNotificationActionTable=_simulatorNotificationActionTable;
-@property(retain, nonatomic) UIView *simulatorNotificationSash; // @synthesize simulatorNotificationSash=_simulatorNotificationSash;
+@property(retain, nonatomic) UIImageView *simulatorNotificationSash; // @synthesize simulatorNotificationSash=_simulatorNotificationSash;
 @property(nonatomic) _Bool kvObservingSimNotificationActionTable; // @synthesize kvObservingSimNotificationActionTable=_kvObservingSimNotificationActionTable;
 @property(nonatomic) _Bool hasLoaded; // @synthesize hasLoaded=_hasLoaded;
 @property(retain, nonatomic) SPActivatingView *activatingView; // @synthesize activatingView=_activatingView;
@@ -69,6 +71,7 @@
 @property(retain, nonatomic) NSString *UUID; // @synthesize UUID=_UUID;
 @property(retain, nonatomic) SPInterfaceGroupView *rootGroupView; // @synthesize rootGroupView=_rootGroupView;
 @property(retain, nonatomic) NSDictionary *interfaceDescription; // @synthesize interfaceDescription=_interfaceDescription;
+@property(nonatomic) _Bool customNotificationWantsHeaderBlur; // @synthesize customNotificationWantsHeaderBlur=_customNotificationWantsHeaderBlur;
 @property(readonly, copy, nonatomic) NSURL *activityWebpageURL; // @synthesize activityWebpageURL=_activityWebpageURL;
 @property(readonly, copy, nonatomic) NSDictionary *activityUserInfo; // @synthesize activityUserInfo=_activityUserInfo;
 @property(copy, nonatomic) NSString *activityType; // @synthesize activityType=_activityType;
@@ -88,13 +91,8 @@
 - (void).cxx_destruct;
 - (void)scrollViewDidEndDecelerating:(id)arg1;
 - (void)scrollViewWillBeginDragging:(id)arg1;
-- (_Bool)_appExtensionFirstUnlock;
-- (_Bool)_appExtensionAvailableBeforeFirstUnlock;
-- (_Bool)_evalShowCompanionLockedScreen;
-- (_Bool)_showCompanionLockedScreen:(_Bool)arg1;
-- (void)_dismissCompanionLockedScreenForGlance;
-- (_Bool)_showCompanionLockedScreenForGlanceIfNecessary;
-- (_Bool)_showCompanionLockedScreenForAppIfNecessary;
+- (void)_dismissCompanionLockedScreen;
+- (_Bool)_showCompanionLockedScreenIfNecessary;
 - (id)_appName;
 - (id)_loadImageFromFile;
 - (_Bool)_saveImageToFile:(id)arg1;
@@ -103,7 +101,6 @@
 - (_Bool)_imageFileExists;
 - (id)_imageFilePathURL;
 - (id)_imageFileName;
-- (void)_saveLoadingView;
 - (id)_getActivatingView;
 - (id)lastUpdatedDateForActivatingView:(id)arg1;
 - (id)snapshotForActivatingView:(id)arg1;
@@ -135,8 +132,8 @@
 - (void)_applicationDidEnterBackground:(id)arg1;
 - (void)_applicationWillEnterForeground:(id)arg1;
 - (void)_applicationDidBecomeActive:(id)arg1;
-- (void)setNeedsStatusBarAppearanceUpdate;
 - (void)_finishedExtendedLaunchTest;
+- (void)updateSimulatorNotificationSashBlur;
 - (void)_hideLoadingView;
 - (void)_showLoadingView;
 - (void)loadView;
@@ -155,6 +152,7 @@
 - (void)handleNotificationAppIconTap:(id)arg1;
 - (void)createSimulatorNotificationButtonsInView:(id)arg1;
 - (struct CGSize)sizeThatFitsFromRootGroupView:(struct CGSize)arg1;
+- (id)notificationSashContentView;
 - (void)logInterfaceViewControllers;
 - (void)didRecieveContentSizeDidChangeNotification:(id)arg1;
 - (void)dealloc;

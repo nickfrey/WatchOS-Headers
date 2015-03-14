@@ -21,6 +21,7 @@
 - (void)viewDidLayoutSubviews;
 - (void)cancel;
 - (void)viewDidLoad;
+- (void)setNeedsStatusBarAppearanceUpdate;
 - (_Bool)prefersStatusBarHidden;
 - (void)dealloc;
 

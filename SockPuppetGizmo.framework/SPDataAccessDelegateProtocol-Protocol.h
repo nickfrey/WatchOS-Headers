@@ -9,6 +9,7 @@
 @class SPComplicationData, SPDataAccess;
 
 @protocol SPDataAccessDelegateProtocol <NSObject>
+- (void)dataAccess:(SPDataAccess *)arg1 firstUnlock:(_Bool)arg2;
 - (void)dataAccess:(SPDataAccess *)arg1 complicationReply:(SPComplicationData *)arg2;
 @end
 

@@ -13,14 +13,14 @@
 @interface SPPageViewController : UIViewController <UIScrollViewDelegate>
 {
     NSArray *_viewControllers;
-    UIScrollView *_scrollView;
     PUICPageIndicatorView *_pageControl;
+    UIScrollView *_scrollView;
     NSMutableArray *_visiblePages;
 }
 
 @property(retain, nonatomic) NSMutableArray *visiblePages; // @synthesize visiblePages=_visiblePages;
-@property(retain, nonatomic) PUICPageIndicatorView *pageControl; // @synthesize pageControl=_pageControl;
 @property(retain, nonatomic) UIScrollView *scrollView; // @synthesize scrollView=_scrollView;
+@property(readonly, nonatomic) PUICPageIndicatorView *pageControl; // @synthesize pageControl=_pageControl;
 @property(copy, nonatomic) NSArray *viewControllers; // @synthesize viewControllers=_viewControllers;
 - (void).cxx_destruct;
 - (void)scrollViewDidEndDecelerating:(id)arg1;
@@ -30,6 +30,7 @@
 - (void)viewWillDisappear:(_Bool)arg1;
 - (void)viewDidAppear:(_Bool)arg1;
 - (void)viewWillAppear:(_Bool)arg1;
+- (void)setNeedsStatusBarAppearanceUpdate;
 - (_Bool)prefersStatusBarHidden;
 - (void)observeValueForKeyPath:(id)arg1 ofObject:(id)arg2 change:(id)arg3 context:(void *)arg4;
 - (id)topScrollViewForViewController:(id)arg1;

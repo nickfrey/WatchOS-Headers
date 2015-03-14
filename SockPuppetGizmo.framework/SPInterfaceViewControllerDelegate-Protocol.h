@@ -20,6 +20,7 @@
 - (void)launchGizmoAppForCompanionAppWithIdentifier:(NSString *)arg1 withURLString:(NSString *)arg2;
 - (void)appWithRootInterfaceViewController:(SPInterfaceViewController *)arg1 performActionWithItemID:(NSString *)arg2 forNotificationID:(NSString *)arg3;
 - (struct UIEdgeInsets)interfaceViewControllerContentInsets:(SPInterfaceViewController *)arg1;
+- (void)interfaceViewControllerDidUpdateInterfaceValues:(SPInterfaceViewController *)arg1;
 - (void)interfaceViewControllerDidHideDisconnectedView:(SPInterfaceViewController *)arg1;
 - (void)interfaceViewControllerDidShowDisconnectedView:(SPInterfaceViewController *)arg1;
 - (void)interfaceViewControllerDidActivate:(SPInterfaceViewController *)arg1;

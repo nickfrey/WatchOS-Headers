@@ -23,6 +23,7 @@
 
 + (id)sharedInstance;
 - (void).cxx_destruct;
+- (void)dataAccess:(id)arg1 firstUnlock:(_Bool)arg2;
 - (void)dataAccess:(id)arg1 complicationReply:(id)arg2;
 - (int)verifyIncomingData:(id)arg1;
 - (Class)_dataAccessDataClass;

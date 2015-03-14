@@ -22,6 +22,8 @@
     UIView *_lastUpdatedView;
 }
 
++ (id)getMessageForView:(id)arg1 below:(id)arg2;
++ (id)getLockedIconForView:(id)arg1;
 + (void)initialize;
 @property(nonatomic, getter=isDisconnected) _Bool disconnected; // @synthesize disconnected=_disconnected;
 @property(nonatomic, getter=isLoading) _Bool loading; // @synthesize loading=_loading;
@@ -34,6 +36,7 @@
 @property(nonatomic) __weak id <SPActivatingViewDelegate> delegate; // @synthesize delegate=_delegate;
 @property(nonatomic, getter=isLocked) _Bool locked; // @synthesize locked=_locked;
 - (void).cxx_destruct;
+- (_Bool)_isAirplaneModeEnabled;
 - (_Bool)_isSameDay:(id)arg1 otherDay:(id)arg2;
 - (_Bool)_isYesterday:(id)arg1;
 - (_Bool)_isToday:(id)arg1;
@@ -61,8 +64,10 @@
 - (void)_updateVisibilityOfSubviews;
 - (void)_removeFromSuperviewIfNecessary;
 - (void)_sizeAndAddToParentView;
+- (void)updateDisconnectedStatus;
 - (void)endMonitoringDisconnectedStatus;
 - (void)startMonitoringDisconnectedStatus;
+- (void)dealloc;
 - (id)initWithDelegate:(id)arg1;
 
 @end

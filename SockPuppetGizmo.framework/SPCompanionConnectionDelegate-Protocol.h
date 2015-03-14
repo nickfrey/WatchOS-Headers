@@ -11,6 +11,7 @@
 @protocol SPCompanionConnectionDelegate <NSObject>
 
 @optional
+- (void)companionConnection:(SPCompanionConnection *)arg1 firstUnlock:(_Bool)arg2;
 - (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewController:(NSString *)arg2 presentNotificationWithType:(NSString *)arg3;
 - (void)companionConnection:(SPCompanionConnection *)arg1 userActivity:(NSDictionary *)arg2;
 - (void)companionConnection:(SPCompanionConnection *)arg1 complicationReply:(SPComplicationData *)arg2;
@@ -26,6 +27,7 @@
 - (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewControllerPopViewController:(NSString *)arg2;
 - (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewController:(NSString *)arg2 pushViewController:(NSString *)arg3 initializationContextID:(NSNumber *)arg4;
 - (void)companionConnection:(SPCompanionConnection *)arg1 interfaceViewController:(NSString *)arg2 setValue:(id)arg3 forKey:(NSString *)arg4 property:(NSString *)arg5;
+- (void)companionDaemonDidRestart:(SPCompanionConnection *)arg1;
 - (void)extensionDidTerminate:(SPCompanionConnection *)arg1;
 @end
 

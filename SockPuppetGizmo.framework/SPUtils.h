@@ -10,6 +10,9 @@
 {
 }
 
++ (_Bool)isRunningInF5DemoMode;
++ (_Bool)appExtensionFirstUnlock;
++ (id)localizedStringForSystemLanguage:(id)arg1 fromBundlePath:(id)arg2;
 + (unsigned long long)folderSizeAtPath:(id)arg1 volumeBlockSize:(unsigned long long)arg2;
 + (unsigned long long)userVolumeBlockSize;
 + (id)deserializeObject:(id)arg1;

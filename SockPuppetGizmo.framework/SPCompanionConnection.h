@@ -48,11 +48,14 @@
 - (void)duetAppDidBecomeActive;
 - (void)willDeactivateDataConnection;
 - (void)didActivateDataConnection;
+- (void)didFullySuspend;
+- (void)didEnterForegroundSuspended;
 - (void)willDeactivate;
 - (void)didActivate;
 - (void)didFinishLaunching;
 - (void)sendPlist:(id)arg1;
 - (void)receiveData:(id)arg1;
+- (void)companionDaemonDidRestart;
 - (void)extensionDidTerminate;
 - (void)fetchConnectionIdentifierWithReply:(CDUnknownBlockType)arg1;
 - (void)invalidate;

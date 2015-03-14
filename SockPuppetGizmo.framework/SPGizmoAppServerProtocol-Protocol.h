@@ -16,6 +16,8 @@
 - (void)processCacheDictionary:(NSDictionary *)arg1 serverIdentifier:(NSString *)arg2 completion:(void (^)(NSDictionary *))arg3;
 - (void)willDeactivateDataConnection:(NSString *)arg1 clientIdentifier:(NSString *)arg2;
 - (void)didActivateDataConnection:(NSString *)arg1 clientIdentifier:(NSString *)arg2;
+- (void)appDidFullySuspend:(NSString *)arg1 clientIdentifier:(NSString *)arg2;
+- (void)appDidEnterForegroundSuspended:(NSString *)arg1 clientIdentifier:(NSString *)arg2;
 - (void)appWillResignActive:(NSString *)arg1 clientIdentifier:(NSString *)arg2;
 - (void)appDidBecomeActive:(NSString *)arg1 clientIdentifier:(NSString *)arg2;
 - (void)appDidFinishLaunching:(NSString *)arg1 clientIdentifier:(NSString *)arg2;

@@ -16,9 +16,11 @@
 
 @interface SPApplicationDelegate : NSObject <SPInterfaceViewControllerDelegate, SPCompanionConnectionDelegate, UIGestureRecognizerDelegate, PUICQuickboardViewControllerDelegate, UIApplicationDelegate>
 {
+    _Bool _displayingFirstUnlockScreen;
     _Bool _launchedWithOptions;
     _Bool _launchedFromNotification;
     _Bool _presentedNotification;
+    _Bool _customNotificationWantsHeaderBlur;
     _Bool _simulatorNotificationForceStaticPresentation;
     UIWindow *_window;
     NSString *_launchMode;
@@ -47,6 +49,7 @@
 @property(retain, nonatomic) UIImage *simulatorNotificationIcon; // @synthesize simulatorNotificationIcon=_simulatorNotificationIcon;
 @property(retain, nonatomic) UIColor *customNotificationTitleColor; // @synthesize customNotificationTitleColor=_customNotificationTitleColor;
 @property(retain, nonatomic) UIColor *customNotificationSashColor; // @synthesize customNotificationSashColor=_customNotificationSashColor;
+@property(nonatomic) _Bool customNotificationWantsHeaderBlur; // @synthesize customNotificationWantsHeaderBlur=_customNotificationWantsHeaderBlur;
 @property(copy, nonatomic) NSDictionary *remoteNotificationContext; // @synthesize remoteNotificationContext=_remoteNotificationContext;
 @property(copy, nonatomic) NSString *notificationTitle; // @synthesize notificationTitle=_notificationTitle;
 @property(copy, nonatomic) NSString *notificationAlert; // @synthesize notificationAlert=_notificationAlert;
@@ -64,6 +67,7 @@
 @property(copy, nonatomic) NSString *stringsFileName; // @synthesize stringsFileName=_stringsFileName;
 @property(retain, nonatomic) NSDictionary *interfaceDescription; // @synthesize interfaceDescription=_interfaceDescription;
 @property(retain) SPCompanionConnection *companionConnection; // @synthesize companionConnection=_companionConnection;
+@property(nonatomic) _Bool displayingFirstUnlockScreen; // @synthesize displayingFirstUnlockScreen=_displayingFirstUnlockScreen;
 @property(readonly, copy, nonatomic) NSString *launchMode; // @synthesize launchMode=_launchMode;
 @property(retain, nonatomic) UIWindow *window; // @synthesize window=_window;
 - (void).cxx_destruct;
@@ -91,6 +95,8 @@
 - (void)interfaceViewControllerWillActivate:(id)arg1;
 - (void)interfaceViewControllerRelease:(id)arg1;
 - (void)interfaceViewController:(id)arg1 createCompanionControllerClass:(id)arg2 properties:(id)arg3 initializationContextID:(id)arg4;
+- (void)restartAppContents;
+- (void)companionDaemonDidRestart:(id)arg1;
 - (void)extensionDidTerminate:(id)arg1;
 - (void)companionConnection:(id)arg1 interfaceViewController:(id)arg2 presentNotificationWithType:(id)arg3;
 - (void)companionConnection:(id)arg1 userActivity:(id)arg2;
@@ -108,11 +114,15 @@
 - (void)companionConnection:(id)arg1 interfaceViewController:(id)arg2 setValue:(id)arg3 forKey:(id)arg4 property:(id)arg5;
 - (_Bool)application:(id)arg1 openURL:(id)arg2 sourceApplication:(id)arg3 annotation:(id)arg4;
 - (id)primaryApplicationColor;
+- (void)_exitApplicationNicely;
 - (void)applicationWillResignActive:(id)arg1;
 - (void)applicationDidBecomeActive:(id)arg1;
 - (id)_setupSignal:(int)arg1 handler:(CDUnknownBlockType)arg2;
 - (void)_setupSignalHandlers;
+- (_Bool)_loadRootViewController;
 - (_Bool)application:(id)arg1 didFinishLaunchingWithOptions:(id)arg2;
+- (void)applicationDidEnterBackground:(id)arg1;
+- (void)applicationWillSuspend:(id)arg1;
 - (void)runTimingWithOptions:(id)arg1;
 - (void)_PoloSetValue:(id)arg1 forKey:(id)arg2 property:(id)arg3;
 - (void)_Marco;

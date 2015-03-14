@@ -76,10 +76,10 @@
 - (void)deleteRowsAtIndexPaths:(id)arg1;
 - (void)insertRowsAtIndexPaths:(id)arg1;
 - (void)reloadData;
-- (void)endUpdatingTable;
-- (void)beginUpdatingTable;
+- (void)beginUpdatingTableIfNecessary;
 - (_Bool)_setInterfaceItemValue:(id)arg1 forKey:(id)arg2 property:(id)arg3;
 - (id)_createInterfaceItems:(id)arg1 property:(id)arg2;
+- (void)setHidden:(_Bool)arg1;
 - (void)layoutSubviews;
 - (_Bool)hasIntrinsicHeight;
 - (struct CGSize)sizeThatFits:(struct CGSize)arg1;
